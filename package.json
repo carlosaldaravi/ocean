@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "tailwind": "postcss src/assets/css/style.css -o src/assets/css/output.css"
   },
   "dependencies": {
+    "autoprefixer": "^9.7.4",
     "core-js": "^3.4.4",
+    "postcss": "^7.0.26",
     "register-service-worker": "^1.6.2",
     "tailwindcss": "^1.1.4",
     "vue": "^2.6.10",
