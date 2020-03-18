@@ -8,11 +8,13 @@
     "tailwind": "postcss src/assets/css/style.css -o src/assets/css/output.css"
   },
   "dependencies": {
+    "@tailwindcss/ui": "^0.1.3",
     "autoprefixer": "^9.7.4",
+    "axios": "^0.19.2",
     "core-js": "^3.4.4",
     "postcss": "^7.0.26",
     "register-service-worker": "^1.6.2",
-    "tailwindcss": "^1.1.4",
+    "tailwindcss": "^1.2.0",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",
     "vuex": "^3.1.2"

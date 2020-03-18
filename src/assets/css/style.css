@@ -3,7 +3,7 @@
 @tailwind components;
 
 /* Flexbox Grid */
-
+/*
 .container-fluid, .container {
     margin-right: auto;
     margin-left: auto;
@@ -85,7 +85,7 @@
       }
 }
 
-/* Custom classes */
+ Custom classes
 .btn {
     @apply m-2 p-4 rounded bg-teal-800 text-white;
 }
@@ -96,5 +96,5 @@
         @apply m-4;
     }
     
-}
+}*/
 @tailwind utilities;
