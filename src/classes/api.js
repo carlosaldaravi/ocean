@@ -7,7 +7,6 @@ import { Result } from './result'
 export const API = class API {
     constructor(url = null) {
         
-        // Dafults to Bitgest API (https://transferencias24.com/api/v2)
         this.apiURL = url || config.apiURL;
 
         this.result = new Result();
@@ -49,7 +48,6 @@ export const API = class API {
         }
     }
 
-    // defaults to Bitgest API (https://transferencias24.com/api/v2)
     setBaseURL(url = null) {
         this.apiURL = url || config.apiURL;
     }

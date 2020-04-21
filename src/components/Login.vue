@@ -103,27 +103,6 @@ export default {
           // loading true
           await this.api.post('/auth/signin', { email: this.email, password: this.password });
           // loading false
-          // let res = null;
-          // try {
-            
-        //       res = await axios({
-        //         method: 'post',
-        //         url: `http://localhost:3000/auth/signin`,
-        //         data: {
-        //           email: this.email,
-        //           password: this.password,
-        //         }, 
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json',
-        //         }
-        //       });
-        //       this.result.ok(res.data);
-        // } catch (e) {
-        //     this.result.error(e);
-        // } finally {
-        //     return this.result;
-        // }
 
         }
     }
