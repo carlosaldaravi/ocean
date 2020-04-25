@@ -1,15 +1,15 @@
 <template>
   <section>
-	  <listado></listado>
+    <list></list>
   </section>
 </template>
 
 <script>
-import ListaAlumnos from '../../components/alumnos/ListaAlumnos.vue'
+import List from "../../components/students/List.vue";
 
 export default {
   components: {
-	  'listado': ListaAlumnos
+    List
   }
 };
 </script>

@@ -1,5 +1,7 @@
 <template>
-
+<footer>
+    just a regular footer
+</footer>
 </template>
 
 <script>

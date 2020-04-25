@@ -1,45 +1,35 @@
 <template>
   <div id="app">
-    <router-view/>
+    <div v-if="isLogged">
+      <shell>
+        <section slot="content">
+          <router-view />
+        </section>
+      </shell>
+    </div>
+    <div v-else>
+      <login></login>
+    </div>
   </div>
 </template>
 
 <script>
-
-import Menu from '@/components/estructura/Menu.vue'
+import Shell from "./components/layout/Shell";
+import Login from "./components/Login";
 
 export default {
-  name: 'app',
+  name: "app",
   data() {
-    return {
-
-    }
+    return {};
   },
   components: {
-    Menu
+    Login,
+    Shell
+  },
+  computed: {
+    isLogged: function() {
+      return localStorage.getItem("user_token") !== undefined;
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>

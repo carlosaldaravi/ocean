@@ -18,19 +18,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import(/* webpackChunkName: "lista-alumnos" */ '../views/Dashboard.vue')
+    path: '/home',
+    name: 'home',
+    component: () => import(/* webpackChunkName: "lista-alumnos" */ '../views/Home.vue')
   },
   {
     path: '/lista-alumnos',
     name: 'alumnoLista',
-    component: () => import(/* webpackChunkName: "lista-alumnos" */ '../views/alumno/AlumnoLista.vue')
+    component: () => import(/* webpackChunkName: "lista-alumnos" */ '../views/student/StudentList.vue')
   },
   {
     path: '/alumno',
     name: 'alumnoIndex',
-    component: () => import(/* webpackChunkName: "alumno" */ '../views/alumno/AlumnoIndex.vue')
+    component: () => import(/* webpackChunkName: "alumno" */ '../views/student/StudentIndex.vue')
   },
   { path: '*', redirect: '/' }
 ]
