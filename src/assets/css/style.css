@@ -97,4 +97,10 @@
     }
     
 }*/
+
+html,
+body,
+#app {
+  height: 100%;
+}
 @tailwind utilities;
