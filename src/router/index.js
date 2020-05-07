@@ -1,44 +1,59 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/about',
-    name: 'about',
+    path: "/about",
+    name: "about",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
   {
-    path: '/home',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "lista-alumnos" */ '../views/Home.vue')
+    path: "/welcome",
+    name: "enrollment",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Enrollment.vue"),
   },
   {
-    path: '/lista-alumnos',
-    name: 'alumnoLista',
-    component: () => import(/* webpackChunkName: "lista-alumnos" */ '../views/student/StudentList.vue')
+    path: "/home",
+    name: "home",
+    component: () =>
+      import(/* webpackChunkName: "lista-alumnos" */ "../views/Home.vue"),
   },
   {
-    path: '/alumno',
-    name: 'alumnoIndex',
-    component: () => import(/* webpackChunkName: "alumno" */ '../views/student/StudentIndex.vue')
+    path: "/lista-alumnos",
+    name: "alumnoLista",
+    component: () =>
+      import(
+        /* webpackChunkName: "lista-alumnos" */ "../views/student/StudentList.vue"
+      ),
   },
-  { path: '*', redirect: '/' }
-]
+  {
+    path: "/alumno",
+    name: "alumnoIndex",
+    component: () =>
+      import(
+        /* webpackChunkName: "alumno" */ "../views/student/StudentIndex.vue"
+      ),
+  },
+  { path: "*", redirect: "/" },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
