@@ -6,9 +6,15 @@
       <div class="mx-auto w-full max-w-sm">
         <div>
           <div class="text-center">
-            <img class="h-40 md:h-64 mx-auto" src="../assets/images/logo.png" alt="Ocean" />
+            <img
+              class="h-40 md:h-64 mx-auto"
+              src="../assets/images/logo.png"
+              alt="Ocean"
+            />
           </div>
-          <h2 class="mt-6 text-3xl leading-9 font-extrabold text-gray-900">Welcome to Ocean Platform</h2>
+          <h2 class="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
+            Welcome to Ocean Platform
+          </h2>
         </div>
 
         <div class="mt-8">
@@ -18,7 +24,8 @@
                 <label
                   for="email"
                   class="block text-sm font-medium leading-5 text-gray-700"
-                >Correo electrónico</label>
+                  >Correo electrónico</label
+                >
                 <div class="mt-1 rounded-md shadow-sm">
                   <input
                     v-model="email"
@@ -34,7 +41,8 @@
                 <label
                   for="password"
                   class="block text-sm font-medium leading-5 text-gray-700"
-                >Contraseña</label>
+                  >Contraseña</label
+                >
                 <div class="mt-1 rounded-md shadow-sm">
                   <input
                     v-model="password"
@@ -57,14 +65,16 @@
                   <label
                     for="remember_me"
                     class="ml-2 block text-sm leading-5 text-gray-900"
-                  >Recuérdame</label>
+                    >Recuérdame</label
+                  >
                 </div>
 
                 <div class="text-sm leading-5">
                   <a
                     href="#"
                     class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-                  >Contraseña olvidada?</a>
+                    >Contraseña olvidada?</a
+                  >
                 </div>
               </div>
 
@@ -74,14 +84,18 @@
                     @click="signin"
                     type="submit"
                     class="w-full flex justify-center mb-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-                  >Entrar</button>
+                  >
+                    Entrar
+                  </button>
                 </span>
                 <span class="block w-full rounded-md shadow-sm">
                   <button
                     @click="signup"
                     type="submit"
                     class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-                  >Registrarme</button>
+                  >
+                    Registrarme
+                  </button>
                 </span>
               </div>
               <div v-else>Loading...</div>
@@ -102,7 +116,7 @@
 
 <script>
 import { API } from "../classes/api";
-
+import { AUTH_REQUEST } from "../store/actions/auth";
 import { config } from "../config";
 
 export default {
@@ -115,7 +129,7 @@ export default {
 
       // others
       loading: null,
-      msg: null
+      msg: null,
     };
   },
   computed: {
@@ -124,40 +138,35 @@ export default {
       if (!this.password) return "Introduzca su contraseña";
 
       return false;
-    }
+    },
   },
   methods: {
     async signin() {
       this.loading = true;
+      const { email, password } = this;
 
-      let { data, success } = await this.api.post("/auth/signin", {
-        email: this.email,
-        password: this.password
+      this.$store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
+        this.$router.push(`/welcome`);
       });
+    },
 
+    async signup() {
+      this.loading = true;
+      let res = await this.api.post("auth/signup", {
+        email: this.email,
+        password: this.password,
+      });
       this.loading = false;
 
-      console.log(data)
-      console.log(success)
-
-      if (!data.status != config.network.SUCCESS) {
+      if (!res.status != config.network.SUCCESS) {
         this.msg = "Error";
         return;
       }
-      console.log(data);
-
       localStorage.setItem("user_token", data.accessToken);
-      this.$router.push(`/${data.rol}`);
-    },
-    async signup() {
-      this.loading = true;
-      let res = await this.api.post("/auth/signup", {
-        email: this.email,
-        password: this.password
-      });
-      this.loading = false;
+      this.$router.push(`/welcome`);
+
       return;
-    }
-  }
+    },
+  },
 };
 </script>
