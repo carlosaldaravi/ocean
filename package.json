@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "tailwind": "postcss src/assets/css/style.css -o src/assets/css/output.css"
+    "tailwind": "npx tailwindcss build src/assets/css/style.css -o src/assets/css/output.css"
   },
   "dependencies": {
     "@tailwindcss/ui": "^0.1.3",
