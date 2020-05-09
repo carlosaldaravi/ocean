@@ -2,13 +2,33 @@
   <section class="bg-blue-100">
     <section class="container p-4 md:p-8 mx-auto">
       <!-- step 1 -->
-      <div v-if="step == 1" class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-          <p>Bienvenido, esta es nuestra aplicación para gestionar los cursos de nuestra escuela náutica.</p>
-          <p>Para empezar como alumno sólo tienes que rellenar unos datos</p>
-          <button @click="step++">Apúntate!</button>
+      <div v-if="step == 1" class="bg-white">
+        <div class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 md:py-16 lg:px-8 lg:py-20">
+          <h2
+            class="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
+          >
+            Bienvenido
+            <br />
+            <span class="text-indigo-600">Listo para convertirte en parte de la familia Be Waters?</span>
+          </h2>
+          <div class="mt-8 flex">
+            <div class="inline-flex rounded-md shadow">
+              <a
+                @click="step++"
+                href="#"
+                class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+              >Continuar</a>
+            </div>
+            <div class="ml-3 inline-flex">
+              <a
+                href="#"
+                class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out"
+              >Salir</a>
+            </div>
+          </div>
         </div>
       </div>
+
       <!-- step 2 -->
       <div v-if="step == 2" class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
         <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -263,9 +283,44 @@
         </div>
       </div>
 
-      <button v-if="step > 1 && step <= max_step" @click="step--">Atrás</button>
-      <button v-if="step > 1 && step < max_step" @click="step++">Siguiente</button>
-      <button v-if="step == 5" @click="enroll">Registrarme</button>
+      <span class="relative z-0 inline-flex shadow-sm">
+        <button
+          v-if="step > 1 && step <= max_step"
+          @click="step--"
+          type="button"
+          class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
+        >
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fill-rule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+        <button
+          v-if="step > 1 && step < max_step"
+          @click="step++"
+          type="button"
+          class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
+        >
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </span>
+      <span class="inline-flex rounded-md shadow-sm">
+        <button
+          v-if="step == 5"
+          @click="enroll"
+          type="button"
+          class="inline-flex items-center px-4 py-2 border border-transparent text-xs leading-5 font-medium rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+        >Entrar</button>
+      </span>
     </section>
   </section>
 </template>
@@ -291,6 +346,11 @@ export default {
       let res = await this.api.post("students", this.user);
       console.log(res);
     }
+  },
+  created() {
+    this.user = this.$store.state.user.profile;
+
+    // this.user.details = this.$store.state.profile.details;
   }
 };
 </script>
