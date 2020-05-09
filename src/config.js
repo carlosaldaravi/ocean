@@ -1,6 +1,6 @@
 export const config = {
   headers: {
-    Authorization: localStorage.token,
+    Authorization: "Bearer " + localStorage.getItem("user-token"),
   },
   apiURL: "http://localhost:3000/api/",
   network: {
