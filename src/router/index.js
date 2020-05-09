@@ -19,6 +19,26 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
+
+  // - PARA TODOS
+  //  index
+  //  cursos
+  //  perfil
+  //  calendario
+  //  objetivos
+  //  estadísticas
+  // - Alumnos
+  //  disponibilidad
+  // + info
+  // - Profesor
+  // disponibilidad (vacaciones)
+  // - Admin
+  // lista de alumnos
+  // lista de instructores
+  // lista de deportes
+  // lista de objetivos
+  // lista de niveles
+  // lista de tipos de cursos
   {
     path: "/welcome",
     name: "enrollment",
@@ -45,6 +65,14 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "alumno" */ "../views/student/StudentIndex.vue"
+      ),
+  },
+  {
+    path: "/mis-cursos",
+    name: "studentCourses",
+    component: () =>
+      import(
+        /* webpackChunkName: "alumno" */ "../views/student/StudentCourses.vue"
       ),
   },
   { path: "*", redirect: "/" },
