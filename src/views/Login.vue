@@ -1,17 +1,17 @@
 <template>
-    <div class="flex justify-center align-bottom">
-      <Login/>
-    </div>
+  <div class="flex justify-center align-bottom">
+    <Login />
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Login from '@/components/Login.vue'
+import Login from "@/components/auth/Login.vue";
 
 export default {
-  name: 'login',
+  name: "login",
   components: {
-    Login
-  }
-}
+    Login,
+  },
+};
 </script>

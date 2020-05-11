@@ -8,7 +8,7 @@
           <div class="text-center">
             <img
               class="h-40 md:h-64 mx-auto"
-              src="../assets/images/logo.png"
+              src="../../assets/images/logo.png"
               alt="Ocean"
             />
           </div>
@@ -115,9 +115,9 @@
 </template>
 
 <script>
-import { API } from "../classes/api";
-import { AUTH_REQUEST } from "../store/actions/auth";
-import { config } from "../config";
+import { API } from "../../classes/api";
+import { AUTH_REQUEST } from "../../store/actions/auth";
+import { config } from "../../config";
 
 export default {
   name: "loginComponent",
@@ -132,6 +132,11 @@ export default {
       msg: null,
     };
   },
+  created() {
+    if (this.$store.getters.isAuthenticated) {
+      this.$router.push(`/home`);
+    }
+  },
   computed: {
     errores: function() {
       if (!this.email) return "Introduzca su email";
@@ -145,8 +150,12 @@ export default {
       this.loading = true;
       const { email, password } = this;
 
-      this.$store.dispatch(AUTH_REQUEST, { email, password }).then(() => {
-        this.$router.push(`/welcome`);
+      this.$store.dispatch(AUTH_REQUEST, { email, password }).then((res) => {
+        if (res.data.data.user.roles === 1) {
+          this.$router.push(`/welcome`);
+        } else {
+          this.$router.push(`/home`);
+        }
       });
     },
 
@@ -162,7 +171,7 @@ export default {
         this.msg = "Error";
         return;
       }
-      localStorage.setItem("user_token", data.accessToken);
+      localStorage.setItem("user-token", data.data.token);
       this.$router.push(`/welcome`);
 
       return;

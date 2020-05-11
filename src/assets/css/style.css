@@ -1,13 +1,13 @@
 @tailwind base;
 @tailwind components;
 
-html,
+/* html,
 body,
 #app {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
+} */
 
 #app > * {
   flex: 1;

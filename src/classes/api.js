@@ -30,8 +30,6 @@ export const API = class API {
   }
 
   async post(url, params) {
-    console.log("params: ", params);
-
     let res = null;
     try {
       res = await axios({
