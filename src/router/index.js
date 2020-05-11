@@ -1,7 +1,24 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store/index";
 
 Vue.use(VueRouter);
+
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+  next("/home");
+};
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next();
+    return;
+  }
+  next("/login");
+};
 
 const routes = [
   {
@@ -16,6 +33,7 @@ const routes = [
   {
     path: "/login",
     name: "login",
+    beforeEnter: ifNotAuthenticated,
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
@@ -42,6 +60,7 @@ const routes = [
   {
     path: "/welcome",
     name: "enrollment",
+    beforeEnter: ifAuthenticated,
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Enrollment.vue"),
   },
