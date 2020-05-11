@@ -3,13 +3,17 @@ import {
   AUTH_ERROR,
   AUTH_SUCCESS,
   AUTH_LOGOUT,
+  AUTH_CHECK,
 } from "../actions/auth";
 import { USER_REQUEST } from "../actions/user";
 import apiCall from "../../utils/api";
 import axios from "axios";
+import { Localit } from "localit";
 
+let store = new Localit();
 const state = {
-  token: localStorage.getItem("user-token") || "",
+  // token: localStorage.getItem("user-token") || "",
+  token: store.get("user-token") || "",
   status: "",
   hasLoadedOnce: false,
 };
@@ -29,9 +33,8 @@ const actions = {
         method: "POST",
       })
         .then((resp) => {
-          console.log(resp);
-
-          localStorage.setItem("user-token", resp.data.data.token);
+          let store = new Localit();
+          store.set("user-token", resp.data.data.token);
           axios.defaults.headers.common["Authorization"] = resp.data.data.token;
           commit(AUTH_SUCCESS, resp);
           dispatch(USER_REQUEST, resp);
@@ -47,10 +50,36 @@ const actions = {
   [AUTH_LOGOUT]: ({ commit }) => {
     return new Promise((resolve) => {
       commit(AUTH_LOGOUT);
-      localStorage.removeItem("user-token");
+      let store = new Localit();
+      store.remove("user-token");
+      // localStorage.removeItem("user-token");
       resolve();
     });
   },
+  [AUTH_CHECK]: ({ commit, dispatch }) => {
+    return new Promise((resolve) => {
+      let store = new Localit();
+      const token = store.get("user-token");
+      const user = store.get("user");
+      if (token) {
+        commit(AUTH_SUCCESS, { data: { data: { token } } });
+        dispatch(USER_REQUEST, { data: { data: { user } } });
+      } else {
+        commit(AUTH_LOGOUT);
+      }
+    });
+  },
+  // AUTH_CHECK(context) {
+  //   let store = new Localit();
+  //   const token = store.get("user-token");
+  //   const user = store.get("user");
+  //   if (token) {
+  //     context.commit(AUTH_SUCCESS, { data: { data: { token } } });
+  //     context.dispatch(USER_REQUEST, { data: { data: { user } } });
+  //   } else {
+  //     context.commit(AUTH_LOGOUT);
+  //   }
+  // },
 };
 
 const mutations = {
