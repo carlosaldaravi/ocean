@@ -73,22 +73,26 @@ const routes = [
   {
     path: "/lista-alumnos",
     name: "alumnoLista",
+    beforeEnter: ifAuthenticated,
     component: () =>
       import(
         /* webpackChunkName: "lista-alumnos" */ "../views/student/StudentList.vue"
       ),
   },
   {
+    // quitar vista y hacer componente de la vista home
     path: "/alumno",
     name: "alumnoIndex",
+    beforeEnter: ifAuthenticated,
     component: () =>
       import(
         /* webpackChunkName: "alumno" */ "../views/student/StudentIndex.vue"
       ),
   },
   {
-    path: "/mis-cursos",
+    path: "/cursos",
     name: "studentCourses",
+    beforeEnter: ifAuthenticated,
     component: () =>
       import(
         /* webpackChunkName: "alumno" */ "../views/student/StudentCourses.vue"
