@@ -1,15 +1,16 @@
 <template>
-  <div class="p-4">
+  <section class="container p-4 md:p-8 mx-auto">
     <div v-if="getRole() === 'ADMIN'"></div>
     <StudentIndex v-if="getRole() === 'STUDENT'" />
     <div v-if="getRole() === 'INSTRUCTOR'">INSTRUCTOR home</div>
-  </div>
+  </section>
 </template>
 
 <script>
 import Shell from "../components/layout/Shell";
-import { mapState } from "vuex";
 import StudentIndex from "../components/student/StudentIndex.vue";
+import { AUTH_LOGOUT } from "../store/actions/auth";
+
 export default {
   data() {
     return {
@@ -23,6 +24,9 @@ export default {
   },
   created() {
     this.roles = this.$store.getters.getRoles;
+    if (this.roles.length == 0) {
+      this.$store.dispatch(AUTH_LOGOUT);
+    }
   },
   methods: {
     getRole() {
