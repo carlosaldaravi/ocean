@@ -88,6 +88,24 @@ const routes = [
         /* webpackChunkName: "alumno" */ "../views/student/StudentCourses.vue"
       ),
   },
+  {
+    path: "/calendar",
+    name: "Calendar",
+    component: () =>
+      import(/* webpackChunkName: "alumno" */ "../views/Calendar.vue"),
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () =>
+      import(/* webpackChunkName: "alumno" */ "../views/Profile.vue"),
+  },
+  {
+    path: "/targets",
+    name: "Targets",
+    component: () =>
+      import(/* webpackChunkName: "alumno" */ "../views/Targets.vue"),
+  },
   { path: "*", redirect: "/" },
 ];
 
