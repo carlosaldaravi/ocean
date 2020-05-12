@@ -5,14 +5,13 @@
 </template>
 
 <script>
-import List from "../../components/students/List.vue";
+import List from "../../components/student/List.vue";
 
 export default {
   components: {
-    List
-  }
+    List,
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

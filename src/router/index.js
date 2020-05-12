@@ -80,16 +80,6 @@ const routes = [
       ),
   },
   {
-    // quitar vista y hacer componente de la vista home
-    path: "/alumno",
-    name: "alumnoIndex",
-    beforeEnter: ifAuthenticated,
-    component: () =>
-      import(
-        /* webpackChunkName: "alumno" */ "../views/student/StudentIndex.vue"
-      ),
-  },
-  {
     path: "/cursos",
     name: "studentCourses",
     beforeEnter: ifAuthenticated,

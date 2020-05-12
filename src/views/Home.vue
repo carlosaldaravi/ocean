@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div v-if="getRole() === 'ADMIN'">ADMIN home</div>
-    <div v-if="getRole() === 'STUDENT'">STUDENT home</div>
+  <div class="p-4">
+    <div v-if="getRole() === 'ADMIN'"></div>
+    <StudentIndex v-if="getRole() === 'STUDENT'" />
     <div v-if="getRole() === 'INSTRUCTOR'">INSTRUCTOR home</div>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import Shell from "../components/layout/Shell";
 import { mapState } from "vuex";
+import StudentIndex from "../components/student/StudentIndex.vue";
 export default {
   data() {
     return {
@@ -18,10 +19,10 @@ export default {
   },
   components: {
     Shell,
+    StudentIndex,
   },
   created() {
     this.roles = this.$store.getters.getRoles;
-    console.log("roles: ", this.roles);
   },
   methods: {
     getRole() {

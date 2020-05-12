@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import CourseList from "../../components/CourseList.vue";
+import CourseList from "../../components/course/CourseList.vue";
 import { Course } from "../../classes/course";
 import { API } from "../../classes/api";
 export default {
