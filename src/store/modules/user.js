@@ -1,19 +1,24 @@
-import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from "../actions/user";
+import {
+  USER_REQUEST,
+  USER_ERROR,
+  USER_SUCCESS,
+  SET_ROLE,
+} from "../actions/user";
 import apiCall from "../../utils/api";
 import Vue from "vue";
 import { AUTH_LOGOUT } from "../actions/auth";
 import { Localit } from "localit";
 
-const state = { status: "", profile: {} };
+const state = {
+  status: "",
+  profile: {},
+  role: "",
+};
 
 const getters = {
   getProfile: (state) => state.profile,
   isProfileLoaded: (state) => !!state.profile.details.firstname,
-  getRoles: (state) => {
-    let roles = [];
-    state.profile.roles.forEach((role) => roles.push(role.name));
-    return roles;
-  },
+  getRole: (state) => state.role,
 };
 
 const actions = {
@@ -22,6 +27,15 @@ const actions = {
     store.set("user", resp.data.data.user);
     commit(USER_REQUEST);
     commit(USER_SUCCESS, resp);
+    const roles = resp.data.data.user.roles;
+
+    if (roles.some((role) => role.name === "ADMIN")) {
+      commit(SET_ROLE, "ADMIN");
+    } else if (roles.some((role) => role.name === "STUDENT")) {
+      commit(SET_ROLE, "STUDENT");
+    } else if (roles.some((role) => role.name === "INSTRUCTOR")) {
+      commit(SET_ROLE, "INSTRUCTOR");
+    }
     // apiCall({ url: "user/me" })
     //   .then((resp) => {
     //     commit(USER_SUCCESS, resp);
@@ -41,13 +55,15 @@ const mutations = {
   [USER_SUCCESS]: (state, resp) => {
     state.status = "success";
     Vue.set(state, "profile", resp.data.data.user);
-    Vue.set(state, "roles", resp.data.data.user.roles);
   },
   [USER_ERROR]: (state) => {
     state.status = "error";
   },
   [AUTH_LOGOUT]: (state) => {
     state.profile = {};
+  },
+  [SET_ROLE]: (state, role) => {
+    state.role = role;
   },
 };
 
