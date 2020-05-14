@@ -4,25 +4,39 @@
       @click="goToCourses()"
       class="h-28 bg-gray-200 sm:h-56 rounded-lg shadow-2xl relative overflow-hidden"
     >
-      <img src="../../assets/images/index_mis_clases.png" alt="" />
+      <img src="../../assets/images/index_mis_clases.png" alt="Cursos" />
     </div>
     <div
       @click="goToCalendar()"
-      class="h-28 bg-gray-200 sm:h-56 rounded-lg shadow-2xl relative overflow-hidden"
+      class="relative text-center h-28 bg-gray-200 sm:h-56 rounded-lg shadow-2xl relative overflow-hidden"
     >
-      <img src="../../assets/images/index_calendario.png" alt="" />
+      <img src="../../assets/images/calendario.png" alt="Calendario" />
+      <div
+        class="font-black top-1/2 font-mono absolute text-5xl -translate-x-1/2 -translate-y-1/2"
+      >
+        CALENDARIO
+      </div>
     </div>
     <div
       @click="goToTargets()"
-      class="h-28 bg-gray-200 sm:h-56 rounded-lg shadow-2xl relative overflow-hidden"
+      class="relative text-center h-28 bg-gray-200 sm:h-56 rounded-lg shadow-2xl relative overflow-hidden"
     >
-      <img src="../../assets/images/index_objetivos.png" alt="" />
+      <img
+        class="h-auto object-cover object-center"
+        src="../../assets/images/targets.png"
+        alt="Objetivos"
+      />
+      <div
+        class="font-black top-1/2 font-mono absolute text-5xl -translate-x-1/2 -translate-y-1/2"
+      >
+        OBJETIVOS
+      </div>
     </div>
     <div
       @click="goToProfile()"
       class="h-28 bg-gray-200 sm:h-56 rounded-lg shadow-2xl relative overflow-hidden"
     >
-      <img src="../../assets/images/perfil.png" alt="" />
+      <img src="../../assets/images/perfil.png" alt="Perfil" />
     </div>
   </div>
 </template>

@@ -46,19 +46,39 @@
       <!-- instructor -->
       <div class="flex justify-between mt-2">
         <div class="flex items-center">
-          <img
-            v-if="course.instructors[0].details.gender == 'FEMALE'"
-            class="w-10 h-10 object-cover object-top rounded-full"
-            src="../../assets/images/avatar/kaya.jpg"
-            alt
-          />
-          <img
-            v-if="course.instructors[0].details.gender == 'MALE'"
-            class="w-10 h-10 object-cover object-top rounded-full"
-            src="../../assets/images/avatar/will.jpg"
-            alt
-          />
-          <div class="pl-2">{{ course.instructors[0].details.firstname }}</div>
+          <div>
+            <img
+              v-if="course.instructors[0].details.gender == 'FEMALE'"
+              class="w-9 h-9 object-cover object-top rounded-full"
+              src="../../assets/images/avatar/kaya.jpg"
+              alt
+            />
+            <img
+              v-if="course.instructors[0].details.gender == 'MALE'"
+              class="w-9 h-9 object-cover object-top rounded-full"
+              src="../../assets/images/avatar/will.jpg"
+              alt
+            />
+          </div>
+          <div class="ml-3">
+            <p
+              class="text-sm leading-5 font-medium text-gray-700 group-hover:text-gray-900"
+            >
+              {{ course.instructors[0].details.firstname }}
+            </p>
+            <p
+              v-if="course.instructors[0].details.gender == 'FEMALE'"
+              class="text-xs leading-4 font-medium text-gray-500 group-hover:text-gray-700 group-focus:underline transition ease-in-out duration-150"
+            >
+              Instructora
+            </p>
+            <p
+              v-else
+              class="text-xs leading-4 font-medium text-gray-500 group-hover:text-gray-700 group-focus:underline transition ease-in-out duration-150"
+            >
+              Instructor
+            </p>
+          </div>
         </div>
         <div class="flex items-center">
           <img class="w-6 h-6 " src="../../assets/images/logros.svg" alt />
