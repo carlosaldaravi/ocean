@@ -1,9 +1,5 @@
 <template>
-  <div
-    id="app"
-    class="bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover"
-    style="background-image: url('./assets/logo.png')"
-  >
+  <div id="app" class="bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover">
     <!-- <div v-if="isLogged">
       <shell>
         <section slot="content">
@@ -28,16 +24,16 @@ export default {
   name: "app",
   data() {
     return {
-      lstore: new Localit(),
+      lstore: new Localit()
     };
   },
   components: {
-    Shell,
+    Shell
   },
   computed: {
     isLogged: function() {
       return this.lstore.get("user-token") !== undefined;
-    },
+    }
   },
   created() {
     // this.AUTH_CHECK();
@@ -49,6 +45,6 @@ export default {
   },
   methods: {
     // ...mapActions([AUTH_CHECK]),
-  },
+  }
 };
 </script>
