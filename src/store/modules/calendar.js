@@ -1,4 +1,9 @@
-import { ADD_EVENT, UPDATE_EVENT, DELETE_EVENT } from "../actions/calendar";
+import {
+  ADD_EVENT,
+  UPDATE_EVENT,
+  DELETE_EVENT,
+  RESET_EVENTS,
+} from "../actions/calendar";
 import { API } from "../../classes/api";
 
 const state = {
@@ -23,6 +28,9 @@ const actions = {
     await api.delete(`calendar/${payload.id}`);
     commit(DELETE_EVENT, payload);
   },
+  RESET_EVENTS({ commit }) {
+    commit(RESET_EVENTS);
+  },
 };
 const mutations = {
   ADD_EVENT: (state, event) => {
@@ -43,6 +51,9 @@ const mutations = {
       let api = new API();
       await api.delete(`calendar/${id}`);
     }
+  },
+  RESET_EVENTS: (state) => {
+    state.events = [];
   },
 };
 export default {
