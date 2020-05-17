@@ -15,7 +15,9 @@
         <div class="pl-2">Pulsa, mantén y luego arrastra</div>
       </div>
     </div>
-    <div v-if="this.$store.getters.getRole === 'INSTRUCTOR'">INSTRUCTOR home</div>
+    <div v-if="this.$store.getters.getRole === 'INSTRUCTOR'">
+      INSTRUCTOR home
+    </div>
     <div class="mt-4 demo-app-top">
       <!-- <button @click="toggleWeekends">toggle weekends</button>
       <br />
@@ -33,10 +35,10 @@
       minTime="09:00:00"
       maxTime="20:00:00"
       :header="{
-    left: 'prev,next today',
-    center: 'title',
-    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-    }"
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+      }"
       :plugins="calendarPlugins"
       :weekends="true"
       :editable="true"
@@ -68,13 +70,14 @@ import { mapGetters } from "vuex";
 import EventModal from "../components/EventModal.vue";
 import { UserCalendar } from "../classes/calendar";
 import { API } from "../classes/api";
+import moment from "moment";
 
 export default {
   components: {
-    FullCalendar // make the <FullCalendar> tag available
+    FullCalendar, // make the <FullCalendar> tag available
   },
   computed: {
-    ...mapGetters(["EVENTS"])
+    ...mapGetters(["EVENTS"]),
   },
   data: function() {
     return {
@@ -84,8 +87,8 @@ export default {
         // plugins must be defined in the JS
         DayGridPlugin,
         TimeGridPlugin,
-        InteractionPlugin // needed for dateClick
-      ]
+        InteractionPlugin, // needed for dateClick
+      ],
 
       // calendarWeekends: true,
       // calendarEvents: [
@@ -125,30 +128,33 @@ export default {
     //   }
     // },
     handleSelect(arg) {
+      const dateStart = moment(arg.start);
+      const dateEnd = moment(arg.end);
       const userCalendar = new UserCalendar(arg);
       userCalendar.title = this.title;
-      console.log("start1: ", userCalendar.start);
-      userCalendar.start = new Date(arg.start);
+      userCalendar.start = dateStart;
 
-      let eventFound = this.$store.getters.EVENTS.find(_event => {
-        console.log("arg: ", userCalendar.start);
-        console.log("_event: ", _event.start);
-        console.log("arg: ", userCalendar.start.getTime());
-        console.log("_event: ", Date.parse(_event.start));
+      let eventFound = this.$store.getters.EVENTS.find((_event) => {
+        let dbDateStart = moment(_event.start);
+        let dbDateEnd = moment(_event.end);
 
-        return _event.start == arg.start;
+        return (
+          (dateStart.isBefore(dbDateEnd) && dateStart.isAfter(dbDateStart)) ||
+          (dateEnd.isBefore(dbDateEnd) && dateEnd.isAfter(dbDateStart)) ||
+          (dateStart.isBefore(dbDateStart) && dateEnd.isAfter(dbDateEnd))
+        );
       });
 
       if (!eventFound) {
         return new Promise((resolve, reject) => {
           this.api
             .post("students/calendar", userCalendar)
-            .then(resp => {
+            .then((resp) => {
               let newCalendar = new UserCalendar(resp.data.data);
               this.$store.dispatch("ADD_EVENT", newCalendar);
               resolve(resp);
             })
-            .catch(err => {
+            .catch((err) => {
               reject(err);
             });
         });
@@ -158,7 +164,7 @@ export default {
       // if (arg.event.title === "Curso") {
       this.$modal.show(EventModal, {
         text: "This is from the component",
-        event: arg.event
+        event: arg.event,
       });
       // }
     },
@@ -176,7 +182,7 @@ export default {
       // closeButton.innerHTML("x");
       arg.el.appendChild(closeButton);
 
-      closeButton.addEventListener("click", event => {
+      closeButton.addEventListener("click", (event) => {
         event.stopPropagation();
         this.$store.dispatch("DELETE_EVENT", arg.event);
       });
@@ -184,7 +190,7 @@ export default {
     async getStudentCalendar() {
       let res = await this.api.get("students/calendar");
       if (res.data.data) {
-        res.data.data.forEach(calendar => {
+        res.data.data.forEach((calendar) => {
           let userCalendar = new UserCalendar(calendar);
 
           this.$store.dispatch("ADD_EVENT", userCalendar);
@@ -194,7 +200,7 @@ export default {
           this.$store.dispatch(AUTH_LOGOUT);
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
