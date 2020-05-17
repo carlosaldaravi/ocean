@@ -18,15 +18,6 @@
     <div v-if="this.$store.getters.getRole === 'INSTRUCTOR'">
       INSTRUCTOR home
     </div>
-    <div class="mt-4 demo-app-top">
-      <!-- <button @click="toggleWeekends">toggle weekends</button>
-      <br />
-      <button @click="gotoPast">go to a date in the past</button>
-      <br />
-
-      <button @click="test">test api</button>-->
-      <!-- (also, click a date/time to add an event) -->
-    </div>
 
     <FullCalendar
       locale="es"
@@ -89,12 +80,6 @@ export default {
         TimeGridPlugin,
         InteractionPlugin, // needed for dateClick
       ],
-
-      // calendarWeekends: true,
-      // calendarEvents: [
-      //   // initial event data
-      //   { title: "Event Now", start: new Date() },
-      // ],
     };
   },
   created() {
@@ -106,59 +91,17 @@ export default {
     if (this.$store.getters.getRole === "INSTRUCTOR") this.title = "Vacaciones";
   },
   methods: {
-    // toggleWeekends() {
-    //   this.calendarWeekends = !this.calendarWeekends; // update a property
-    // },
-    // test() {
-    //   let calendarApi = this.$refs.fullCalendar.getApi(); // from the ref="..."
-    //   console.log(calendarApi);
-    // },
-    // gotoPast() {
-    //   let calendarApi = this.$refs.fullCalendar.getApi(); // from the ref="..."
-    //   calendarApi.gotoDate("2000-01-01"); // call a method on the Calendar object
-    // },
-    // handleDateClick(arg) {
-    //   if (confirm("Would you like to add an event to " + arg.dateStr + " ?")) {
-    //     this.calendarEvents.push({
-    //       // add new event data
-    //       title: "New Event",
-    //       start: arg.date,
-    //       allDay: arg.allDay,
-    //     });
-    //   }
-    // },
+    // Full Calendar methods
     handleSelect(arg) {
-      const dateStart = moment(arg.start);
-      const dateEnd = moment(arg.end);
-      const userCalendar = new UserCalendar(arg);
-      userCalendar.title = this.title;
-      userCalendar.start = dateStart;
-
-      // check if new data overwrite existing data
-      let eventFound = this.$store.getters.EVENTS.find((_event) => {
-        let dbDateStart = moment(_event.start);
-        let dbDateEnd = moment(_event.end);
-
-        return (
-          (dateStart.isBefore(dbDateEnd) && dateStart.isAfter(dbDateStart)) ||
-          (dateEnd.isBefore(dbDateEnd) && dateEnd.isAfter(dbDateStart)) ||
-          (dateStart.isBefore(dbDateStart) && dateEnd.isAfter(dbDateEnd))
-        );
-      });
-
-      if (!eventFound) {
-        return new Promise((resolve, reject) => {
-          this.api
-            .post("students/calendar", userCalendar)
-            .then((resp) => {
-              let newCalendar = new UserCalendar(resp.data.data);
-              this.$store.dispatch("ADD_EVENT", newCalendar);
-              resolve(resp);
-            })
-            .catch((err) => {
-              reject(err);
-            });
-        });
+      // each role save distint calendar type
+      switch (this.$store.getters.getRole) {
+        case "STUDENT":
+          this.addStudentEvent(arg);
+          break;
+        case "INSTRUCTOR":
+          break;
+        case "ADMIN":
+          break;
       }
     },
     handleClick(arg) {
@@ -188,7 +131,11 @@ export default {
         this.$store.dispatch("DELETE_EVENT", arg.event);
       });
     },
+
+    // own methods
     async getStudentCalendar() {
+      // first of all, synchronize db with store
+      this.$store.dispatch("RESET_EVENTS");
       let res = await this.api.get("students/calendar");
       if (res.data.data) {
         res.data.data.forEach((calendar) => {
@@ -200,6 +147,42 @@ export default {
         if (res.data.response.status === 401) {
           this.$store.dispatch(AUTH_LOGOUT);
         }
+      }
+    },
+    addStudentEvent(arg) {
+      const dateStart = moment(arg.start);
+      const dateEnd = moment(arg.end);
+      const userCalendar = new UserCalendar(arg);
+      userCalendar.title = this.title;
+      userCalendar.start = dateStart;
+
+      // check if new data overwrite existing data
+      let eventFound = this.$store.getters.EVENTS.find((_event) => {
+        let dbDateStart = moment(_event.start);
+        let dbDateEnd = moment(_event.end);
+
+        return (
+          (dateStart.isBefore(dbDateEnd) && dateStart.isAfter(dbDateStart)) ||
+          (dateEnd.isBefore(dbDateEnd) && dateEnd.isAfter(dbDateStart)) ||
+          (dateStart.isBefore(dbDateStart) && dateEnd.isAfter(dbDateEnd)) ||
+          dateStart.isSame(dbDateStart) ||
+          dateEnd.isSame(dbDateEnd)
+        );
+      });
+
+      if (!eventFound) {
+        return new Promise((resolve, reject) => {
+          this.api
+            .post("students/calendar", userCalendar)
+            .then((resp) => {
+              let newCalendar = new UserCalendar(resp.data.data);
+              this.$store.dispatch("ADD_EVENT", newCalendar);
+              resolve(resp);
+            })
+            .catch((err) => {
+              reject(err);
+            });
+        });
       }
     },
   },
