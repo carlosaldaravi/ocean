@@ -8,29 +8,24 @@
       </p>
       <div class="pt-1 items-center flex">
         <img class="h-4 w-4" src="../assets/icons/computer-desktop.svg" />
-        <div class="pl-2">
-          Click y arrastra
-        </div>
+        <div class="pl-2">Click y arrastra</div>
       </div>
       <div class="flex items-center">
         <img class="h-4 w-4" src="../assets/icons/mobile-devices.svg" />
-        <div class="pl-2">
-          Pulsa, mantén y luego arrastra
-        </div>
+        <div class="pl-2">Pulsa, mantén y luego arrastra</div>
       </div>
     </div>
-    <div v-if="this.$store.getters.getRole === 'INSTRUCTOR'">
-      INSTRUCTOR home
-    </div>
+    <div v-if="this.$store.getters.getRole === 'INSTRUCTOR'">INSTRUCTOR home</div>
     <div class="mt-4 demo-app-top">
       <!-- <button @click="toggleWeekends">toggle weekends</button>
       <br />
       <button @click="gotoPast">go to a date in the past</button>
       <br />
 
-      <button @click="test">test api</button> -->
+      <button @click="test">test api</button>-->
       <!-- (also, click a date/time to add an event) -->
     </div>
+
     <FullCalendar
       locale="es"
       class="demo-app-calendar bg-white"
@@ -38,10 +33,10 @@
       minTime="09:00:00"
       maxTime="20:00:00"
       :header="{
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-      }"
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+    }"
       :plugins="calendarPlugins"
       :weekends="true"
       :editable="true"
@@ -54,6 +49,9 @@
       @eventDrop="updateEvent"
       @eventRender="renderEvent"
     />
+    <!-- <Modal>
+      <Course-form>      
+    </Modal>-->
     <modals-container />
   </div>
 </template>
@@ -68,22 +66,27 @@ import TimeGridPlugin from "@fullcalendar/timegrid";
 import InteractionPlugin from "@fullcalendar/interaction";
 import { mapGetters } from "vuex";
 import EventModal from "../components/EventModal.vue";
+import { UserCalendar } from "../classes/calendar";
+import { API } from "../classes/api";
+
 export default {
   components: {
-    FullCalendar, // make the <FullCalendar> tag available
+    FullCalendar // make the <FullCalendar> tag available
   },
   computed: {
-    ...mapGetters(["EVENTS"]),
+    ...mapGetters(["EVENTS"])
   },
   data: function() {
     return {
+      api: new API(),
       title: "",
       calendarPlugins: [
         // plugins must be defined in the JS
         DayGridPlugin,
         TimeGridPlugin,
-        InteractionPlugin, // needed for dateClick
-      ],
+        InteractionPlugin // needed for dateClick
+      ]
+
       // calendarWeekends: true,
       // calendarEvents: [
       //   // initial event data
@@ -93,7 +96,10 @@ export default {
   },
   created() {
     if (this.$store.getters.getRole === "ADMIN") this.title = "Curso";
-    if (this.$store.getters.getRole === "STUDENT") this.title = "Disponible";
+    if (this.$store.getters.getRole === "STUDENT") {
+      this.title = "Disponible";
+      this.getStudentCalendar();
+    }
     if (this.$store.getters.getRole === "INSTRUCTOR") this.title = "Vacaciones";
   },
   methods: {
@@ -119,19 +125,32 @@ export default {
     //   }
     // },
     handleSelect(arg) {
-      let index = this.$store.getters.EVENTS.findIndex((_event) => {
+      const userCalendar = new UserCalendar(arg);
+      userCalendar.title = this.title;
+      console.log("start1: ", userCalendar.start);
+      userCalendar.start = new Date(arg.start);
+
+      let eventFound = this.$store.getters.EVENTS.find(_event => {
+        console.log("arg: ", userCalendar.start);
         console.log("_event: ", _event.start);
-        console.log("event: ", arg.start);
-        _event.start == arg.start;
+        console.log("arg: ", userCalendar.start.getTime());
+        console.log("_event: ", Date.parse(_event.start));
+
+        return _event.start == arg.start;
       });
-      console.log("index: ", index);
-      if (index == -1) {
-        this.$store.dispatch("ADD_EVENT", {
-          id: new Date().getTime(),
-          title: this.title,
-          start: arg.start,
-          end: arg.end,
-          allDay: arg.allDay,
+
+      if (!eventFound) {
+        return new Promise((resolve, reject) => {
+          this.api
+            .post("students/calendar", userCalendar)
+            .then(resp => {
+              let newCalendar = new UserCalendar(resp.data.data);
+              this.$store.dispatch("ADD_EVENT", newCalendar);
+              resolve(resp);
+            })
+            .catch(err => {
+              reject(err);
+            });
         });
       }
     },
@@ -139,23 +158,43 @@ export default {
       // if (arg.event.title === "Curso") {
       this.$modal.show(EventModal, {
         text: "This is from the component",
-        event: arg.event,
+        event: arg.event
       });
       // }
     },
     updateEvent(arg) {
-      this.$store.dispatch("UPDATE_EVENT", arg.event);
+      const userCalendar = new UserCalendar(arg.event);
+      this.$store.dispatch("UPDATE_EVENT", userCalendar);
     },
     renderEvent(arg) {
-      let close = document.createElement("img");
-      close.setAttribute("src", "../assets/icons/close.svg");
-      close.setAttribute("alt", "borrar");
-      arg.el.appendChild(close);
-      close.addEventListener("click", (event) => {
+      let closeButton = document.createElement("button");
+      let closeSpan = document.createElement("span");
+      closeButton.setAttribute(
+        "class",
+        "h-1 p-2 rounded text-white bg-red-700 order-1"
+      );
+      // closeButton.innerHTML("x");
+      arg.el.appendChild(closeButton);
+
+      closeButton.addEventListener("click", event => {
         event.stopPropagation();
         this.$store.dispatch("DELETE_EVENT", arg.event);
       });
     },
-  },
+    async getStudentCalendar() {
+      let res = await this.api.get("students/calendar");
+      if (res.data.data) {
+        res.data.data.forEach(calendar => {
+          let userCalendar = new UserCalendar(calendar);
+
+          this.$store.dispatch("ADD_EVENT", userCalendar);
+        });
+      } else {
+        if (res.data.response.status === 401) {
+          this.$store.dispatch(AUTH_LOGOUT);
+        }
+      }
+    }
+  }
 };
 </script>
