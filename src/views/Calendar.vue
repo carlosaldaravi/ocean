@@ -134,6 +134,7 @@ export default {
       userCalendar.title = this.title;
       userCalendar.start = dateStart;
 
+      // check if new data overwrite existing data
       let eventFound = this.$store.getters.EVENTS.find((_event) => {
         let dbDateStart = moment(_event.start);
         let dbDateEnd = moment(_event.end);
@@ -177,9 +178,9 @@ export default {
       let closeSpan = document.createElement("span");
       closeButton.setAttribute(
         "class",
-        "h-1 p-2 rounded text-white bg-red-700 order-1"
+        " p-2 mr-4 rounded text-white bg-red-700 order-1"
       );
-      // closeButton.innerHTML("x");
+      closeButton.innerHTML = "&#88";
       arg.el.appendChild(closeButton);
 
       closeButton.addEventListener("click", (event) => {
