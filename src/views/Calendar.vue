@@ -36,11 +36,11 @@
       :events="EVENTS"
       :selectable="true"
       :firstDay="1"
+      :eventRender="renderEvent"
       @select="handleSelect"
       @eventClick="handleClick"
       @eventResize="updateEvent"
       @eventDrop="updateEvent"
-      @eventRender="renderEvent"
     />
     <!-- <Modal>
       <Course-form>      
@@ -93,14 +93,13 @@ export default {
   methods: {
     // Full Calendar methods
     handleSelect(arg) {
-      // each role save distint calendar type
+      // students and instructor have the same iteration with calendar
+      // admin has different iteration with courses calendar
       switch (this.$store.getters.getRole) {
-        case "STUDENT":
-          this.addStudentEvent(arg);
-          break;
-        case "INSTRUCTOR":
-          break;
         case "ADMIN":
+          break;
+        default:
+          this.addStudentOrInstructorEvent(arg);
           break;
       }
     },
@@ -149,7 +148,7 @@ export default {
         }
       }
     },
-    addStudentEvent(arg) {
+    addStudentOrInstructorEvent(arg) {
       const dateStart = moment(arg.start);
       const dateEnd = moment(arg.end);
       const userCalendar = new UserCalendar(arg);
