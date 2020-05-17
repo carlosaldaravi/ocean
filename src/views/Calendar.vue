@@ -83,12 +83,18 @@ export default {
     };
   },
   created() {
-    if (this.$store.getters.getRole === "ADMIN") this.title = "Curso";
+    if (this.$store.getters.getRole === "ADMIN") {
+      this.title = "Curso";
+      this.getCalendar("admins");
+    }
     if (this.$store.getters.getRole === "STUDENT") {
       this.title = "Disponible";
-      this.getStudentCalendar();
+      this.getCalendar("students");
     }
-    if (this.$store.getters.getRole === "INSTRUCTOR") this.title = "Vacaciones";
+    if (this.$store.getters.getRole === "INSTRUCTOR") {
+      this.title = "Vacaciones";
+      this.getCalendar("instructors");
+    }
   },
   methods: {
     // Full Calendar methods
@@ -132,10 +138,10 @@ export default {
     },
 
     // own methods
-    async getStudentCalendar() {
+    async getCalendar(role) {
       // first of all, synchronize db with store
       this.$store.dispatch("RESET_EVENTS");
-      let res = await this.api.get("students/calendar");
+      let res = await this.api.get(`${role}/calendar`);
       if (res.data.data) {
         res.data.data.forEach((calendar) => {
           let userCalendar = new UserCalendar(calendar);
