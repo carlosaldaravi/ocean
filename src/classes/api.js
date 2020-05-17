@@ -39,6 +39,49 @@ export const API = class API {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("user-token"),
+        },
+      });
+      this.result.ok(res.data);
+    } catch (e) {
+      this.result.error(e);
+    } finally {
+      return this.result;
+    }
+  }
+
+  async patch(url, params) {
+    let res = null;
+    try {
+      res = await axios({
+        method: "patch",
+        url: `${this.apiURL}${url}`,
+        data: params,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("user-token"),
+        },
+      });
+      this.result.ok(res.data);
+    } catch (e) {
+      this.result.error(e);
+    } finally {
+      return this.result;
+    }
+  }
+
+  async delete(url, params) {
+    let res = null;
+    try {
+      res = await axios({
+        method: "delete",
+        url: `${this.apiURL}${url}`,
+        data: params,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("user-token"),
         },
       });
       this.result.ok(res.data);
