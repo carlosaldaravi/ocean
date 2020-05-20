@@ -14,7 +14,7 @@ body,
 }
 
 #app {
-  background-image: url("../images/fondo.png");
+  background-image: url("../images/seatop.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -22,10 +22,20 @@ body,
 /* Calendar override */
 .fc-day-grid-event {
   display: flex !important;
-  height: 2rem !important;
+  height: 4rem !important;
 }
 .fc-day-grid-event .fc-content {
   order: 2 !important;
+}
+
+.fc-toolbar {
+  @apply flex flex-col;
+}
+
+@screen sm {
+  .fc-toolbar {
+    @apply flex-row;
+  }
 }
 
 @tailwind utilities;
