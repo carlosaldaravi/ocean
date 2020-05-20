@@ -6,12 +6,12 @@
         Selecciona en el calendario las fechas en las que estás disponible para
         nuestras clases.
       </p>
-      <div class="pt-1 items-center flex">
-        <img class="h-4 w-4" src="../assets/icons/computer-desktop.svg" />
+      <div class="flex items-center pt-1">
+        <img class="w-4 h-4" src="../assets/icons/computer-desktop.svg" />
         <div class="pl-2">Click y arrastra</div>
       </div>
       <div class="flex items-center">
-        <img class="h-4 w-4" src="../assets/icons/mobile-devices.svg" />
+        <img class="w-4 h-4" src="../assets/icons/mobile-devices.svg" />
         <div class="pl-2">Pulsa, mantén y luego arrastra</div>
       </div>
     </div>
@@ -21,7 +21,7 @@
 
     <FullCalendar
       locale="es"
-      class="demo-app-calendar bg-white"
+      class="bg-white demo-app-calendar"
       defaultView="dayGridMonth"
       minTime="09:00:00"
       maxTime="20:00:00"
@@ -103,6 +103,7 @@ export default {
       // admin has different iteration with courses calendar
       switch (this.$store.getters.getRole) {
         case "ADMIN":
+          this.addCourseEvent(arg);
           break;
         default:
           this.addStudentOrInstructorEvent(arg);
@@ -121,7 +122,9 @@ export default {
       const userCalendar = new UserCalendar(arg.event);
       this.$store.dispatch("UPDATE_EVENT", userCalendar);
     },
-    renderEvent(arg) {
+    renderEvent(arg, element) {
+      console.log("element: ", element);
+
       let closeButton = document.createElement("button");
       let closeSpan = document.createElement("span");
       closeButton.setAttribute(
@@ -190,6 +193,7 @@ export default {
         });
       }
     },
+    addCourseEvent(arg) {},
   },
 };
 </script>
