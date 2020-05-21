@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover">
+  <div id="app" class="bg-fixed bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover">
     <!-- <div v-if="isLogged">
       <shell>
         <section slot="content">
