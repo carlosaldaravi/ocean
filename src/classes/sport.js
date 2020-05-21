@@ -4,6 +4,6 @@ export const Sport = class Sport {
     this.id = data?.id;
     this.name = data?.name;
     this.description = data?.description;
-    this.targets = data?.targets;
+    this.sportLevel = data?.sportLevel;
   }
 };
