@@ -1,25 +1,17 @@
 export const Target = class Target {
   constructor(data = null) {
-    this.target = {
-      id: data?.target?.id,
-      name: data?.target?.name,
-      levelId: data?.target?.levelId,
-      level: {
-        name: data?.target?.level?.name,
-        order: data?.target?.level?.order,
-      },
-      description: data?.target?.description,
-      sportId: data?.target?.sportId,
+    this.id = data?.id;
+    this.name = data?.name;
+    this.level = {
+      id: data?.level?.id,
+      name: data?.level?.name,
+      order: data?.level?.order,
     };
-    this.instructor = {
-      details: {
-        firstname: data?.instructor?.details?.firstname,
-        gender: data?.instructor?.details?.gender,
-      },
+    this.description = data?.description;
+    this.sport = {
+      id: data?.sport?.id,
+      name: data?.sport?.name,
+      description: data?.sport?.description,
     };
-    this.validatedBy = data?.validatedBy;
-    this.date = data?.date;
-    this.feedback = data?.feedback;
-    this.targetId = data?.targetId;
   }
 };
