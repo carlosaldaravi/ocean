@@ -19,6 +19,7 @@ const getters = {
   getProfile: (state) => state.profile,
   isProfileLoaded: (state) => !!state.profile.details.firstname,
   getRole: (state) => state.role,
+  getUserId: (state) => state.profile.id,
 };
 
 const actions = {
