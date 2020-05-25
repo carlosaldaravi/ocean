@@ -4,18 +4,20 @@
       <h1
         class="font-serif text-3xl font-extrabold leading-9 tracking-tight text-center text-gray-900 sm:text-4xl sm:leading-10"
       >Objetivos</h1>
-      <div v-for="sport of sports" :key="sport.id" class="mt-3">
+      <div class="mt-3">
         <div>
           <nav class="flex justify-center">
             <a
-              :class="{ 'bg-green-400 text-white': sport.name == sportSelected }"
-              @click="sportSelected = sport.name"
+              v-for="sport of sports"
+              :key="sport.id"
+              :class="{ 'bg-green-400 text-white': sport.name == sportSelected.name }"
+              @click="sportSelected = sport"
               class="px-3 py-2 text-xl font-medium font-bold leading-5 text-gray-900 rounded-lg rounded-b-none cursor-pointer hover:text-gray-800"
             >{{sport.name}}</a>
           </nav>
         </div>
-        <div>
-          <div v-if="sport.sportLevel.length > 3" class="sm:hidden">
+        <div v-if="Object.keys(sportSelected).length !== 0">
+          <div class="mb-2 sm:hidden">
             <select
               v-model="levelSelected"
               aria-label="Selected level"
@@ -23,16 +25,16 @@
               class="block w-full bg-gray-200 form-select"
             >
               <option
-                v-for="sportLevel of sport.sportLevel"
+                v-for="sportLevel of sportSelected.sportLevel"
                 :key="sportLevel.level.id"
               >{{sportLevel.level.name}}</option>
             </select>
           </div>
-          <div :class="{ 'hidden sm:block': sport.sportLevel.length > 3 }">
+          <div class="hidden sm:block">
             <div class="mb-1 border-b border-gray-900">
               <nav class="flex -mb-px">
                 <a
-                  v-for="sportLevel of sport.sportLevel"
+                  v-for="sportLevel of sportSelected.sportLevel"
                   :key="sportLevel.level.id"
                   @click="levelSelected=sportLevel.level.name"
                   :class="[ levelSelected == sportLevel.level.name ? 'text-gray-100 focus:text-gray-100 focus:border-gray-300' : 'text-gray-900 border-transparent hover:text-gray-300' ]"
@@ -62,9 +64,10 @@ export default {
   data() {
     return {
       api: new API(),
+      targets: [], // targets
       studentTargets: [], // studentTargets
       sports: [], // sports
-      sportSelected: "",
+      sportSelected: new Sport(),
       levelSelected: ""
     };
   },
@@ -73,21 +76,15 @@ export default {
   },
   created() {
     this.getSports();
+    this.getTargets();
   },
   computed: {
     targetsList: function() {
-      let targets = [];
-      if (this.sportSelected !== "" && this.levelSelected !== "") {
-        const sport = this.sports.find(
-          sport => sport.name == this.sportSelected
-        );
-
-        const sportLevel = sport.sportLevel.find(
-          sportLevel => sportLevel.level.name === this.levelSelected
-        );
-        targets = sportLevel.level.target;
-      }
-      return targets;
+      return this.targets.filter(
+        target =>
+          target.sport.id === this.sportSelected.id &&
+          target.level.name === this.levelSelected
+      );
     }
   },
   methods: {
@@ -98,8 +95,16 @@ export default {
           this.sports.push(new Sport(sport));
         });
         if (this.sports.length == 1) {
-          this.sportSelected = res.data.data[0].name;
+          this.sportSelected = res.data.data[0];
         }
+      }
+    },
+    async getTargets() {
+      let res = await this.api.get("students/targets");
+      if (res.data.data) {
+        res.data.data.forEach(target => {
+          this.targets.push(new Target(target));
+        });
       }
     }
   }
