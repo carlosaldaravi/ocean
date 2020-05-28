@@ -1,5 +1,5 @@
 <template>
-  <section class="grid grid-cols-1 gap-4 md:grid-cols-2">
+  <section class="grid grid-cols-1 gap-8 md:grid-cols-2">
     <div v-for="target of targets" :key="target.id">
       <TargetCard :target="target" />
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[ target.studentTargets.length > 0  ? isValidated(target) ? 'bg-green-400' : 'bg-gray-100' : 'bg-gray-600']"
-    class="relative flex flex-col h-auto overflow-hidden bg-gray-100 bg-opacity-75 rounded shadow sm:flex-row md:h-28"
+    class="relative flex flex-col h-auto mt-3 bg-gray-100 bg-opacity-75 rounded shadow sm:flex-row md:h-28"
   >
     <div class="w-full h-full p-4">
       <!-- target  -->
@@ -11,17 +11,20 @@
         </div>
         <div
           v-if="target.studentTargets.length > 0 && !isValidated(target)"
-          class="flex items-center"
+          class="absolute right-0 flex items-center p-2 bg-white rounded-full -top-4"
         >
           <img v-if="!moreCard" class="w-4 h-4" src="../../assets/icons/lock-open.svg" alt />
         </div>
         <div
           v-if="target.studentTargets.length > 0 && isValidated(target)"
-          class="flex items-center"
+          class="absolute right-0 flex items-center p-2 bg-white rounded-full -top-4"
         >
           <img v-if="!moreCard" class="w-4 h-4" src="../../assets/icons/checkmark.svg" alt />
         </div>
-        <div v-if="target.studentTargets.length === 0" class="flex items-center">
+        <div
+          v-if="target.studentTargets.length === 0"
+          class="absolute right-0 flex items-center p-2 bg-white rounded-full -top-4"
+        >
           <img v-if="!moreCard" class="w-4 h-4" src="../../assets/icons/lock-closed.svg" alt />
         </div>
       </div>
