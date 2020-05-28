@@ -1,18 +1,15 @@
 <template>
-  <div>
-    <div>
-      <label :for="id" class="block text-sm font-medium leading-5 text-gray-700">{{ title }}</label>
-      <div class="relative mt-1 rounded-md shadow-sm">
-        <input
-          v-model="data"
-          class="block w-full form-input sm:text-sm sm:leading-5"
-          :type="type"
-          :id="id"
-          :placeholder="placeholder"
-          :required="required"
-          :value="value"
-        />
-      </div>
+  <div class="flex items-start">
+    <div class="absolute flex items-center h-5">
+      <input
+        v-model="checked"
+        type="checkbox"
+        class="w-4 h-4 text-indigo-600 transition duration-150 ease-in-out form-checkbox"
+        :disabled="disabled"
+      />
+    </div>
+    <div class="text-sm leading-5 pl-7">
+      <label :for="title" class="font-medium text-gray-700">{{ title }}</label>
     </div>
   </div>
 </template>
@@ -26,33 +23,17 @@ export default {
   },
   props: {
     value: {
-      required: false
-    },
-    id: {
-      type: String,
-      default: "input_" + Math.floor(Math.random() * 100)
-    },
-    label: {
-      type: String,
       required: true
     },
     title: {
       type: String,
       required: true
     },
-    type: {
-      type: String,
-      default: "text"
-    },
-    required: {
+    disabled: {
       type: Boolean,
       default: false
     },
-    placeholder: {
-      type: String,
-      default: ""
-    },
-    disabled: {
+    checked: {
       type: Boolean,
       default: false
     },
