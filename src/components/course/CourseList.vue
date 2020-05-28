@@ -1,5 +1,5 @@
 <template>
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <section class="grid grid-cols-1 gap-4 md:grid-cols-2">
     <div v-for="course of courses" :key="course.id">
       <CourseCard :course="course" />
     </div>
@@ -10,8 +10,8 @@
 import CourseCard from "./CourseCard.vue";
 export default {
   props: {
-    courses: { type: Array, required: true },
+    courses: { type: Array, required: true }
   },
-  components: { CourseCard },
+  components: { CourseCard }
 };
 </script>
