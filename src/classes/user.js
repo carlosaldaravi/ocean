@@ -2,10 +2,9 @@ export const User = class User {
   constructor(data) {
     this.id = data?.id;
     this.email = data?.email;
-    this.created_at = data?.created_at;
     this.status = data?.status;
+    this.created_at = data?.created_at;
     this.updated_at = data?.updated_at;
-
     this.details = {
       id: data?.details?.id,
       firstname: data?.details?.firstname,
@@ -21,14 +20,8 @@ export const User = class User {
       knownWay: data?.details?.knownWay,
       dni: data?.details?.dni,
     };
-    this.sports = data?.sports;
-    this.level = {
-      id: data?.level?.id,
-    };
-    this.calendar = data?.calendar;
+    this.userSports = data?.userSports;
     this.languages = data?.languages;
-    this.courses = data?.courses;
-    this.targets = data?.targets;
     this.roles = data?.roles;
   }
 };
