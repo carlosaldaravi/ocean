@@ -80,6 +80,15 @@ const routes = [
       ),
   },
   {
+    path: "/instructores",
+    name: "instructores",
+    beforeEnter: ifAuthenticated,
+    component: () =>
+      import(
+        /* webpackChunkName: "lista-alumnos" */ "../views/instructor/InstructorList.vue"
+      ),
+  },
+  {
     path: "/cursos",
     name: "studentCourses",
     beforeEnter: ifAuthenticated,
