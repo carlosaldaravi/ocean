@@ -3,7 +3,7 @@
     <section class="container p-4 mx-auto md:p-8">
       <h1
         class="font-serif text-3xl font-extrabold leading-9 tracking-tight text-center text-gray-900 sm:text-4xl sm:leading-10"
-      >Objetivos</h1>
+      >OBJETIVOS</h1>
       <div class="mt-3">
         <div>
           <nav class="flex justify-center">
@@ -32,13 +32,13 @@
           </div>
           <div class="hidden sm:block">
             <div class="mb-1 border-b border-gray-900">
-              <nav class="flex -mb-px">
+              <nav class="flex justify-between -mb-px">
                 <a
                   v-for="sportLevel of sportSelected.sportLevel"
                   :key="sportLevel.level.id"
                   @click="levelSelected=sportLevel.level.name"
                   :class="[ levelSelected == sportLevel.level.name ? 'text-gray-100 focus:text-gray-100 focus:border-gray-300' : 'text-gray-900 border-transparent hover:text-gray-300' ]"
-                  class="w-1/4 px-1 py-4 font-medium leading-5 text-center border-b-2 cursor-pointer text-m focus:outline-none"
+                  class="px-1 py-4 font-medium leading-5 text-center border-b-2 cursor-pointer text-m focus:outline-none"
                   aria-current="page"
                 >{{sportLevel.level.name}}</a>
               </nav>
