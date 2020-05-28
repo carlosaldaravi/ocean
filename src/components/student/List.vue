@@ -13,7 +13,7 @@ import { Student } from "../../classes/student";
 import Card from "./Card.vue";
 
 export default {
-  name: "List", // solo sirve para las devtools, nada más
+  name: "List", // used to devtools, nothing more
   data() {
     return {
       api: new API(),
