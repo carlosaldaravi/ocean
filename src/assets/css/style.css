@@ -4,7 +4,7 @@
 html,
 body,
 #app {
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -17,6 +17,10 @@ body,
   background-image: url("../images/seatop.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.container {
+  @apply p-4;
 }
 
 /* Calendar override */
