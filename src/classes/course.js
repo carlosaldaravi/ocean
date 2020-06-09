@@ -1,7 +1,7 @@
 export const Course = class Course {
   constructor(data) {
     this.id = data?.id;
-    this.instructors = data?.instructors;
+    this.courseInstructors = data?.courseInstructors;
     this.sport = {
       id: data?.sport?.id,
       name: data?.sport?.name,
@@ -19,7 +19,7 @@ export const Course = class Course {
       discount: data?.type?.discount,
       maxStudents: data?.type?.maxStudents,
     };
-    this.students = data?.students;
+    this.courseStudents = data?.courseStudents;
     this.calendar = data?.calendar;
   }
 };

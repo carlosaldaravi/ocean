@@ -1,3 +1,5 @@
+import { Language } from "./language";
+
 export const User = class User {
   constructor(data) {
     this.id = data?.id;
@@ -21,7 +23,15 @@ export const User = class User {
       dni: data?.details?.dni,
     };
     this.userSports = data?.userSports;
-    this.languages = data?.languages;
+    this.languages = [];
+    if (data.languages) {
+      data.languages.forEach((language) => {
+        this.languages.push({
+          checked: true,
+          language: new Language(language),
+        });
+      });
+    }
     this.roles = data?.roles;
   }
 };

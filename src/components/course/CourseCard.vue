@@ -48,13 +48,13 @@
         <div class="flex items-center">
           <div>
             <img
-              v-if="course.instructors[0].details.gender == 'FEMALE'"
+              v-if="course.courseInstructors[0].instructor.details.gender == 'FEMALE'"
               class="object-cover object-top rounded-full w-9 h-9"
               src="../../assets/images/avatar/kaya.jpg"
               alt
             />
             <img
-              v-if="course.instructors[0].details.gender == 'MALE'"
+              v-if="course.courseInstructors[0].instructor.details.gender == 'MALE'"
               class="object-cover object-top rounded-full w-9 h-9"
               src="../../assets/images/avatar/will.jpg"
               alt
@@ -63,9 +63,9 @@
           <div class="ml-3">
             <p
               class="text-sm font-medium leading-5 text-gray-700 group-hover:text-gray-900"
-            >{{ course.instructors[0].details.firstname }}</p>
+            >{{ course.courseInstructors[0].instructor.details.firstname }}</p>
             <p
-              v-if="course.instructors[0].details.gender == 'FEMALE'"
+              v-if="course.courseInstructors[0].instructor.details.gender == 'FEMALE'"
               class="text-xs font-medium leading-4 text-gray-500 transition duration-150 ease-in-out group-hover:text-gray-700 group-focus:underline"
             >Instructora</p>
             <p
