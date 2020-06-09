@@ -42,4 +42,8 @@ body,
   }
 }
 
+.hidden-modal {
+  display: none !important;
+}
+
 @tailwind utilities;
