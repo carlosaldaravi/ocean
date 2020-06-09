@@ -4,9 +4,7 @@
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
           <h3 class="text-lg font-medium leading-6 text-gray-900">Información Personal</h3>
-          <p
-            class="mt-1 text-sm leading-5 text-gray-500"
-          >Use a permanent address where you can receive mail.</p>
+          <p class="mt-1 text-sm leading-5 text-gray-500">Rellena tu información personal.</p>
         </div>
         <div class="mt-5 md:mt-0 md:col-span-2">
           <form action="#" method="POST">
@@ -19,11 +17,11 @@
                 <oc-input label="lastname" title="Apellidos" v-model="user.details.lastname"></oc-input>
               </div>
 
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-3">
                 <oc-input label="dni" title="DNI" type="dni" v-model="user.dni"></oc-input>
               </div>
 
-              <div class="col-span-6 sm:col-span-4">
+              <div class="col-span-6 sm:col-span-3">
                 <oc-input label="email" title="Email" type="email" v-model="user.email"></oc-input>
               </div>
 
@@ -38,11 +36,11 @@
                 </select>
               </div>
 
-              <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+              <div class="col-span-6 sm:col-span-3 lg:col-span-3">
                 <oc-input label="city" title="Ciudad" v-model="user.details.city"></oc-input>
               </div>
 
-              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+              <div class="col-span-6 sm:col-span-3 lg:col-span-3">
                 <oc-input label="phone" title="Teléfono" v-model="user.details.phone"></oc-input>
               </div>
             </div>
@@ -53,7 +51,7 @@
     <div v-else class="p-6 bg-white rounded-lg md:flex">
       <div>
         <img
-          class="absolute top-0 object-cover object-top w-16 h-16 rounded-full left-1/2"
+          class="absolute top-0 object-cover object-top w-16 h-16 transform -translate-x-1/2 rounded-full left-1/2"
           src="../assets/images/avatar/will.jpg"
           alt
         />

@@ -6,7 +6,7 @@
           <h3 class="text-lg font-medium leading-6 text-gray-900">Información Específica</h3>
           <p
             class="mt-1 text-sm leading-5 text-gray-500"
-          >Cuántos más datos tengamos, mejor serán nuestras clases.</p>
+          >Cuantos más datos tengamos, mejor serán nuestras clases.</p>
         </div>
         <div class="mt-5 md:mt-0 md:col-span-2">
           <form action="#" method="POST">

@@ -95,33 +95,134 @@
             <h3 class="text-lg font-medium leading-6 text-gray-900">Cursos</h3>
             <p
               class="mt-1 text-sm leading-5 text-gray-500"
-            >Selecciona los deportes y el idioma en los que estás interesado.</p>
+            >Añade deportes en los que estés interesado. Para añadir un nuevo deporte, tendrás que seleccionar el nivel. Ten en cuenta que no puedes eliminar un deporte si estás apuntado a alguna clase del mismo.</p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
               <fieldset>
                 <legend class="text-base font-medium leading-6 text-gray-900">Deportes</legend>
-                <div v-for="sport of sports" :key="sport.id" class="mt-4">
-                  <!-- for de deportes en la escuela -->
-                  <oc-checkbox
-                    :value="sport.id"
-                    :title="sport.name"
-                    :checked="isChecked('sport', sport)"
-                  ></oc-checkbox>
+                <div v-if="user.userSports">
+                  <div v-for="userSport of user.userSports" :key="userSport.sportId" class="mt-4">
+                    <div class="flex">
+                      <div>
+                        <div class="text-sm text-gray-700">{{userSport.sport.name}}</div>
+                        <div class="text-xs text-gray-700">Nivel actual: {{userSport.level.name}}</div>
+                      </div>
+                      <div class="flex items-center ml-4">
+                        <button
+                          @click="openModal('confirm_'+userSport.sportId);"
+                          type="button"
+                          class="inline-flex items-center px-2.5 py-1 text-xs font-medium leading-4 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded hover:bg-red-500 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+                        >Eliminar</button>
+                        <Modal :id="'confirm_'+userSport.sportId">
+                          <slot>
+                            <div
+                              class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                              <svg
+                                class="w-6 h-6 text-red-600"
+                                stroke="currentColor"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                                />
+                              </svg>
+                            </div>
+                          </slot>
+                          <div>
+                            <h3
+                              class="text-lg font-medium leading-6 text-gray-900"
+                              id="modal-headline"
+                            >Eliminar</h3>
+                            <div class="mt-2">
+                              <p
+                                class="text-sm leading-5 text-gray-700"
+                              >¿Estás seguro que quieres eliminar de tus deportes el {{userSport.sport.name}}?</p>
+                              <p
+                                class="text-xs leading-5 text-gray-500"
+                              >Ten en cuenta que no podrás eliminar este deporte mientras estés apuntado a alguna de sus clases.</p>
+                            </div>
+                          </div>
+                          <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                            <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                              <button
+                                @click="remove(userSport); closeModal('confirm_'+userSport.sportId);"
+                                type="button"
+                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+                              >Confirmar</button>
+                            </span>
+                            <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                              <button
+                                @click="closeModal('confirm_'+userSport.sportId);"
+                                type="button"
+                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+                              >Cancelar</button>
+                            </span>
+                          </div>
+                        </Modal>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <!-- <div v-for="sport of sports" :key="sport.id" class="mt-4"> -->
+                <!-- for de deportes en la escuela -->
+                <!-- <oc-checkbox :user="user" :value="sport" toUpdate="userSports"></oc-checkbox> -->
+                <button
+                  @click="openModal('modal_add_usersport');"
+                  type="button"
+                  class="inline-flex items-center px-3 py-2 mt-3 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+                >Añadir deporte</button>
+                <Modal id="modal_add_usersport">
+                  <div class="mt-3 text-center sm:mt-5">
+                    <h3
+                      class="text-lg font-medium leading-6 text-gray-900"
+                      id="modal-headline"
+                    >Selecciona deporte</h3>
+                    <div
+                      v-for="userSport of user.userSports"
+                      :key="userSport.sport.id"
+                      class="mt-2"
+                    >
+                      <p class="text-sm leading-5 text-gray-500">{{userSport.sport.name}}</p>
+                    </div>
+                  </div>
+                  <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                    <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                      <button
+                        @click="closeModal('modal_add_usersport');"
+                        type="button"
+                        class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+                      >Confirmar</button>
+                    </span>
+                    <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                      <button
+                        @click="closeModal('modal_add_usersport');"
+                        type="button"
+                        class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+                      >Cancelar</button>
+                    </span>
+                  </div>
+                </Modal>
+                <!-- <ProfileModal
+                  v-if="showModal"
+                  @closeModal="showModal = false"
+                  :sports="sportsLeft()"
+                />-->
+                <!-- </div> -->
               </fieldset>
               <fieldset>
                 <legend class="pt-4 text-base font-medium leading-6 text-gray-900">Idiomas</legend>
-                <div v-for="language of languages" :key="language.id" class="mt-4">
+                <div v-for="language of user.languages" :key="language.id" class="mt-4">
                   <!-- for de deportes en la escuela -->
-                  <oc-checkbox
-                    :value="language.id"
-                    :title="language.name"
-                    :checked="isChecked('language', language)"
-                  ></oc-checkbox>
+                  <oc-checkbox v-model="language.checked" :label="language.language.name"></oc-checkbox>
                 </div>
               </fieldset>
-              <fieldset class="mt-6">
+              <!-- <fieldset class="mt-6">
                 <legend class="text-base font-medium leading-6 text-gray-900">Push Notifications</legend>
                 <p
                   class="text-sm leading-5 text-gray-500"
@@ -163,7 +264,7 @@
                     </label>
                   </div>
                 </div>
-              </fieldset>
+              </fieldset>-->
             </form>
           </div>
         </div>
@@ -180,24 +281,25 @@
         v-if="!editing"
         @click="goToIndex()"
         type="button"
-        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-400 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
       >Volver</button>
       <button
         @click="editing = true"
         v-if="!editing"
         type="button"
-        class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-400 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+        class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
       >Editar</button>
       <button
         @click="editing = false"
         v-if="editing"
         type="button"
-        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-400 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
       >Cancelar</button>
       <button
+        @click="saveUser()"
         v-if="editing"
         type="button"
-        class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-400 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+        class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
       >Guardar</button>
     </span>
   </div>
@@ -209,32 +311,38 @@ import oc_input from "../components/forms/Input.vue";
 import oc_checkbox from "../components/forms/Checkbox.vue";
 import SpecificData from "../components/SpecificData.vue";
 import PersonalData from "../components/PersonalData.vue";
+import ProfileModal from "../components/user/ProfileModal.vue";
+import Modal from "../components/modals/Modal.vue";
 import { User } from "../classes/user";
 import { Sport } from "../classes/sport";
 import { Language } from "../classes/language";
 import { API } from "../classes/api";
+import { UI } from "../mixins/UI";
 export default {
   components: {
     "oc-input": oc_input,
     "oc-checkbox": oc_checkbox,
     SpecificData,
-    PersonalData
+    PersonalData,
+    ProfileModal,
+    Modal
   },
-
+  mixins: [UI],
   data() {
     return {
       editing: false,
       api: new API(),
       user: null,
       sports: [],
-      languages: []
+      showModal: false,
+      showConfirmModal: false
     };
   },
   created() {
     this.getUserData();
     this.getSports();
-    this.getLanguages();
   },
+  computed: {},
   methods: {
     formatDate,
     async getUserData() {
@@ -243,6 +351,7 @@ export default {
         data: { data }
       } = await this.api.get(`users/${userId}`);
       this.user = new User(data);
+      this.getLanguages();
     },
     formatDate,
     async getSports() {
@@ -258,28 +367,47 @@ export default {
         data: { data }
       } = await this.api.get(`languages`);
       data.forEach(language => {
-        this.languages.push(new Sport(language));
+        let checkedLanguages = this.user.languages.find(
+          userLanguage => userLanguage.language.id == language.id
+        );
+
+        if (!checkedLanguages) {
+          this.user.languages.push({
+            checked: false,
+            language: new Language(language)
+          });
+        }
       });
     },
     goToIndex() {
       this.$router.push(`/home`);
     },
-    isChecked(toFind, element) {
-      let found;
-      switch (toFind) {
-        case "sport":
-          found = this.user.userSports.find(
-            userSport => userSport.sport.name == element.name
-          );
-          break;
-        case "language":
-          found = this.user.languages.find(
-            language => language.name == element.name
-          );
-          break;
+    async saveUser() {
+      await this.api.patch(`users`, this.user);
+    },
+    sportsLeft() {
+      let userSports = this.user.userSports.map(
+        userSport => userSport.sport.id
+      );
+
+      let sportsLeft = this.sports.filter(sport => {
+        return !userSports.includes(sport.id);
+      });
+
+      return sportsLeft;
+    },
+    async remove(userSport) {
+      var index = this.user.userSports.indexOf(userSport);
+      if (index > -1) {
+        this.user.userSports.splice(index, 1);
+        // this.showConfirmModal = false;
       }
-      if (found) return true;
-      else return false;
+      // let {
+      //   data: { data }
+      // } = await this.api.delete(`users/sport`, userSport);
+      // if (data.error) {
+      //   console.log("no ha podido eliminarse");
+      // }
     }
   }
 };
