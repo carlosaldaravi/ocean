@@ -115,7 +115,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "alumno" */ "../views/Targets.vue"),
   },
-  { path: "*", redirect: "/" },
+  { path: "*", redirect: "/login" },
 ];
 
 const router = new VueRouter({
