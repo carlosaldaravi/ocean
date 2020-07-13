@@ -1,3 +1,5 @@
+import { Course } from "./course";
+
 export const UserCalendar = class UserCalendar {
   constructor(data = null) {
     if (!data) return;
@@ -6,5 +8,7 @@ export const UserCalendar = class UserCalendar {
     this.start = data?.start;
     this.end = data?.end;
     this.allDay = data?.allDay;
+    this.comments = data?.comments;
+    this.course = data?.course;
   }
 };
