@@ -5,9 +5,9 @@
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">Perfil</h3>
-            <p
-              class="mt-1 text-sm leading-5 text-gray-500"
-            >Esta información es pública así que cuidado con lo que compartes.</p>
+            <p class="mt-1 text-sm leading-5 text-gray-500">
+              Esta información es pública así que cuidado con lo que compartes.
+            </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
@@ -15,7 +15,8 @@
                 <label
                   for="about"
                   class="block text-sm font-medium leading-5 text-gray-700"
-                >Comentarios</label>
+                  >Comentarios</label
+                >
                 <div class="rounded-md shadow-sm">
                   <textarea
                     id="about"
@@ -24,15 +25,20 @@
                     placeholder
                   ></textarea>
                 </div>
-                <p
-                  class="mt-2 text-sm text-gray-500"
-                >Aquí podrás poner si crees que hay algo más que debamos saber sobre ti.</p>
+                <p class="mt-2 text-sm text-gray-500">
+                  Aquí podrás poner si crees que hay algo más que debamos saber
+                  sobre ti.
+                </p>
               </div>
 
               <div class="mt-6">
-                <label class="block text-sm font-medium leading-5 text-gray-700">Foto</label>
+                <label class="block text-sm font-medium leading-5 text-gray-700"
+                  >Foto</label
+                >
                 <div class="flex items-center mt-2">
-                  <span class="inline-block w-12 h-12 overflow-hidden bg-gray-100 rounded-full">
+                  <span
+                    class="inline-block w-12 h-12 overflow-hidden bg-gray-100 rounded-full"
+                  >
                     <svg
                       class="w-full h-full text-gray-300"
                       fill="currentColor"
@@ -47,13 +53,17 @@
                     <button
                       type="button"
                       class="px-3 py-2 text-sm font-medium leading-4 text-gray-700 transition duration-150 ease-in-out border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800"
-                    >Cambiar</button>
+                    >
+                      Cambiar
+                    </button>
                   </span>
                 </div>
               </div>
 
               <div class="mt-6">
-                <label class="block text-sm font-medium leading-5 text-gray-700">Visualización</label>
+                <label class="block text-sm font-medium leading-5 text-gray-700"
+                  >Visualización</label
+                >
                 <div
                   class="flex justify-center px-6 pt-5 pb-6 mt-2 border-2 border-gray-300 border-dashed rounded-md"
                 >
@@ -74,10 +84,14 @@
                     <p class="mt-1 text-sm text-gray-600">
                       <button
                         class="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline"
-                      >Sube un archivo</button>
+                      >
+                        Sube un archivo
+                      </button>
                       o haz arrastralo aquí
                     </p>
-                    <p class="mt-1 text-xs text-gray-500">PNG, JPG, GIF hasta 10MB</p>
+                    <p class="mt-1 text-xs text-gray-500">
+                      PNG, JPG, GIF hasta 10MB
+                    </p>
                   </div>
                 </div>
               </div>
@@ -93,28 +107,43 @@
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">Cursos</h3>
-            <p
-              class="mt-1 text-sm leading-5 text-gray-500"
-            >Añade deportes en los que estés interesado. Para añadir un nuevo deporte, tendrás que seleccionar el nivel. Ten en cuenta que no puedes eliminar un deporte si estás apuntado a alguna clase del mismo.</p>
+            <p class="mt-1 text-sm leading-5 text-gray-500">
+              Añade deportes en los que estés interesado. Para añadir un nuevo
+              deporte, tendrás que seleccionar el nivel. Ten en cuenta que no
+              puedes eliminar un deporte si estás apuntado a alguna clase del
+              mismo.
+            </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
               <fieldset>
-                <legend class="text-base font-medium leading-6 text-gray-900">Deportes</legend>
+                <legend class="text-base font-medium leading-6 text-gray-900">
+                  Deportes
+                </legend>
                 <div v-if="user.userSports">
-                  <div v-for="userSport of user.userSports" :key="userSport.sportId" class="mt-4">
+                  <div
+                    v-for="userSport of user.userSports"
+                    :key="userSport.sportId"
+                    class="mt-4"
+                  >
                     <div class="flex">
                       <div>
-                        <div class="text-sm text-gray-700">{{userSport.sport.name}}</div>
-                        <div class="text-xs text-gray-700">Nivel actual: {{userSport.level.name}}</div>
+                        <div class="text-sm text-gray-700">
+                          {{ userSport.sport.name }}
+                        </div>
+                        <div class="text-xs text-gray-700">
+                          Nivel actual: {{ userSport.level.name }}
+                        </div>
                       </div>
                       <div class="flex items-center ml-4">
                         <button
-                          @click="openModal('confirm_'+userSport.sportId);"
+                          @click="openModal('confirm_' + userSport.sportId)"
                           type="button"
                           class="inline-flex items-center px-2.5 py-1 text-xs font-medium leading-4 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded hover:bg-red-500 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-                        >Eliminar</button>
-                        <Modal :id="'confirm_'+userSport.sportId">
+                        >
+                          Eliminar
+                        </button>
+                        <Modal :id="'confirm_' + userSport.sportId">
                           <slot>
                             <div
                               class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
@@ -138,30 +167,48 @@
                             <h3
                               class="text-lg font-medium leading-6 text-gray-900"
                               id="modal-headline"
-                            >Eliminar</h3>
+                            >
+                              Eliminar
+                            </h3>
                             <div class="mt-2">
-                              <p
-                                class="text-sm leading-5 text-gray-700"
-                              >¿Estás seguro que quieres eliminar de tus deportes el {{userSport.sport.name}}?</p>
-                              <p
-                                class="text-xs leading-5 text-gray-500"
-                              >Ten en cuenta que no podrás eliminar este deporte mientras estés apuntado a alguna de sus clases.</p>
+                              <p class="text-sm leading-5 text-gray-700">
+                                ¿Estás seguro que quieres eliminar de tus
+                                deportes el {{ userSport.sport.name }}?
+                              </p>
+                              <p class="text-xs leading-5 text-gray-500">
+                                Ten en cuenta que no podrás eliminar este
+                                deporte mientras estés apuntado a alguna de sus
+                                clases.
+                              </p>
                             </div>
                           </div>
                           <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                            <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                            <span
+                              class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto"
+                            >
                               <button
-                                @click="remove(userSport); closeModal('confirm_'+userSport.sportId);"
+                                @click="
+                                  remove(userSport);
+                                  closeModal('confirm_' + userSport.sportId);
+                                "
                                 type="button"
                                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-                              >Confirmar</button>
+                              >
+                                Confirmar
+                              </button>
                             </span>
-                            <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                            <span
+                              class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
+                            >
                               <button
-                                @click="closeModal('confirm_'+userSport.sportId);"
+                                @click="
+                                  closeModal('confirm_' + userSport.sportId)
+                                "
                                 type="button"
                                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-                              >Cancelar</button>
+                              >
+                                Cancelar
+                              </button>
                             </span>
                           </div>
                         </Modal>
@@ -173,38 +220,53 @@
                 <!-- for de deportes en la escuela -->
                 <!-- <oc-checkbox :user="user" :value="sport" toUpdate="userSports"></oc-checkbox> -->
                 <button
-                  @click="openModal('modal_add_usersport');"
+                  @click="openModal('modal_add_usersport')"
                   type="button"
                   class="inline-flex items-center px-3 py-2 mt-3 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-                >Añadir deporte</button>
+                >
+                  Añadir deporte
+                </button>
                 <Modal id="modal_add_usersport">
                   <div class="mt-3 text-center sm:mt-5">
                     <h3
                       class="text-lg font-medium leading-6 text-gray-900"
                       id="modal-headline"
-                    >Selecciona deporte</h3>
-                    <div
-                      v-for="userSport of user.userSports"
-                      :key="userSport.sport.id"
-                      class="mt-2"
                     >
-                      <p class="text-sm leading-5 text-gray-500">{{userSport.sport.name}}</p>
+                      Selecciona deporte
+                    </h3>
+                    <div>
+                      <select
+                        id="location"
+                        class="block w-full py-2 pl-3 pr-10 mt-1 text-base leading-6 border-gray-300 form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                      >
+                        <option v-for="sport of sportsLeft" :key="sport.id">{{
+                          sport.name
+                        }}</option>
+                      </select>
                     </div>
                   </div>
                   <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                    <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                    <span
+                      class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto"
+                    >
                       <button
-                        @click="closeModal('modal_add_usersport');"
+                        @click="closeModal('modal_add_usersport')"
                         type="button"
                         class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-                      >Confirmar</button>
+                      >
+                        Confirmar
+                      </button>
                     </span>
-                    <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                    <span
+                      class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
+                    >
                       <button
-                        @click="closeModal('modal_add_usersport');"
+                        @click="closeModal('modal_add_usersport')"
                         type="button"
                         class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-                      >Cancelar</button>
+                      >
+                        Cancelar
+                      </button>
                     </span>
                   </div>
                 </Modal>
@@ -216,10 +278,21 @@
                 <!-- </div> -->
               </fieldset>
               <fieldset>
-                <legend class="pt-4 text-base font-medium leading-6 text-gray-900">Idiomas</legend>
-                <div v-for="language of user.languages" :key="language.id" class="mt-4">
+                <legend
+                  class="pt-4 text-base font-medium leading-6 text-gray-900"
+                >
+                  Idiomas
+                </legend>
+                <div
+                  v-for="language of user.languages"
+                  :key="language.id"
+                  class="mt-4"
+                >
                   <!-- for de deportes en la escuela -->
-                  <oc-checkbox v-model="language.checked" :label="language.language.name"></oc-checkbox>
+                  <oc-checkbox
+                    v-model="language.checked"
+                    :label="language.language.name"
+                  ></oc-checkbox>
                 </div>
               </fieldset>
               <!-- <fieldset class="mt-6">
@@ -282,25 +355,33 @@
         @click="goToIndex()"
         type="button"
         class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >Volver</button>
+      >
+        Volver
+      </button>
       <button
         @click="editing = true"
         v-if="!editing"
         type="button"
         class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >Editar</button>
+      >
+        Editar
+      </button>
       <button
         @click="editing = false"
         v-if="editing"
         type="button"
         class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >Cancelar</button>
+      >
+        Cancelar
+      </button>
       <button
         @click="saveUser()"
         v-if="editing"
         type="button"
         class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >Guardar</button>
+      >
+        Guardar
+      </button>
     </span>
   </div>
 </template>
@@ -325,7 +406,7 @@ export default {
     SpecificData,
     PersonalData,
     ProfileModal,
-    Modal
+    Modal,
   },
   mixins: [UI],
   data() {
@@ -334,13 +415,15 @@ export default {
       api: new API(),
       user: null,
       sports: [],
+      sportsLeft: [],
       showModal: false,
-      showConfirmModal: false
+      showConfirmModal: false,
     };
   },
   created() {
     this.getUserData();
     this.getSports();
+    this.sportsLeft();
   },
   computed: {},
   methods: {
@@ -348,7 +431,7 @@ export default {
     async getUserData() {
       const userId = this.$store.getters.getUserId;
       let {
-        data: { data }
+        data: { data },
       } = await this.api.get(`users/${userId}`);
       this.user = new User(data);
       this.getLanguages();
@@ -356,25 +439,25 @@ export default {
     formatDate,
     async getSports() {
       let {
-        data: { data }
+        data: { data },
       } = await this.api.get(`sports`);
-      data.forEach(sport => {
+      data.forEach((sport) => {
         this.sports.push(new Sport(sport));
       });
     },
     async getLanguages() {
       let {
-        data: { data }
+        data: { data },
       } = await this.api.get(`languages`);
-      data.forEach(language => {
+      data.forEach((language) => {
         let checkedLanguages = this.user.languages.find(
-          userLanguage => userLanguage.language.id == language.id
+          (userLanguage) => userLanguage.language.id == language.id
         );
 
         if (!checkedLanguages) {
           this.user.languages.push({
             checked: false,
-            language: new Language(language)
+            language: new Language(language),
           });
         }
       });
@@ -386,15 +469,13 @@ export default {
       await this.api.patch(`users`, this.user);
     },
     sportsLeft() {
-      let userSports = this.user.userSports.map(
-        userSport => userSport.sport.id
+      this.userSports = this.user.userSports.map(
+        (userSport) => userSport.sport.id
       );
 
-      let sportsLeft = this.sports.filter(sport => {
+      let sportsLeft = this.sports.filter((sport) => {
         return !userSports.includes(sport.id);
       });
-
-      return sportsLeft;
     },
     async remove(userSport) {
       var index = this.user.userSports.indexOf(userSport);
@@ -408,7 +489,7 @@ export default {
       // if (data.error) {
       //   console.log("no ha podido eliminarse");
       // }
-    }
-  }
+    },
+  },
 };
 </script>
