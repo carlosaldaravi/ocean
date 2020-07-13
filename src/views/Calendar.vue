@@ -1,6 +1,87 @@
 <template>
   <div class="p-4 demo-app">
-    <div v-if="this.$store.getters.getRole === 'ADMIN'"></div>
+    <div v-if="this.$store.getters.getRole === 'ADMIN'">
+      <Modal id="modal_add_course">
+        <div class="mt-3 text-center sm:mt-5">
+          <h3
+            class="text-lg font-medium leading-6 text-gray-900"
+            id="modal-headline"
+          >
+            Añadir curso
+          </h3>
+        </div>
+        <div>
+          <oc-input
+            label="firstname"
+            title="Hora Inicio"
+            type="time"
+          ></oc-input>
+          <oc-input label="firstname" title="Hora fin" type="time"></oc-input>
+          <div class="col-span-6 sm:col-span-3">
+            <label
+              for="gender"
+              class="block text-sm font-medium leading-5 text-gray-700"
+              >Deporte</label
+            >
+            <select
+              id="gender"
+              class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+            >
+              <option>Kitesurf</option>
+              <option>Windsurf</option>
+            </select>
+          </div>
+          <div class="col-span-6 sm:col-span-3">
+            <label
+              for="gender"
+              class="block text-sm font-medium leading-5 text-gray-700"
+              >Tipo de curso</label
+            >
+            <select
+              id="courseType"
+              class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+            >
+              <option>Normal</option>
+              <option>Privado</option>
+            </select>
+          </div>
+          <div class="col-span-6 sm:col-span-3">
+            <label
+              for="gender"
+              class="block text-sm font-medium leading-5 text-gray-700"
+              >Nivel</label
+            >
+            <select
+              id="levelCourse"
+              class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+            >
+              <option>Iniciación</option>
+              <option>Avanzado</option>
+            </select>
+          </div>
+        </div>
+        <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+          <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+            <button
+              @click="closeModal('modal_add_course')"
+              type="button"
+              class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+            >
+              Confirmar
+            </button>
+          </span>
+          <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+            <button
+              @click="closeModal('modal_add_course')"
+              type="button"
+              class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+            >
+              Cancelar
+            </button>
+          </span>
+        </div>
+      </Modal>
+    </div>
     <div v-if="this.$store.getters.getRole === 'STUDENT'">
       <p>
         Selecciona en el calendario las fechas en las que estás disponible para
@@ -14,9 +95,6 @@
         <img class="w-4 h-4" src="../assets/icons/mobile-devices.svg" />
         <div class="pl-2">Pulsa, mantén y luego arrastra</div>
       </div>
-    </div>
-    <div v-if="this.$store.getters.getRole === 'INSTRUCTOR'">
-      INSTRUCTOR home
     </div>
 
     <FullCalendar
@@ -62,11 +140,17 @@ import EventModal from "../components/EventModal.vue";
 import { UserCalendar } from "../classes/calendar";
 import { API } from "../classes/api";
 import moment from "moment";
+import Modal from "../components/modals/Modal.vue";
+import { UI } from "../mixins/UI";
+import oc_input from "../components/forms/Input.vue";
 
 export default {
   components: {
     FullCalendar, // make the <FullCalendar> tag available
+    Modal,
+    "oc-input": oc_input,
   },
+  mixins: [UI],
   computed: {
     ...mapGetters(["EVENTS"]),
   },
@@ -142,9 +226,18 @@ export default {
 
     // own methods
     async getCalendar(role) {
+      let res;
       // first of all, synchronize db with store
       this.$store.dispatch("RESET_EVENTS");
-      let res = await this.api.get(`${role}/calendar`);
+      switch (role) {
+        case "STUDENT":
+        case "INSTRUCTOR":
+          res = await this.api.get(`${role}/calendar`);
+          break;
+        default:
+          res = await this.api.get(`calendar/courses`);
+          break;
+      }
       if (res.data.data) {
         res.data.data.forEach((calendar) => {
           let userCalendar = new UserCalendar(calendar);
@@ -193,7 +286,12 @@ export default {
         });
       }
     },
-    addCourseEvent(arg) {},
+    async addCourseEvent(arg) {
+      console.log("arg: ", arg);
+      res = await this.api.get(`courses/new`);
+      // Show modal to create course event
+      UI.methods.openModal("modal_add_course");
+    },
   },
 };
 </script>
