@@ -5,6 +5,7 @@ import {
   AUTH_LOGOUT,
   AUTH_CHECK,
 } from "../actions/auth";
+import router from "../../router";
 import { USER_REQUEST } from "../actions/user";
 import apiCall from "../../utils/api";
 import axios from "axios";
@@ -53,6 +54,7 @@ const actions = {
       let store = new Localit();
       store.remove("user-token");
       // localStorage.removeItem("user-token");
+      router.push(`/login`);
       resolve();
     });
   },
