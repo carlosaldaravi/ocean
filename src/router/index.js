@@ -100,6 +100,7 @@ const routes = [
   {
     path: "/calendar",
     name: "Calendar",
+    beforeEnter: ifAuthenticated,
     component: () =>
       import(/* webpackChunkName: "alumno" */ "../views/Calendar.vue"),
   },
@@ -112,6 +113,7 @@ const routes = [
   {
     path: "/targets",
     name: "Targets",
+    beforeEnter: ifAuthenticated,
     component: () =>
       import(/* webpackChunkName: "alumno" */ "../views/Targets.vue"),
   },
