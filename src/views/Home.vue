@@ -5,6 +5,16 @@
     <div v-if="this.$store.getters.getRole === 'INSTRUCTOR'">
       INSTRUCTOR home
     </div>
+    <div
+      @click="logout()"
+      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-red-700 bg-opacity-75 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
+    >
+      <div
+        class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
+      >
+        LOGOUT
+      </div>
+    </div>
   </section>
 </template>
 
@@ -29,6 +39,11 @@ export default {
     if (this.$store.getters.getRole === "") {
       this.$store.dispatch(AUTH_LOGOUT);
     }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch(AUTH_LOGOUT);
+    },
   },
 };
 </script>
