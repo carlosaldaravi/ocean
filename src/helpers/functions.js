@@ -9,3 +9,7 @@ export const formatTime = (time) => {
   time.pop();
   return time.join(":");
 };
+
+export const getTimeFromDataFormat = (data) => {
+  return data.split(" ")[1];
+};

@@ -2,83 +2,114 @@
   <div class="p-4 demo-app">
     <div v-if="this.$store.getters.getRole === 'ADMIN'">
       <Modal id="modal_add_course">
-        <div class="mt-3 text-center sm:mt-5">
-          <h3
-            class="text-lg font-medium leading-6 text-gray-900"
-            id="modal-headline"
-          >
-            Añadir curso
-          </h3>
-        </div>
-        <div>
-          <oc-input
-            label="firstname"
-            title="Hora Inicio"
-            type="time"
-          ></oc-input>
-          <oc-input label="firstname" title="Hora fin" type="time"></oc-input>
-          <div class="col-span-6 sm:col-span-3">
-            <label
-              for="gender"
-              class="block text-sm font-medium leading-5 text-gray-700"
-              >Deporte</label
+        <div v-if="newCourseParamsNeeded">
+          <div class="mt-3 text-center sm:mt-5">
+            <h3
+              class="text-lg font-medium leading-6 text-gray-900"
+              id="modal-headline"
             >
-            <select
-              id="gender"
-              class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-            >
-              <option>Kitesurf</option>
-              <option>Windsurf</option>
-            </select>
+              Añadir curso
+            </h3>
           </div>
-          <div class="col-span-6 sm:col-span-3">
-            <label
-              for="gender"
-              class="block text-sm font-medium leading-5 text-gray-700"
-              >Tipo de curso</label
-            >
-            <select
-              id="courseType"
-              class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-            >
-              <option>Normal</option>
-              <option>Privado</option>
-            </select>
+          <div>
+            <oc-input
+              label="newCourseTimeStart"
+              title="Hora Inicio"
+              type="time"
+              v-model="newCourseTimeStart"
+            ></oc-input>
+            <oc-input
+              label="newCourseTimeEnd"
+              title="Hora fin"
+              type="time"
+              v-model="newCourseTimeEnd"
+            ></oc-input>
+            <div class="col-span-6 sm:col-span-3">
+              <label
+                for="gender"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Deporte</label
+              >
+              <select
+                id="gender"
+                @change="changeSportSelected($event)"
+                class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                required
+              >
+                <option value="0">Selecciona deporte</option>
+                <option
+                  v-for="sport of newCourseParamsNeeded.sports"
+                  :key="sport.id"
+                  >{{ sport.name }}</option
+                >
+              </select>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label
+                for="gender"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Tipo de curso</label
+              >
+              <select
+                id="courseType"
+                @change="changeTypeSelected($event)"
+                class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                required
+              >
+                <option value="0">Selecciona tipo de curso</option>
+                <option
+                  v-for="type of newCourseParamsNeeded.courseTypes"
+                  :key="type.id"
+                  >{{ type.name }}</option
+                >
+              </select>
+            </div>
+            <div v-if="newCourseSportSelected" class="col-span-6 sm:col-span-3">
+              <label
+                for="gender"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Nivel</label
+              >
+              <select
+                id="levelCourse"
+                @change="changeLevelSelected($event)"
+                class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                required
+              >
+                <option value="0">Selecciona nivel</option>
+                <option
+                  v-for="level of newCourseSportSelected.sportLevel"
+                  :key="level.levelId"
+                  >{{ level.level.name }}</option
+                >
+              </select>
+            </div>
           </div>
-          <div class="col-span-6 sm:col-span-3">
-            <label
-              for="gender"
-              class="block text-sm font-medium leading-5 text-gray-700"
-              >Nivel</label
+          <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+            <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+              <button
+                @click="
+                  closeModal('modal_add_course');
+                  addCourse();
+                "
+                type="button"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+              >
+                Confirmar
+              </button>
+            </span>
+            <span
+              class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
             >
-            <select
-              id="levelCourse"
-              class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-            >
-              <option>Iniciación</option>
-              <option>Avanzado</option>
-            </select>
+              <button
+                @click="closeModal('modal_add_course')"
+                type="button"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+              >
+                Cancelar
+              </button>
+            </span>
           </div>
-        </div>
-        <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-          <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-            <button
-              @click="closeModal('modal_add_course')"
-              type="button"
-              class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-            >
-              Confirmar
-            </button>
-          </span>
-          <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
-            <button
-              @click="closeModal('modal_add_course')"
-              type="button"
-              class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-            >
-              Cancelar
-            </button>
-          </span>
         </div>
       </Modal>
     </div>
@@ -143,6 +174,12 @@ import moment from "moment";
 import Modal from "../components/modals/Modal.vue";
 import { UI } from "../mixins/UI";
 import oc_input from "../components/forms/Input.vue";
+import { Course } from "../classes/course";
+import {
+  formatDate,
+  formatTime,
+  getTimeFromDataFormat,
+} from "../helpers/functions";
 
 export default {
   components: {
@@ -158,6 +195,14 @@ export default {
     return {
       api: new API(),
       title: "",
+      newCourseTimeStart: "00:00",
+      newCourseTimeEnd: "00:00",
+      newCourseDate: "",
+      newCourseParamsNeeded: null,
+      newCourseSportSelected: null,
+      newCourseTypeSelected: null,
+      newCourseLevelSelected: null,
+      newCourse: new Course(),
       calendarPlugins: [
         // plugins must be defined in the JS
         DayGridPlugin,
@@ -181,6 +226,9 @@ export default {
     }
   },
   methods: {
+    formatDate,
+    formatTime,
+    getTimeFromDataFormat,
     // Full Calendar methods
     handleSelect(arg) {
       // students and instructor have the same iteration with calendar
@@ -287,10 +335,52 @@ export default {
       }
     },
     async addCourseEvent(arg) {
-      console.log("arg: ", arg);
-      res = await this.api.get(`courses/new`);
+      const dateStart = moment(arg.start);
+      const dateEnd = moment(arg.end);
+      this.newCourseTimeStart = dateStart.format("HH:mm");
+      this.newCourseTimeEnd = dateEnd.format("HH:mm");
+      this.newCourseDate =
+        dateStart.format("YYYY") +
+        "-" +
+        dateStart.format("M") +
+        "-" +
+        dateStart.format("D");
+
+      let res = await this.api.get(`courses/new`);
+
+      this.newCourseParamsNeeded = res.data.data;
+
       // Show modal to create course event
       UI.methods.openModal("modal_add_course");
+    },
+    changeSportSelected(event) {
+      this.newCourseSportSelected = this.newCourseParamsNeeded.sports.find(
+        (sport) => sport.name == event.target.value
+      );
+      this.newCourse.sport = this.newCourseSportSelected;
+    },
+    changeTypeSelected(event) {
+      this.newCourseTypeSelected = this.newCourseParamsNeeded.courseTypes.find(
+        (type) => type.name == event.target.value
+      );
+      this.newCourse.type = this.newCourseTypeSelected;
+    },
+    changeLevelSelected(event) {
+      this.newCourseLevelSelected = this.newCourseSportSelected.sportLevel.find(
+        (sportLevel) => sportLevel.level.name == event.target.value
+      );
+      this.newCourse.level = this.newCourseLevelSelected.level;
+    },
+    async addCourse() {
+      let newCourse = new Course();
+      newCourse.sport = this.newCourseSportSelected;
+      newCourse.type = this.newCourseTypeSelected;
+      newCourse.level = this.newCourseLevelSelected.level;
+      newCourse.calendar = {
+        start: this.newCourseDate + " " + this.newCourseTimeStart,
+        end: this.newCourseDate + " " + this.newCourseTimeEnd,
+      };
+      let res = await this.api.post("courses", newCourse);
     },
   },
 };
