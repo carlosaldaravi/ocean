@@ -1,10 +1,16 @@
 <template>
   <div>
     <div>
-      <label :for="id" class="block text-sm font-medium leading-5 text-gray-700">{{ title }}</label>
+      <label
+        :for="id"
+        :class="{ 'text-red-600 text-base': error }"
+        class="block text-sm font-medium leading-5 text-gray-700"
+        >{{ title }}</label
+      >
       <div class="relative mt-1 rounded-md shadow-sm">
         <input
           v-model="data"
+          :class="{ 'border-red-600': error }"
           class="block w-full form-input sm:text-sm sm:leading-5"
           :type="type"
           :id="id"
@@ -22,47 +28,51 @@ export default {
   // Vue magic so we can use v-model on the parent instead of the :value binding and the @data emitter
   model: {
     prop: "value",
-    event: "data"
+    event: "data",
   },
   props: {
     value: {
-      required: false
+      required: false,
     },
     id: {
       type: String,
-      default: "input_" + Math.floor(Math.random() * 100)
+      default: "input_" + Math.floor(Math.random() * 100),
     },
     label: {
       type: String,
-      required: true
+      required: true,
+    },
+    error: {
+      type: Boolean,
+      default: false,
     },
     title: {
       type: String,
-      required: true
+      required: true,
     },
     type: {
       type: String,
-      default: "text"
+      default: "text",
     },
     required: {
       type: Boolean,
-      default: false
+      default: false,
     },
     placeholder: {
       type: String,
-      default: ""
+      default: "",
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // MODIFIERS
     // possible modifiers: uppercase, lowercase, no_space
     modifiers: {
       type: Array,
       required: false,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   watch: {
     value() {
@@ -70,11 +80,11 @@ export default {
     },
     data() {
       this.$emit("data", this.data);
-    }
+    },
   },
   data() {
     return {
-      data: this.value
+      data: this.value,
     };
   },
   updated() {
@@ -127,7 +137,7 @@ export default {
         if (text.includes(ch)) text = text.replace(ch, "");
       }
       return text;
-    }
-  }
+    },
+  },
 };
 </script>
