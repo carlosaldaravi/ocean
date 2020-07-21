@@ -16,6 +16,9 @@ const getters = {
 
 const actions = {
   ADD_EVENT({ commit }, event) {
+    if (event.title == "Curso") {
+      event.id = event.course.id;
+    }
     commit(ADD_EVENT, event);
   },
   async UPDATE_EVENT({ commit }, payload) {
