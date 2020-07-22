@@ -3,7 +3,9 @@
     <section class="container p-4 mx-auto md:p-8">
       <h1
         class="text-3xl font-extrabold leading-9 tracking-tight text-center text-gray-900 sm:text-4xl sm:leading-10"
-      >Mis cursos</h1>
+      >
+        Mis cursos
+      </h1>
       <div>
         <div class="mb-4">
           <nav class="flex justify-center">
@@ -12,13 +14,15 @@
               href="#"
               @click="tab = 'past'"
               class="px-3 py-2 text-sm font-medium leading-5 text-gray-600 rounded-lg rounded-b-none hover:text-gray-800"
-            >Realizados</a>
+              >Realizados</a
+            >
             <a
               @click="tab = 'next'"
               :class="{ 'bg-green-400 text-white': tab == 'next' }"
               href="#"
               class="px-3 py-2 ml-4 text-sm font-medium leading-5 text-gray-600 rounded-lg rounded-b-none hover:text-gray-800"
-            >Próximos</a>
+              >Próximos</a
+            >
           </nav>
         </div>
         <CourseList :courses="coursesList"></CourseList>
@@ -39,11 +43,11 @@ export default {
       api: new API(),
       courses: [],
       // values: 'next', 'past'
-      tab: "next"
+      tab: "next",
     };
   },
   components: {
-    CourseList
+    CourseList,
   },
   created() {
     this.getCourses();
@@ -54,28 +58,22 @@ export default {
     },
     nextCourses: function() {
       return this.courses.filter(
-        course =>
-          new Date() <
-          new Date(
-            `${course.calendar[0].date} ${course.calendar[0].start_time}`
-          )
+        (course) => new Date() < new Date(`${course.calendar[0].start}`)
       );
     },
     pastCourses: function() {
       return this.courses.filter(
-        course =>
-          new Date() >
-          new Date(
-            `${course.calendar[0].date} ${course.calendar[0].start_time}`
-          )
+        (course) => new Date() > new Date(`${course.calendar[0].start}`)
       );
-    }
+    },
   },
   methods: {
     async getCourses() {
       let res = await this.api.get("students/courses");
       if (res.data.data) {
-        res.data.data.forEach(course => {
+        console.log(res.data.data);
+
+        res.data.data.forEach((course) => {
           this.courses.push(new Course(course));
         });
       } else {
@@ -83,8 +81,8 @@ export default {
           this.$store.dispatch(AUTH_LOGOUT);
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -26,14 +26,16 @@
       <div class="flex justify-between">
         <div class="flex items-center">
           <img src="../../assets/images/calendario.svg" class="w-6 h-6" alt />
-          <div class="pl-2">{{ formatDate(course.calendar[0].date) }}</div>
+          <div class="pl-2">
+            {{ getDate(course.calendar[0].start) }}
+          </div>
         </div>
 
         <div class="flex items-center sm:mr-4">
           <img src="../../assets/images/reloj.svg" class="w-6 h-6" alt />
           <div class="pl-2">
-            {{ formatTime(course.calendar[0].start_time) }} -
-            {{ formatTime(course.calendar[0].end_time) }}
+            {{ getTime(course.calendar[0].start) }} -
+            {{ getTime(course.calendar[0].end) }}
           </div>
         </div>
       </div>
@@ -48,13 +50,18 @@
         <div class="flex items-center">
           <div>
             <img
-              v-if="course.courseInstructors[0].instructor.details.gender == 'FEMALE'"
+              v-if="
+                course.courseInstructors[0].instructor.details.gender ==
+                  'FEMALE'
+              "
               class="object-cover object-top rounded-full w-9 h-9"
               src="../../assets/images/avatar/kaya.jpg"
               alt
             />
             <img
-              v-if="course.courseInstructors[0].instructor.details.gender == 'MALE'"
+              v-if="
+                course.courseInstructors[0].instructor.details.gender == 'MALE'
+              "
               class="object-cover object-top rounded-full w-9 h-9"
               src="../../assets/images/avatar/will.jpg"
               alt
@@ -63,15 +70,24 @@
           <div class="ml-3">
             <p
               class="text-sm font-medium leading-5 text-gray-700 group-hover:text-gray-900"
-            >{{ course.courseInstructors[0].instructor.details.firstname }}</p>
+            >
+              {{ course.courseInstructors[0].instructor.details.firstname }}
+            </p>
             <p
-              v-if="course.courseInstructors[0].instructor.details.gender == 'FEMALE'"
+              v-if="
+                course.courseInstructors[0].instructor.details.gender ==
+                  'FEMALE'
+              "
               class="text-xs font-medium leading-4 text-gray-500 transition duration-150 ease-in-out group-hover:text-gray-700 group-focus:underline"
-            >Instructora</p>
+            >
+              Instructora
+            </p>
             <p
               v-else
               class="text-xs font-medium leading-4 text-gray-500 transition duration-150 ease-in-out group-hover:text-gray-700 group-focus:underline"
-            >Instructor</p>
+            >
+              Instructor
+            </p>
           </div>
         </div>
         <div class="flex items-center">
@@ -85,10 +101,11 @@
 
 <script>
 import { formatDate, formatTime } from "../../helpers/functions";
+import moment from "moment";
 
 export default {
   props: {
-    course: { type: Object, required: true }
+    course: { type: Object, required: true },
   },
   methods: {
     formatDate,
@@ -99,8 +116,14 @@ export default {
       } else {
         return "instructor";
       }
-    }
-  }
+    },
+    getDate(date) {
+      return moment(date).format("DD-MM-YYYY");
+    },
+    getTime(date) {
+      return moment(date).format("HH:mm");
+    },
+  },
 };
 </script>
 
