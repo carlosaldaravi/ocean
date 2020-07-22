@@ -3,17 +3,23 @@
     <section class="container p-4 mx-auto md:p-8">
       <h1
         class="font-serif text-3xl font-extrabold leading-9 tracking-tight text-center text-gray-900 sm:text-4xl sm:leading-10"
-      >OBJETIVOS</h1>
+      >
+        OBJETIVOS
+      </h1>
       <div class="mt-3">
         <div>
           <nav class="flex justify-center">
             <a
               v-for="sport of sports"
               :key="sport.id"
-              :class="{ 'bg-green-400 text-white': sport.name == sportSelected.name }"
+              :class="{
+                'bg-primary-200 text-secondary-100 hover:text-secondary-100':
+                  sport.name == sportSelected.name,
+              }"
               @click="sportSelected = sport"
-              class="px-3 py-2 text-xl font-medium font-bold leading-5 text-gray-900 rounded-lg rounded-b-none cursor-pointer hover:text-gray-800"
-            >{{sport.name}}</a>
+              class="px-3 py-2 text-xl font-medium font-bold leading-5 rounded-lg rounded-b-none cursor-pointer hover:text-primary-300"
+              >{{ sport.name }}</a
+            >
           </nav>
         </div>
         <div v-if="Object.keys(sportSelected).length !== 0">
@@ -22,25 +28,31 @@
               v-model="levelSelected"
               aria-label="Selected level"
               :value="levelSelected"
-              class="block w-full bg-gray-200 form-select"
+              class="block w-full bg-primary-400 form-select"
             >
               <option
                 v-for="sportLevel of sportSelected.sportLevel"
                 :key="sportLevel.level.id"
-              >{{sportLevel.level.name}}</option>
+                >{{ sportLevel.level.name }}</option
+              >
             </select>
           </div>
           <div class="hidden sm:block">
-            <div class="mb-1 border-b border-gray-900">
+            <div class="mb-1 border-b border-primary-400">
               <nav class="flex justify-between -mb-px">
                 <a
                   v-for="sportLevel of sportSelected.sportLevel"
                   :key="sportLevel.level.id"
-                  @click="levelSelected=sportLevel.level.name"
-                  :class="[ levelSelected == sportLevel.level.name ? 'text-gray-100 focus:text-gray-100 focus:border-gray-300' : 'text-gray-900 border-transparent hover:text-gray-300' ]"
-                  class="px-1 py-4 font-medium leading-5 text-center border-b-2 cursor-pointer text-m focus:outline-none"
+                  @click="levelSelected = sportLevel.level.name"
+                  :class="[
+                    levelSelected == sportLevel.level.name
+                      ? 'text-primary-100 border-primary-100'
+                      : 'text-secondary-200 border-transparent text-secondary-200 hover:border-primary-200 hover:text-primary-200',
+                  ]"
+                  class="px-1 py-4 font-medium leading-5 text-center border-b-2 cursor-pointer text-m hover:outline-none"
                   aria-current="page"
-                >{{sportLevel.level.name}}</a>
+                  >{{ sportLevel.level.name }}</a
+                >
               </nav>
             </div>
           </div>
@@ -68,11 +80,11 @@ export default {
       studentTargets: [], // studentTargets
       sports: [], // sports
       sportSelected: new Sport(),
-      levelSelected: ""
+      levelSelected: "",
     };
   },
   components: {
-    TargetList
+    TargetList,
   },
   created() {
     this.getSports();
@@ -81,17 +93,17 @@ export default {
   computed: {
     targetsList: function() {
       return this.targets.filter(
-        target =>
+        (target) =>
           target.sport.id === this.sportSelected.id &&
           target.level.name === this.levelSelected
       );
-    }
+    },
   },
   methods: {
     async getSports() {
       let res = await this.api.get("users/sports");
       if (res.data.data) {
-        res.data.data.forEach(sport => {
+        res.data.data.forEach((sport) => {
           this.sports.push(new Sport(sport));
         });
         if (this.sports.length == 1) {
@@ -102,12 +114,12 @@ export default {
     async getTargets() {
       let res = await this.api.get("students/targets");
       if (res.data.data) {
-        res.data.data.forEach(target => {
+        res.data.data.forEach((target) => {
           this.targets.push(new Target(target));
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -11,22 +11,22 @@
           <nav class="flex justify-center">
             <a
               :class="{
-                'bg-primary-400 text-secondary-400 hover:text-secondary-400':
+                'bg-primary-200 text-secondary-100 hover:text-secondary-100':
                   tab == 'past',
               }"
               href="#"
               @click="tab = 'past'"
-              class="px-3 py-2 text-sm font-medium leading-5 rounded-lg rounded-b-none text-secondary-300 bg-primary-200 hover:text-primary-400"
+              class="px-3 py-2 text-sm font-medium leading-5 rounded-lg rounded-b-none hover:text-primary-300"
               >Realizados</a
             >
             <a
               @click="tab = 'next'"
               :class="{
-                'bg-primary-400 text-secondary-400 hover:text-secondary-400':
+                'bg-primary-200 text-secondary-100 hover:text-secondary-100':
                   tab == 'next',
               }"
               href="#"
-              class="px-3 py-2 text-sm font-medium leading-5 rounded-lg rounded-b-none text-secondary-300 bg-primary-200 hover:text-primary-400"
+              class="px-3 py-2 text-sm font-medium leading-5 rounded-lg rounded-b-none hover:text-primary-300"
               >Próximos</a
             >
           </nav>
