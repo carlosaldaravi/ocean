@@ -75,7 +75,14 @@ export default {
   },
   methods: {
     async getCourses() {
-      let res = await this.api.get("students/courses");
+      let res;
+      if (this.$store.getters.getRole == "STUDENT") {
+        res = await this.api.get("students/courses");
+      } else {
+        res = await this.api.get("instructors/courses");
+      }
+      console.log(res.data.data);
+
       if (res.data.data) {
         console.log(res.data.data);
 
