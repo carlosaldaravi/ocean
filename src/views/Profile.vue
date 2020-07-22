@@ -436,7 +436,6 @@ export default {
       this.user = new User(data);
       this.getLanguages();
     },
-    formatDate,
     async getSports() {
       let {
         data: { data },
