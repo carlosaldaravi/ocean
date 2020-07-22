@@ -919,11 +919,11 @@ body,
           flex: 1;
 }
 
-#app {
+/* #app {
   background-image: url("../images/seatop.png");
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .container {
   padding: 1rem;
