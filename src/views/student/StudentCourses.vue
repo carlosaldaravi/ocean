@@ -10,17 +10,23 @@
         <div class="mb-4">
           <nav class="flex justify-center">
             <a
-              :class="{ 'bg-green-400 text-white': tab == 'past' }"
+              :class="{
+                'bg-primary-400 text-secondary-400 hover:text-secondary-400':
+                  tab == 'past',
+              }"
               href="#"
               @click="tab = 'past'"
-              class="px-3 py-2 text-sm font-medium leading-5 text-gray-600 rounded-lg rounded-b-none hover:text-gray-800"
+              class="px-3 py-2 text-sm font-medium leading-5 rounded-lg rounded-b-none text-secondary-300 bg-primary-200 hover:text-primary-400"
               >Realizados</a
             >
             <a
               @click="tab = 'next'"
-              :class="{ 'bg-green-400 text-white': tab == 'next' }"
+              :class="{
+                'bg-primary-400 text-secondary-400 hover:text-secondary-400':
+                  tab == 'next',
+              }"
               href="#"
-              class="px-3 py-2 ml-4 text-sm font-medium leading-5 text-gray-600 rounded-lg rounded-b-none hover:text-gray-800"
+              class="px-3 py-2 text-sm font-medium leading-5 rounded-lg rounded-b-none text-secondary-300 bg-primary-200 hover:text-primary-400"
               >Próximos</a
             >
           </nav>
