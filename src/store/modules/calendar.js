@@ -16,7 +16,7 @@ const getters = {
 
 const actions = {
   ADD_EVENT({ commit }, event) {
-    if (event.title == "Curso") {
+    if (event.title == "Curso" && event.course) {
       event.id = event.course.id;
     }
     commit(ADD_EVENT, event);
@@ -28,7 +28,11 @@ const actions = {
   },
   async DELETE_EVENT({ commit }, payload) {
     let api = new API();
-    await api.delete(`calendar/${payload.id}`);
+    if (payload.title == "Curso") {
+      await api.delete(`calendar/course/${payload.id}`);
+    } else {
+      await api.delete(`calendar/${payload.id}`);
+    }
     commit(DELETE_EVENT, payload);
   },
   RESET_EVENTS({ commit }) {
@@ -51,8 +55,8 @@ const mutations = {
     let index = state.events.findIndex((event) => event.id == id);
     if (index > -1) {
       state.events.splice(index, 1);
-      let api = new API();
-      await api.delete(`calendar/${id}`);
+      // let api = new API();
+      // await api.delete(`calendar/${id}`);
     }
   },
   RESET_EVENTS: (state) => {

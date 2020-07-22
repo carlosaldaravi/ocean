@@ -13,12 +13,14 @@
           </div>
           <div>
             <oc-input
+              :error="!isTimeStart"
               label="newCourseTimeStart"
               title="Hora Inicio"
               type="time"
               v-model="newCourseTimeStart"
             ></oc-input>
             <oc-input
+              :error="!isTimeStart"
               label="newCourseTimeEnd"
               title="Hora fin"
               type="time"
@@ -26,13 +28,37 @@
             ></oc-input>
             <div class="col-span-6 sm:col-span-3">
               <label
-                for="gender"
+                :class="{ 'text-red-600 text-base': !isInstructorSelected }"
+                for="instructorSelected"
                 class="block text-sm font-medium leading-5 text-gray-700"
-                >Deporte</label
-              >
+                >Instructor
+              </label>
               <select
-                id="gender"
+                id="instructorSelected"
+                @change="changeInstructorSelected($event)"
+                :class="{ 'border-red-600': !isInstructorSelected }"
+                class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                required
+              >
+                <option value="0">Selecciona instructor</option>
+                <option
+                  v-for="instructor of newCourseParamsNeeded.instructors"
+                  :key="instructor.id"
+                  >{{ instructor.details.firstname }}</option
+                >
+              </select>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label
+                :class="{ 'text-red-600 text-base': !isSportSelected }"
+                for="sportSelected"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Deporte
+              </label>
+              <select
+                id="sportSelected"
                 @change="changeSportSelected($event)"
+                :class="{ 'border-red-600': !isSportSelected }"
                 class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                 required
               >
@@ -46,13 +72,15 @@
             </div>
             <div class="col-span-6 sm:col-span-3">
               <label
-                for="gender"
+                :class="{ 'text-red-600 text-base': !isTypeSelected }"
+                for="courseType"
                 class="block text-sm font-medium leading-5 text-gray-700"
                 >Tipo de curso</label
               >
               <select
                 id="courseType"
                 @change="changeTypeSelected($event)"
+                :class="{ 'border-red-600': !isTypeSelected }"
                 class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                 required
               >
@@ -66,13 +94,15 @@
             </div>
             <div v-if="newCourseSportSelected" class="col-span-6 sm:col-span-3">
               <label
-                for="gender"
+                :class="{ 'text-red-600 text-base': !isLevelSelected }"
+                for="levelCourse"
                 class="block text-sm font-medium leading-5 text-gray-700"
                 >Nivel</label
               >
               <select
                 id="levelCourse"
                 @change="changeLevelSelected($event)"
+                :class="{ 'border-red-600': !isLevelSelected }"
                 class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                 required
               >
@@ -88,10 +118,7 @@
           <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
               <button
-                @click="
-                  closeModal('modal_add_course');
-                  addCourse();
-                "
+                @click="addCourse()"
                 type="button"
                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
               >
@@ -102,7 +129,10 @@
               class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
             >
               <button
-                @click="closeModal('modal_add_course')"
+                @click="
+                  closeModal('modal_add_course');
+                  resetAll();
+                "
                 type="button"
                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
               >
@@ -113,6 +143,213 @@
         </div>
       </Modal>
     </div>
+    <Modal id="modal_show_course">
+      <div class="mt-3 text-center sm:mt-5">
+        <h3
+          class="text-lg font-medium leading-6 text-gray-900"
+          id="modal-headline"
+        >
+          RESERVA DE CURSO
+        </h3>
+      </div>
+      <div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Deporte
+          </label>
+          {{ newCourseSportSelected }}
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Tipo de curso</label
+          >
+          {{ newCourseTypeSelected }}
+        </div>
+        <div v-if="newCourseSportSelected" class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Nivel</label
+          >
+          {{ newCourseLevelSelected }}
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Instructor</label
+          >
+          {{ newCourseInstructorSelected }}
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Día</label
+          >
+          {{ newCourseDate }}
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Hora inicio</label
+          >
+          {{ newCourseTimeStart }}
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Hora final</label
+          >
+          {{ newCourseTimeEnd }}
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Plazas disponibles/totales</label
+          >
+          <div
+            v-if="newCourseMaxStudents - newCourseCurrentNumStudents == 0"
+            class="text-red-600"
+          >
+            Curso completo
+          </div>
+          <div v-else>
+            {{ newCourseMaxStudents - newCourseCurrentNumStudents }}/{{
+              newCourseMaxStudents
+            }}
+          </div>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >Precio</label
+          >
+          {{ newCoursePrice }}€
+        </div>
+        <div v-if="isDone" class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-lg font-medium leading-5 text-red-700"
+            >Este curso ya se ha realizado</label
+          >
+        </div>
+        <div v-if="isReserved && !isDone" class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-lg font-medium leading-5 text-green-700"
+            >¡ Ya estás registrado en este curso !</label
+          >
+        </div>
+        <div
+          v-if="
+            !isReserved &&
+              newCourseMaxStudents - newCourseCurrentNumStudents == 0
+          "
+          class="col-span-6 sm:col-span-3"
+        >
+          <label
+            for="gender"
+            class="block text-lg font-medium leading-5 text-red-700"
+            >¡ Curso completo !</label
+          >
+        </div>
+      </div>
+      <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+          <button
+            v-if="
+              isDone ||
+                (newCourseMaxStudents - newCourseCurrentNumStudents < 1 &&
+                  !isReserved)
+            "
+            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white rounded opacity-50 cursor-not-allowed bg-primary-200"
+          >
+            Reservar
+          </button>
+          <div v-else>
+            <button
+              v-if="!isReserved"
+              @click="reserveCourse()"
+              type="button"
+              class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+            >
+              Reservar
+            </button>
+            <button
+              v-else
+              @click="deleteCourseStudent()"
+              type="button"
+              class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-400 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+            >
+              Eliminar reserva
+            </button>
+          </div>
+        </span>
+        <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+          <button
+            @click="
+              closeModal('modal_show_course');
+              resetAll();
+            "
+            type="button"
+            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+          >
+            Cancelar
+          </button>
+        </span>
+      </div>
+    </Modal>
+    <Modal id="modal_confirm_delete_event">
+      <div class="mt-3 text-center sm:mt-5">
+        <h3
+          class="text-lg font-medium leading-6 text-gray-900"
+          id="modal-headline"
+        >
+          ELIMINAR EVENTO
+        </h3>
+      </div>
+      <div>
+        <div class="col-span-6 sm:col-span-3">
+          <label
+            for="gender"
+            class="block text-sm font-medium leading-5 text-gray-700"
+            >¿Seguro que deseas eliminar este evento del calendario?
+          </label>
+        </div>
+      </div>
+      <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+          <button
+            @click="deleteEvent()"
+            type="button"
+            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-400 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+          >
+            Eliminar
+          </button>
+        </span>
+        <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+          <button
+            @click="
+              closeModal('modal_confirm_delete_event');
+              resetAll();
+            "
+            type="button"
+            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+          >
+            Cancelar
+          </button>
+        </span>
+      </div>
+    </Modal>
     <div v-if="this.$store.getters.getRole === 'STUDENT'">
       <p>
         Selecciona en el calendario las fechas en las que estás disponible para
@@ -151,10 +388,6 @@
       @eventResize="updateEvent"
       @eventDrop="updateEvent"
     />
-    <!-- <Modal>
-      <Course-form>      
-    </Modal>-->
-    <modals-container />
   </div>
 </template>
 
@@ -168,7 +401,7 @@ import TimeGridPlugin from "@fullcalendar/timegrid";
 import InteractionPlugin from "@fullcalendar/interaction";
 import { mapGetters } from "vuex";
 import EventModal from "../components/EventModal.vue";
-import { UserCalendar } from "../classes/calendar";
+import { Calendar } from "../classes/calendar";
 import { API } from "../classes/api";
 import moment from "moment";
 import Modal from "../components/modals/Modal.vue";
@@ -195,13 +428,28 @@ export default {
     return {
       api: new API(),
       title: "",
+      clickedEvent: null,
       newCourseTimeStart: "00:00",
       newCourseTimeEnd: "00:00",
       newCourseDate: "",
       newCourseParamsNeeded: null,
+      newCourseInstructorSelected: null,
       newCourseSportSelected: null,
       newCourseTypeSelected: null,
       newCourseLevelSelected: null,
+      newCourseMaxStudents: null,
+      newCourseCurrentNumStudents: null,
+      newCoursePrice: null,
+      isInstructorSelected: true,
+      isSportSelected: true,
+      isTypeSelected: true,
+      isLevelSelected: true,
+      isTimeStart: true,
+      isTimeEnd: true,
+      isReserved: false,
+      isDone: false,
+      showSuccessAlert: false,
+      successText: "",
       newCourse: new Course(),
       calendarPlugins: [
         // plugins must be defined in the JS
@@ -242,66 +490,110 @@ export default {
           break;
       }
     },
-    handleClick(arg) {
-      // if (arg.event.title === "Curso") {
-      this.$modal.show(EventModal, {
-        text: "This is from the component",
-        event: arg.event,
-      });
-      // }
+    async handleClick(arg) {
+      if (arg.event.title === "Curso") {
+        this.clickedEvent = arg.event;
+        let res = await this.api.get(`calendar/course/${arg.event.id}`);
+
+        this.newCourseSportSelected = res.data.data.course.sport.name;
+        this.newCourseTypeSelected = res.data.data.course.type.name;
+        this.newCourseLevelSelected = res.data.data.course.level.name;
+        this.newCourseDate = new moment(res.data.data.start).format(
+          "DD-MM-YYYY"
+        );
+        this.newCourseTimeStart = new moment(res.data.data.start).format(
+          "HH:mm"
+        );
+        this.newCourseTimeEnd = new moment(res.data.data.end).format("HH:mm");
+        this.newCourseMaxStudents = res.data.data.course.type.maxStudents;
+        this.newCourseCurrentNumStudents =
+          res.data.data.course.courseStudents.length;
+        this.newCoursePrice = res.data.data.course.type.price;
+        this.newCourseInstructorSelected =
+          res.data.data.course.courseInstructors[0].instructor.details.firstname;
+        let now = new Date();
+        let courseDate = new Date(`${res.data.data.start}`);
+        if (courseDate < now) {
+          this.isDone = true;
+        } else {
+          this.isDone = false;
+        }
+        if (res.data.data.course.courseStudents) {
+          let actualStudent = res.data.data.course.courseStudents.filter(
+            (student) => student.studentId == this.$store.getters.getUserId
+          );
+          if (actualStudent.length > 0) {
+            this.isReserved = true;
+          } else {
+            this.isReserved = false;
+          }
+        }
+        UI.methods.openModal("modal_show_course");
+      }
     },
     updateEvent(arg) {
-      const userCalendar = new UserCalendar(arg.event);
+      const userCalendar = new Calendar(arg.event);
       this.$store.dispatch("UPDATE_EVENT", userCalendar);
     },
     renderEvent(arg, element) {
-      console.log("element: ", element);
+      if (
+        (this.$store.getters.getRole === "ADMIN" &&
+          arg.event.title == "Curso") ||
+        arg.event.title != "Curso"
+      ) {
+        let closeButton = document.createElement("button");
+        let closeSpan = document.createElement("span");
+        closeButton.setAttribute(
+          "class",
+          " p-2 mr-4 rounded text-white bg-red-700 order-1"
+        );
+        closeButton.innerHTML = "&#88";
+        arg.el.appendChild(closeButton);
 
-      let closeButton = document.createElement("button");
-      let closeSpan = document.createElement("span");
-      closeButton.setAttribute(
-        "class",
-        " p-2 mr-4 rounded text-white bg-red-700 order-1"
-      );
-      closeButton.innerHTML = "&#88";
-      arg.el.appendChild(closeButton);
+        closeButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          this.clickedEvent = arg.event;
+          UI.methods.openModal("modal_confirm_delete_event");
 
-      closeButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        this.$store.dispatch("DELETE_EVENT", arg.event);
-      });
+          // this.$store.dispatch("DELETE_EVENT", arg.event);
+        });
+      }
     },
 
     // own methods
     async getCalendar(role) {
-      let res;
+      let res1, res2;
       // first of all, synchronize db with store
       this.$store.dispatch("RESET_EVENTS");
       switch (role) {
-        case "STUDENT":
-        case "INSTRUCTOR":
-          res = await this.api.get(`${role}/calendar`);
+        case "students":
+        case "instructors":
+          res1 = await this.api.get(`${role}/calendar`);
           break;
         default:
-          res = await this.api.get(`calendar/courses`);
+          res2 = await this.api.get(`calendar/courses`);
           break;
       }
-      if (res.data.data) {
-        res.data.data.forEach((calendar) => {
-          let userCalendar = new UserCalendar(calendar);
+
+      if (res1 && res1.data.data) {
+        res1.data.data.forEach((calendar) => {
+          let userCalendar = new Calendar(calendar);
 
           this.$store.dispatch("ADD_EVENT", userCalendar);
         });
-      } else {
-        if (res.data.response.status === 401) {
-          this.$store.dispatch(AUTH_LOGOUT);
-        }
+      }
+      if (res2 && res2.data.data) {
+        res2.data.data.forEach((calendar) => {
+          let userCalendar = new Calendar(calendar);
+
+          this.$store.dispatch("ADD_EVENT", userCalendar);
+        });
       }
     },
     addStudentOrInstructorEvent(arg) {
       const dateStart = moment(arg.start);
       const dateEnd = moment(arg.end);
-      const userCalendar = new UserCalendar(arg);
+      const userCalendar = new Calendar(arg);
       userCalendar.title = this.title;
       userCalendar.start = dateStart;
 
@@ -324,7 +616,7 @@ export default {
           this.api
             .post("students/calendar", userCalendar)
             .then((resp) => {
-              let newCalendar = new UserCalendar(resp.data.data);
+              let newCalendar = new Calendar(resp.data.data);
               this.$store.dispatch("ADD_EVENT", newCalendar);
               resolve(resp);
             })
@@ -347,32 +639,62 @@ export default {
         dateStart.format("D");
 
       let res = await this.api.get(`courses/new`);
-
       this.newCourseParamsNeeded = res.data.data;
 
       // Show modal to create course event
       UI.methods.openModal("modal_add_course");
+    },
+    changeInstructorSelected(event) {
+      this.newCourseInstructorSelected = this.newCourseParamsNeeded.instructors.find(
+        (instructor) => instructor.details.firstname == event.target.value
+      );
+      this.newCourse.instructor = this.newCourseInstructorSelected;
+      this.isInstructorSelected = true;
     },
     changeSportSelected(event) {
       this.newCourseSportSelected = this.newCourseParamsNeeded.sports.find(
         (sport) => sport.name == event.target.value
       );
       this.newCourse.sport = this.newCourseSportSelected;
+      this.isSportSelected = true;
     },
     changeTypeSelected(event) {
       this.newCourseTypeSelected = this.newCourseParamsNeeded.courseTypes.find(
         (type) => type.name == event.target.value
       );
       this.newCourse.type = this.newCourseTypeSelected;
+      this.isTypeSelected = true;
     },
     changeLevelSelected(event) {
       this.newCourseLevelSelected = this.newCourseSportSelected.sportLevel.find(
         (sportLevel) => sportLevel.level.name == event.target.value
       );
       this.newCourse.level = this.newCourseLevelSelected.level;
+      this.isLevelSelected = true;
     },
-    async addCourse() {
+    addCourse() {
+      if (this.newCourseTimeStart == "00:00") {
+        this.isTimeStart = false;
+        return;
+      }
+      if (this.newCourseTimeEnd == "00:00") {
+        this.isTimeEnd = false;
+        return;
+      }
+      if (!this.newCourseSportSelected) {
+        this.isSportSelected = false;
+        return;
+      }
+      if (!this.newCourseTypeSelected) {
+        this.isTypeSelected = false;
+        return;
+      }
+      if (!this.newCourseLevelSelected) {
+        this.isLevelSelected = false;
+        return;
+      }
       let newCourse = new Course();
+      newCourse.instructor = this.newCourseInstructorSelected;
       newCourse.sport = this.newCourseSportSelected;
       newCourse.type = this.newCourseTypeSelected;
       newCourse.level = this.newCourseLevelSelected.level;
@@ -380,7 +702,54 @@ export default {
         start: this.newCourseDate + " " + this.newCourseTimeStart,
         end: this.newCourseDate + " " + this.newCourseTimeEnd,
       };
-      let res = await this.api.post("courses", newCourse);
+      return new Promise((resolve, reject) => {
+        this.api
+          .post("courses", newCourse)
+          .then((resp) => {
+            let newCalendar = new Calendar(resp.data.data);
+            this.$store.dispatch("ADD_EVENT", newCalendar);
+            resolve(resp);
+            UI.methods.closeModal("modal_add_course");
+            resetAll();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    resetAll() {
+      this.isSportSelected = true;
+      this.isTypeSelected = true;
+      this.isLevelSelected = true;
+      this.isTimeStart = true;
+      this.isTimeEnd = true;
+      this.newCourseSportSelected = null;
+      this.newCourseTypeSelected = null;
+      this.newCourseLevelSelected = null;
+    },
+    async reserveCourse() {
+      let res = await this.api.patch(
+        `courses/add/${this.clickedEvent.id}/${this.$store.getters.getUserId}`
+      );
+      this.isReserved = true;
+      UI.methods.closeModal("modal_show_course");
+      this.showSuccessAlert = true;
+      this.successText = "Has realizado la reserva con éxito";
+      this.$store.dispatch("ADD_NOTIFICATION", {
+        type: "success",
+        message: "Reserva realizada con éxito",
+      });
+    },
+    async deleteCourseStudent() {
+      let res = await this.api.delete(
+        `courses/del/${this.clickedEvent.id}/${this.$store.getters.getUserId}`
+      );
+      this.isReserved = false;
+      UI.methods.closeModal("modal_show_course");
+    },
+    deleteEvent() {
+      UI.methods.closeModal("modal_confirm_delete_event");
+      this.$store.dispatch("DELETE_EVENT", this.clickedEvent);
     },
   },
 };

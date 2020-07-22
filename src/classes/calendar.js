@@ -1,6 +1,4 @@
-import { Course } from "./course";
-
-export const UserCalendar = class UserCalendar {
+export const Calendar = class Calendar {
   constructor(data = null) {
     if (!data) return;
     this.id = data?.id;
