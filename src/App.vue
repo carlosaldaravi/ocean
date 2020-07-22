@@ -1,24 +1,25 @@
 <template>
-  <div id="app" class="bg-fixed bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover">
-    <!-- <div v-if="isLogged">
+  <div id="app">
+    <div v-if="isAuthenticated">
       <shell>
         <section slot="content">
           <router-view />
+          <notification-list />
         </section>
       </shell>
     </div>
     <div v-else>
-      <login></login>
-    </div>-->
-    <router-view />
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
 import Shell from "./components/layout/Shell";
 import { Localit } from "localit";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { AUTH_CHECK } from "./store/actions/auth";
+import NotificationList from "./components/notifications/NotificationsList.vue";
 
 export default {
   name: "app",
@@ -28,12 +29,11 @@ export default {
     };
   },
   components: {
-    Shell
+    Shell,
+    NotificationList
   },
   computed: {
-    isLogged: function() {
-      return this.lstore.get("user-token") !== undefined;
-    }
+    ...mapGetters(["isAuthenticated"])
   },
   created() {
     // this.AUTH_CHECK();

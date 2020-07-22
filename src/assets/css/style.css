@@ -7,8 +7,14 @@ body,
   height: auto;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 #app > * {
   flex: 1;
 }
