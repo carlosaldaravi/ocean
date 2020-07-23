@@ -198,7 +198,10 @@
                   Calendario
                 </a>
               </router-link>
-              <router-link to="/home">
+              <router-link
+                v-if="this.$store.getters.getRole === 'ADMIN'"
+                to="/home"
+              >
                 <a
                   @click="isOpen = false"
                   :class="
@@ -237,8 +240,8 @@
               >
                 <img
                   src="../../assets/icons/stand-by.svg"
-                  class="w-6 h-6 mr-3 bg-red-700 rounded-full"
-                  alt=""
+                  class="w-6 h-6 p-1 mr-4 bg-red-700 border-2 border-gray-900 rounded-full"
+                  alt="logout"
                 />
                 Salir
               </a>
@@ -261,12 +264,12 @@
                   </div>
                   <div class="ml-3">
                     <p class="text-base font-medium leading-6 text-white">
-                      Carlos Aldaravi
+                      {{ this.$store.getters.getUserName }}
                     </p>
                     <p
                       class="text-sm font-medium leading-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300"
                     >
-                      Ver perfil
+                      Perfil
                     </p>
                   </div>
                 </div>
@@ -419,6 +422,7 @@
                 </a>
               </router-link>
               <a
+                v-if="this.$store.getters.getRole === 'ADMIN'"
                 href="#"
                 :class="
                   this.$route.name == 'Stats'
@@ -454,8 +458,8 @@
               >
                 <img
                   src="../../assets/icons/stand-by.svg"
-                  class="w-6 h-6 mr-3 bg-red-700 rounded-full"
-                  alt=""
+                  class="w-6 h-6 p-1 mr-3 bg-red-700 border-2 border-gray-900 rounded-full"
+                  alt="logout"
                 />
                 Salir
               </a>
@@ -474,7 +478,7 @@
                 <router-link to="/profile">
                   <div class="ml-3">
                     <p class="text-sm font-medium leading-5 text-white">
-                      Carlos Aldaravi
+                      {{ this.$store.getters.getUserName }}
                     </p>
                     <p
                       class="text-xs font-medium leading-4 text-gray-300 transition duration-150 ease-in-out group-hover:text-gray-200"
