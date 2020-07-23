@@ -1,11 +1,6 @@
 <template>
   <section class>
     <section class="container p-4 mx-auto md:p-8">
-      <h1
-        class="font-serif text-3xl font-extrabold leading-9 tracking-tight text-center text-gray-900 sm:text-4xl sm:leading-10"
-      >
-        OBJETIVOS
-      </h1>
       <div class="mt-3">
         <div>
           <nav class="flex justify-center">

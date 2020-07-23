@@ -66,7 +66,7 @@ const routes = [
   },
   {
     path: "/home",
-    name: "Home",
+    name: "Inicio",
     component: () =>
       import(/* webpackChunkName: "lista-alumnos" */ "../views/Home.vue"),
   },
@@ -90,7 +90,7 @@ const routes = [
   },
   {
     path: "/cursos",
-    name: "Cursos",
+    name: "Mis Cursos",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(
@@ -99,7 +99,7 @@ const routes = [
   },
   {
     path: "/calendar",
-    name: "Calendar",
+    name: "Calendario",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(/* webpackChunkName: "alumno" */ "../views/Calendar.vue"),
@@ -112,7 +112,7 @@ const routes = [
   },
   {
     path: "/targets",
-    name: "Targets",
+    name: "Objetivos",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(/* webpackChunkName: "alumno" */ "../views/Targets.vue"),

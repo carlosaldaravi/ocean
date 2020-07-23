@@ -1,11 +1,6 @@
 <template>
   <section class>
     <section class="container p-4 mx-auto md:p-8">
-      <h1
-        class="text-3xl font-extrabold leading-9 tracking-tight text-center text-gray-900 sm:text-4xl sm:leading-10"
-      >
-        Mis cursos
-      </h1>
       <div>
         <div class="mb-4">
           <nav class="flex justify-center">
