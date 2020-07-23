@@ -138,7 +138,7 @@
                 <a
                   @click="isOpen = false"
                   :class="
-                    this.$route.name == 'Targets'
+                    this.$route.name == 'Objetivos'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -147,7 +147,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Targets'
+                      this.$route.name == 'Objetivos'
                         ? 'text-primary-400'
                         : 'text-primary-300'
                     "
@@ -170,7 +170,7 @@
                 <a
                   @click="isOpen = false"
                   :class="
-                    this.$route.name == 'Calendar'
+                    this.$route.name == 'Calendario'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -179,7 +179,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Calendar'
+                      this.$route.name == 'Calendario'
                         ? 'text-primary-400'
                         : 'text-primary-300'
                     "
@@ -230,6 +230,18 @@
                   Estadísticas
                 </a>
               </router-link>
+              <a
+                @click="logout()"
+                href="#"
+                class="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-red-500 transition duration-150 ease-in-out rounded-md group hover:text-primary-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+              >
+                <img
+                  src="../../assets/icons/stand-by.svg"
+                  class="w-6 h-6 mr-3 bg-red-700 rounded-full"
+                  alt=""
+                />
+                Salir
+              </a>
             </nav>
           </div>
           <div class="flex flex-shrink-0 p-4 bg-gray-700">
@@ -348,7 +360,7 @@
                 <a
                   href="#"
                   :class="
-                    this.$route.name == 'Targets'
+                    this.$route.name == 'Objetivos'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -356,7 +368,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Targets'
+                      this.$route.name == 'Objetivos'
                         ? 'text-primary-400'
                         : 'text-primary-300'
                     "
@@ -379,7 +391,7 @@
                 <a
                   href="#"
                   :class="
-                    this.$route.name == 'Calendar'
+                    this.$route.name == 'Calendario'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -387,7 +399,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Calendar'
+                      this.$route.name == 'Calendario'
                         ? 'text-primary-400'
                         : 'text-primary-300'
                     "
@@ -434,6 +446,18 @@
                   />
                 </svg>
                 Estadísticas
+              </a>
+              <a
+                @click="logout()"
+                href="#"
+                class="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-red-500 transition duration-150 ease-in-out rounded-md group hover:text-primary-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+              >
+                <img
+                  src="../../assets/icons/stand-by.svg"
+                  class="w-6 h-6 mr-3 bg-red-700 rounded-full"
+                  alt=""
+                />
+                Salir
               </a>
             </nav>
           </div>
@@ -522,6 +546,7 @@
 
 <script>
 import Footer from "./Footer.vue";
+import { AUTH_LOGOUT } from "../../store/actions/auth";
 export default {
   components: {
     "ocean-footer": Footer,
@@ -529,6 +554,11 @@ export default {
   data: () => ({
     isOpen: false,
   }),
+  methods: {
+    logout() {
+      this.$store.dispatch(AUTH_LOGOUT);
+    },
+  },
 };
 </script>
 
