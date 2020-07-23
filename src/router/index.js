@@ -66,7 +66,7 @@ const routes = [
   },
   {
     path: "/home",
-    name: "home",
+    name: "Home",
     component: () =>
       import(/* webpackChunkName: "lista-alumnos" */ "../views/Home.vue"),
   },
@@ -90,7 +90,7 @@ const routes = [
   },
   {
     path: "/cursos",
-    name: "studentCourses",
+    name: "Cursos",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(
