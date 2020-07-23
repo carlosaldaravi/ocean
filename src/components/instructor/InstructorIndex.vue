@@ -7,7 +7,7 @@
       <div
         class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
       >
-        CLASES
+        MIS CURSOS
       </div>
     </div>
     <div

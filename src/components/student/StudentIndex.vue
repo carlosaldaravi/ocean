@@ -4,25 +4,41 @@
       @click="goToCourses()"
       class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
     >
-      <div class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl">CLASES</div>
+      <div
+        class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
+      >
+        MIS CURSOS
+      </div>
     </div>
     <div
       @click="goToCalendar()"
       class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
     >
-      <div class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl">CALENDARIO</div>
+      <div
+        class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
+      >
+        CALENDARIO
+      </div>
     </div>
     <div
       @click="goToTargets()"
       class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
     >
-      <div class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl">OBJETIVOS</div>
+      <div
+        class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
+      >
+        OBJETIVOS
+      </div>
     </div>
     <div
       @click="goToProfile()"
       class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
     >
-      <div class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl">PERFIL</div>
+      <div
+        class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
+      >
+        PERFIL
+      </div>
     </div>
   </div>
 </template>
@@ -42,10 +58,10 @@ export default {
     },
     goToProfile() {
       this.$router.push(`/profile`);
-    }
+    },
   },
   components: {
-    Menu
-  }
+    Menu,
+  },
 };
 </script>
