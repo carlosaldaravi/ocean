@@ -1,7 +1,13 @@
 <template>
   <div
-    :class="[ target.studentTargets.length > 0  ? isValidated(target) ? 'bg-green-400' : 'bg-gray-100' : 'bg-gray-600']"
-    class="relative flex flex-col h-auto mt-3 bg-gray-100 bg-opacity-75 rounded shadow sm:flex-row md:h-28"
+    :class="[
+      target.studentTargets.length > 0
+        ? isValidated(target)
+          ? 'bg-secondary-200'
+          : 'bg-primary-400'
+        : 'bg-primary-200',
+    ]"
+    class="relative flex flex-col h-auto mt-3 bg-opacity-75 rounded shadow sm:flex-row"
   >
     <div class="w-full h-full p-4">
       <!-- target  -->
@@ -13,19 +19,34 @@
           v-if="target.studentTargets.length > 0 && !isValidated(target)"
           class="absolute right-0 flex items-center p-2 bg-white rounded-full -top-4"
         >
-          <img v-if="!moreCard" class="w-4 h-4" src="../../assets/icons/lock-open.svg" alt />
+          <img
+            v-if="!moreCard"
+            class="w-4 h-4"
+            src="../../assets/icons/lock-open.svg"
+            alt
+          />
         </div>
         <div
           v-if="target.studentTargets.length > 0 && isValidated(target)"
           class="absolute right-0 flex items-center p-2 bg-white rounded-full -top-4"
         >
-          <img v-if="!moreCard" class="w-4 h-4" src="../../assets/icons/checkmark.svg" alt />
+          <img
+            v-if="!moreCard"
+            class="w-4 h-4"
+            src="../../assets/icons/checkmark.svg"
+            alt
+          />
         </div>
         <div
           v-if="target.studentTargets.length === 0"
           class="absolute right-0 flex items-center p-2 bg-white rounded-full -top-4"
         >
-          <img v-if="!moreCard" class="w-4 h-4" src="../../assets/icons/lock-closed.svg" alt />
+          <img
+            v-if="!moreCard"
+            class="w-4 h-4"
+            src="../../assets/icons/lock-closed.svg"
+            alt
+          />
         </div>
       </div>
 
@@ -52,16 +73,22 @@
                 <p
                   v-if="getInstructorGender(target) == 'FEMALE'"
                   class="text-xs font-medium leading-4 transition duration-150 ease-in-out"
-                >Validado por:</p>
-                <p class="text-sm font-medium leading-5">{{ getInstructorName(target) }}</p>
+                >
+                  Validado por:
+                </p>
+                <p class="text-sm font-medium leading-5">
+                  {{ getInstructorName(target) }}
+                </p>
               </div>
             </div>
           </div>
           <!-- fecha -->
-          <div class="flex items-center ml-1 text-sm">{{ getValidationDate(target) }}</div>
+          <div class="flex items-center ml-1 text-sm">
+            {{ getValidationDate(target) }}
+          </div>
         </div>
         <div class="mt-2 italic">Descripción</div>
-        <div class="text-sm">{{target.description}}</div>
+        <div class="text-sm">{{ target.description }}</div>
         <div v-if="isValidated(target)">
           <div class="mt-2 italic">Materiales</div>
           <div class="flex justify-between">
@@ -70,7 +97,10 @@
         </div>
       </div>
 
-      <div v-if="target.studentTargets.length > 0" class="flex justify-center -mb-3">
+      <div
+        v-if="target.studentTargets.length > 0"
+        class="flex justify-center -mb-3"
+      >
         <button @click="moreCard = !moreCard">
           <img
             v-if="!moreCard"
@@ -78,7 +108,12 @@
             src="../../assets/icons/cheveron-down.svg"
             alt
           />
-          <img v-else class="w-4 h-4 text-red-500" src="../../assets/icons/cheveron-up.svg" alt />
+          <img
+            v-else
+            class="w-4 h-4 text-red-500"
+            src="../../assets/icons/cheveron-up.svg"
+            alt
+          />
         </button>
       </div>
     </div>
@@ -91,42 +126,42 @@ import { formatDate, formatTime } from "../../helpers/functions";
 export default {
   data() {
     return {
-      moreCard: false
+      moreCard: false,
     };
   },
   props: {
-    target: { type: Object, required: true }
+    target: { type: Object, required: true },
   },
   methods: {
     formatDate,
     formatTime,
     isValidated(target) {
       let studentIsIn = target.studentTargets.find(
-        student => student.studentId === this.$store.getters.getUserId
+        (student) => student.studentId === this.$store.getters.getUserId
       );
       if (studentIsIn && studentIsIn.instructor) return true;
     },
 
     getValidationDate(target) {
       let studentIsIn = target.studentTargets.find(
-        student => student.studentId === this.$store.getters.getUserId
+        (student) => student.studentId === this.$store.getters.getUserId
       );
       return this.formatDate(studentIsIn.date);
     },
 
     getInstructorName(target) {
       let studentIsIn = target.studentTargets.find(
-        student => student.studentId === this.$store.getters.getUserId
+        (student) => student.studentId === this.$store.getters.getUserId
       );
       return studentIsIn.instructor.details.firstname;
     },
 
     getInstructorGender(target) {
       let studentIsIn = target.studentTargets.find(
-        student => student.studentId === this.$store.getters.getUserId
+        (student) => student.studentId === this.$store.getters.getUserId
       );
       return studentIsIn.instructor.details.gender;
-    }
-  }
+    },
+  },
 };
 </script>
