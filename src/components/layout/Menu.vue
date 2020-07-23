@@ -1,191 +1,8 @@
 <template>
-  <!-- <div id="nav" v-if="this.$route.name != 'login'">
-    <nav class="bg-primary-200">
-      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img class="w-8 h-8" src="../../assets/images/logo.png" alt="Workflow logo" />
-            </div>
-            <div class="hidden md:block">
-              <div class="flex items-baseline ml-10">
-                <router-link
-                  to="/home"
-                  class="px-3 py-2 text-sm font-medium text-white rounded-md bg-primary-300 focus:outline-none focus:text-white focus:bg-indigo-600"
-                >Inicio</router-link>|
-                <router-link
-                  to="/alumno"
-                  class="px-3 py-2 text-sm font-medium text-white rounded-md bg-primary-300 focus:outline-none focus:text-white focus:bg-indigo-600"
-                >Alumno</router-link>|
-                <router-link
-                  to="/about"
-                  class="px-3 py-2 text-sm font-medium text-white rounded-md bg-primary-300 focus:outline-none focus:text-white focus:bg-indigo-600"
-                >About</router-link>|
-              </div>
-            </div>
-          </div>
-          <div class="hidden md:block">
-            <div class="flex items-center ml-4 md:ml-6">
-              <button
-                class="p-1 text-indigo-300 border-2 border-transparent rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-indigo-600"
-                aria-label="Notifications"
-              >
-                <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
-  </button>-->
-
-  <!-- Profile dropdown -->
-  <!-- <div class="relative ml-3">
-                <div>
-                  <button
-                    class="flex items-center max-w-xs text-sm text-white rounded-full focus:outline-none focus:shadow-solid"
-                    id="user-menu"
-                    aria-label="User menu"
-                    aria-haspopup="true"
-                  >
-                    <img
-                      class="w-8 h-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt
-                    />
-                  </button>
-  </div>-->
-  <!--
-                Profile dropdown panel, show/hide based on dropdown state.
-
-                Entering: "transition ease-out duration-100"
-                  From: "transform opacity-0 scale-95"
-                  To: "transform opacity-100 scale-100"
-                Leaving: "transition ease-in duration-75"
-                  From: "transform opacity-100 scale-100"
-                  To: "transform opacity-0 scale-95"
-  -->
-  <!-- <div class="absolute right-0 w-48 mt-2 origin-top-right rounded-md shadow-lg">
-                  <div class="py-1 bg-white rounded-md shadow-xs">
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >Your Profile</a>
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >Settings</a>
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >Sign out</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-  <div class="flex -mr-2 md:hidden">-->
-  <!-- Mobile menu button -->
-  <!-- <button
-              class="inline-flex items-center justify-center p-2 text-indigo-300 rounded-md hover:text-white hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 focus:text-white"
-  >-->
-  <!-- Menu open: "hidden", Menu closed: "block" -->
-  <!-- <svg class="block w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-  </svg>-->
-  <!-- Menu open: "block", Menu closed: "hidden" -->
-  <!-- <svg class="hidden w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-  </div>-->
-
-  <!--
-      Mobile menu, toggle classes based on menu state.
-
-      Open: "block", closed: "hidden"
-  -->
-  <!-- <div class="hidden md:hidden">
-        <div class="px-2 pt-2 pb-3 sm:px-3">
-          <a
-            href="#"
-            class="block px-3 py-2 text-base font-medium text-white bg-indigo-800 rounded-md focus:outline-none focus:text-white focus:bg-gray-700"
-          >Dashboard</a>
-          <a
-            href="#"
-            class="block px-3 py-2 mt-1 text-base font-medium text-indigo-200 rounded-md hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
-          >Team</a>
-          <a
-            href="#"
-            class="block px-3 py-2 mt-1 text-base font-medium text-indigo-200 rounded-md hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
-          >Projects</a>
-          <a
-            href="#"
-            class="block px-3 py-2 mt-1 text-base font-medium text-indigo-200 rounded-md hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
-          >Calendar</a>
-          <a
-            href="#"
-            class="block px-3 py-2 mt-1 text-base font-medium text-indigo-200 rounded-md hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
-          >Reports</a>
-        </div>
-        <div class="pt-4 pb-3 border-t border-gray-700">
-          <div class="flex items-center px-5">
-            <div class="flex-shrink-0">
-              <img
-                class="w-10 h-10 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt
-              />
-            </div>
-            <div class="ml-3">
-              <div class="text-base font-medium leading-none text-white">Tom Cook</div>
-              <div class="mt-1 text-sm font-medium leading-none text-indigo-300">tom@example.com</div>
-            </div>
-          </div>
-          <div
-            class="px-2 mt-3"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="user-menu"
-          >
-            <a
-              href="#"
-              class="block px-3 py-2 text-base font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
-              role="menuitem"
-            >Your Profile</a>
-            <a
-              href="#"
-              class="block px-3 py-2 mt-1 text-base font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
-              role="menuitem"
-            >Settings</a>
-            <a
-              href="#"
-              class="block px-3 py-2 mt-1 text-base font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
-              role="menuitem"
-            >Sign out</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </div>-->
-
   <div
     id="nav"
     v-if="this.$route.name != 'login'"
-    class="flex h-screen overflow-hidden bg-gray-100"
+    class="flex h-screen overflow-hidden bg-primary-400"
   >
     <!-- Off-canvas menu for mobile -->
     <div v-if="isOpen" class="md:hidden">
@@ -257,7 +74,7 @@
                 <a
                   @click="isOpen = false"
                   :class="
-                    this.$route.name == 'Home'
+                    this.$route.name == 'Inicio'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -266,7 +83,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Home'
+                      this.$route.name == 'Inicio'
                         ? 'text-primary-400'
                         : 'text-primary-300'
                     "
@@ -289,7 +106,7 @@
                 <a
                   @click="isOpen = false"
                   :class="
-                    this.$route.name == 'Cursos'
+                    this.$route.name == 'Mis Cursos'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -298,7 +115,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Cursos'
+                      this.$route.name == 'Mis Cursos'
                         ? 'text-primary-400 bg-primary-100'
                         : 'text-primary-300'
                     "
@@ -314,7 +131,7 @@
                       d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                     />
                   </svg>
-                  Cursos
+                  Mis Cursos
                 </a>
               </router-link>
               <router-link to="/targets">
@@ -469,7 +286,7 @@
                 <a
                   href="#"
                   :class="
-                    this.$route.name == 'Home'
+                    this.$route.name == 'Inicio'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -477,7 +294,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Home'
+                      this.$route.name == 'Inicio'
                         ? 'text-primary-400'
                         : 'text-primary-300'
                     "
@@ -499,7 +316,7 @@
               <router-link to="/cursos">
                 <a
                   :class="
-                    this.$route.name == 'Cursos'
+                    this.$route.name == 'Mis Cursos'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -508,7 +325,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Cursos'
+                      this.$route.name == 'Mis Cursos'
                         ? 'text-primary-400'
                         : 'text-primary-300'
                     "
@@ -524,7 +341,7 @@
                       d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                     />
                   </svg>
-                  Mis clases
+                  Mis Cursos
                 </a>
               </router-link>
               <router-link to="/targets">
@@ -670,23 +487,45 @@
           </svg>
         </button>
       </div>
-      <main class="flex-1 bg-primary-400" tabindex="0">
-        <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <!-- Replace with your content-->
-          <div class="px-4 py-4 sm:px-0">
+      <!-- <main class="flex-1 overflow-auto bg-primary-400" tabindex="0">
+        <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8"> -->
+      <!-- Replace with your content-->
+      <!-- <div class="px-4 py-4 sm:px-0">
+            <slot name="content">
+              <router-view />
+            </slot>
+          </div> -->
+      <!-- /End replace -->
+      <!-- </div>
+      </main> -->
+      <main
+        class="relative z-0 flex-1 overflow-y-auto focus:outline-none"
+        tabindex="0"
+      >
+        <div class="pt-2 pb-6 md:py-6">
+          <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <h1 class="text-2xl font-semibold text-gray-900">
+              {{ this.$route.name }}
+            </h1>
+          </div>
+          <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
             <slot name="content">
               <router-view />
             </slot>
           </div>
-          <!-- /End replace -->
         </div>
       </main>
+      <ocean-footer></ocean-footer>
     </div>
   </div>
 </template>
 
 <script>
+import Footer from "./Footer.vue";
 export default {
+  components: {
+    "ocean-footer": Footer,
+  },
   data: () => ({
     isOpen: false,
   }),
