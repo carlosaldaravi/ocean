@@ -120,7 +120,7 @@
                 <legend class="text-base font-medium leading-6 text-gray-900">
                   Deportes
                 </legend>
-                <div v-if="user.userSports">
+                <div v-if="user && user.userSports">
                   <div
                     v-for="userSport of user.userSports"
                     :key="userSport.sportId"
@@ -423,7 +423,7 @@ export default {
   created() {
     this.getUserData();
     this.getSports();
-    this.sportsLeft();
+    this.getSportsLeft();
   },
   computed: {},
   methods: {
@@ -467,14 +467,16 @@ export default {
     async saveUser() {
       await this.api.patch(`users`, this.user);
     },
-    sportsLeft() {
-      this.userSports = this.user.userSports.map(
-        (userSport) => userSport.sport.id
-      );
+    getSportsLeft() {
+      if (this.user) {
+        this.userSports = this.user.userSports.map(
+          (userSport) => userSport.sport.id
+        );
 
-      let sportsLeft = this.sports.filter((sport) => {
-        return !userSports.includes(sport.id);
-      });
+        let sportsLeft = this.sports.filter((sport) => {
+          return !userSports.includes(sport.id);
+        });
+      }
     },
     async remove(userSport) {
       var index = this.user.userSports.indexOf(userSport);
