@@ -67,25 +67,24 @@ const routes = [
   {
     path: "/home",
     name: "Inicio",
-    component: () =>
-      import(/* webpackChunkName: "lista-alumnos" */ "../views/Home.vue"),
+    component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
   },
   {
-    path: "/lista-alumnos",
-    name: "alumnoLista",
+    path: "/alumnos",
+    name: "Alumnos",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(
-        /* webpackChunkName: "lista-alumnos" */ "../views/student/StudentList.vue"
+        /* webpackChunkName: "alumnos" */ "../views/student/StudentList.vue"
       ),
   },
   {
     path: "/instructores",
-    name: "instructores",
+    name: "Instructores",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(
-        /* webpackChunkName: "lista-alumnos" */ "../views/instructor/InstructorList.vue"
+        /* webpackChunkName: "instructores" */ "../views/instructor/InstructorList.vue"
       ),
   },
   {
@@ -98,24 +97,31 @@ const routes = [
       ),
   },
   {
-    path: "/calendar",
+    path: "/calendario",
     name: "Calendario",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(/* webpackChunkName: "alumno" */ "../views/Calendar.vue"),
   },
   {
-    path: "/profile",
-    name: "Profile",
+    path: "/perfil",
+    name: "Perfil",
     component: () =>
       import(/* webpackChunkName: "alumno" */ "../views/Profile.vue"),
   },
   {
-    path: "/targets",
+    path: "/objetivos",
     name: "Objetivos",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(/* webpackChunkName: "alumno" */ "../views/Targets.vue"),
+  },
+  {
+    path: "/estadisticas",
+    name: "Estadísticas",
+    beforeEnter: ifAuthenticated,
+    component: () =>
+      import(/* webpackChunkName: "estadisticas" */ "../views/Statistics.vue"),
   },
   { path: "*", redirect: "/login" },
 ];

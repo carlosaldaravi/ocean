@@ -4,30 +4,18 @@
       @click="goToCalendar()"
       class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
     >
-      <div
-        class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
-      >
+      <div class="absolute font-mono text-xl font-black sm:text- md:text-3xl">
         CALENDARIO
       </div>
     </div>
     <div
       @click="goToStatistics()"
-      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
+      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg cursor-pointer shadow- hover:scale-105 hover:bg-opacity-75 md:h-56"
     >
       <div
-        class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
+        class="absolute font-mono text-xl font-black sm:text-2xl md:text-3xl"
       >
         ESTADÍSTICAS
-      </div>
-    </div>
-    <div
-      @click="goToProfile()"
-      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
-    >
-      <div
-        class="absolute font-mono text-3xl font-black sm:text-4xl md:text-5xl"
-      >
-        PERFIL
       </div>
     </div>
   </div>
@@ -38,13 +26,10 @@ import Menu from "../../components/layout/Menu";
 export default {
   methods: {
     goToCalendar() {
-      this.$router.push(`/calendar`);
+      this.$router.push(`/calendario`);
     },
     goToStatistics() {
-      this.$router.push(`/statistics`);
-    },
-    goToProfile() {
-      this.$router.push(`/profile`);
+      this.$router.push(`/estadisticas`);
     },
   },
   components: {
