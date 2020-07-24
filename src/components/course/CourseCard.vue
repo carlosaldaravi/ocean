@@ -16,11 +16,11 @@
               <div class="flex justify-between my-4">
                 <label
                   for="alumnoSelected"
-                  class="block text-sm font-medium leading-5 text-primary-200"
+                  class="block text-lg font-medium leading-5 text-primary-200"
                   >Alumno
                 </label>
                 <div
-                  class="block text-sm font-medium leading-5 text-primary-200"
+                  class="block text-lg font-medium leading-5 text-primary-200"
                   v-if="studentToValidate"
                 >
                   {{ studentToValidate.details.firstname }}
