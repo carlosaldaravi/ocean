@@ -499,42 +499,44 @@
                   Calendario
                 </a>
               </router-link>
-              <a
-                v-if="this.$store.getters.getRole === 'ADMIN'"
-                href="#"
-                :class="
-                  this.$route.name == 'Stats'
-                    ? 'text-primary-400 bg-primary-100'
-                    : 'text-primary-300'
-                "
-                class="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 transition duration-150 ease-in-out rounded-md group hover:text-primary-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-              >
-                <svg
+              <router-link to="/estadisticas">
+                <a
+                  v-if="this.$store.getters.getRole === 'ADMIN'"
+                  href="#"
                   :class="
-                    this.$route.name == 'Stats'
-                      ? 'text-primary-400'
+                    this.$route.name == 'Estadísticas'
+                      ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
-                  class="w-6 h-6 mr-3 transition duration-150 ease-in-out group-hover:text-gray-300 group-focus:text-gray-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  class="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 transition duration-150 ease-in-out rounded-md group hover:text-primary-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                  />
-                </svg>
-                Estadísticas
-              </a>
+                  <svg
+                    :class="
+                      this.$route.name == 'Estadísticas'
+                        ? 'text-primary-400'
+                        : 'text-primary-300'
+                    "
+                    class="w-6 h-6 mr-3 transition duration-150 ease-in-out group-hover:text-gray-300 group-focus:text-gray-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
+                  </svg>
+                  Estadísticas
+                </a>
+              </router-link>
               <router-link to="/alumnos">
                 <a
                   v-if="this.$store.getters.getRole === 'ADMIN'"
                   href="#"
                   :class="
-                    this.$route.name == 'Stats'
+                    this.$route.name == 'Alumnos'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -566,7 +568,7 @@
                   v-if="this.$store.getters.getRole === 'ADMIN'"
                   href="#"
                   :class="
-                    this.$route.name == 'Alumnos'
+                    this.$route.name == 'Instructores'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
