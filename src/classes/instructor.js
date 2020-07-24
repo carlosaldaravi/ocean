@@ -3,12 +3,14 @@ export const Instructor = class Instructor {
     if (!data) return;
     this.id = data?.id;
     this.email = data?.email;
+    this.status = data?.status;
     this.details = {
       firstname: data?.details.firstname,
       lastname: data?.details.lastname,
       phone: data?.details.phone,
       dateBorn: data?.details.dateBorn,
       city: data?.details.city,
+      gender: data?.details.gender,
     };
   }
 };
