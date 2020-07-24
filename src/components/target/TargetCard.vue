@@ -1,5 +1,6 @@
 <template>
   <div
+    @click="moreCard = !moreCard"
     :class="[
       target.studentTargets.length > 0
         ? isValidated(target)
@@ -101,7 +102,7 @@
         v-if="target.studentTargets.length > 0"
         class="flex justify-center -mb-3"
       >
-        <button @click="moreCard = !moreCard">
+        <button>
           <img
             v-if="!moreCard"
             class="w-4 h-4 text-red-500"
