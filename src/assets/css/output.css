@@ -12764,12 +12764,24 @@ body,
   height: 100vh;
 }
 
+.text-xxs {
+  font-size: .695rem;
+}
+
 .text-xs {
-  font-size: 0.75rem;
+  font-size: .75rem;
+}
+
+.text-s {
+  font-size: .825rem;
 }
 
 .text-sm {
-  font-size: 0.875rem;
+  font-size: .875rem;
+}
+
+.text-tiny {
+  font-size: .925rem;
 }
 
 .text-base {
@@ -12802,6 +12814,10 @@ body,
 
 .text-6xl {
   font-size: 4rem;
+}
+
+.text-7xl {
+  font-size: 5rem;
 }
 
 .leading-3 {
@@ -50630,12 +50646,24 @@ body,
     height: 100vh;
   }
 
+  .sm\:text-xxs {
+    font-size: .695rem;
+  }
+
   .sm\:text-xs {
-    font-size: 0.75rem;
+    font-size: .75rem;
+  }
+
+  .sm\:text-s {
+    font-size: .825rem;
   }
 
   .sm\:text-sm {
-    font-size: 0.875rem;
+    font-size: .875rem;
+  }
+
+  .sm\:text-tiny {
+    font-size: .925rem;
   }
 
   .sm\:text-base {
@@ -50668,6 +50696,10 @@ body,
 
   .sm\:text-6xl {
     font-size: 4rem;
+  }
+
+  .sm\:text-7xl {
+    font-size: 5rem;
   }
 
   .sm\:leading-3 {
@@ -88497,12 +88529,24 @@ body,
     height: 100vh;
   }
 
+  .md\:text-xxs {
+    font-size: .695rem;
+  }
+
   .md\:text-xs {
-    font-size: 0.75rem;
+    font-size: .75rem;
+  }
+
+  .md\:text-s {
+    font-size: .825rem;
   }
 
   .md\:text-sm {
-    font-size: 0.875rem;
+    font-size: .875rem;
+  }
+
+  .md\:text-tiny {
+    font-size: .925rem;
   }
 
   .md\:text-base {
@@ -88535,6 +88579,10 @@ body,
 
   .md\:text-6xl {
     font-size: 4rem;
+  }
+
+  .md\:text-7xl {
+    font-size: 5rem;
   }
 
   .md\:leading-3 {
@@ -126364,12 +126412,24 @@ body,
     height: 100vh;
   }
 
+  .lg\:text-xxs {
+    font-size: .695rem;
+  }
+
   .lg\:text-xs {
-    font-size: 0.75rem;
+    font-size: .75rem;
+  }
+
+  .lg\:text-s {
+    font-size: .825rem;
   }
 
   .lg\:text-sm {
-    font-size: 0.875rem;
+    font-size: .875rem;
+  }
+
+  .lg\:text-tiny {
+    font-size: .925rem;
   }
 
   .lg\:text-base {
@@ -126402,6 +126462,10 @@ body,
 
   .lg\:text-6xl {
     font-size: 4rem;
+  }
+
+  .lg\:text-7xl {
+    font-size: 5rem;
   }
 
   .lg\:leading-3 {
@@ -164231,12 +164295,24 @@ body,
     height: 100vh;
   }
 
+  .xl\:text-xxs {
+    font-size: .695rem;
+  }
+
   .xl\:text-xs {
-    font-size: 0.75rem;
+    font-size: .75rem;
+  }
+
+  .xl\:text-s {
+    font-size: .825rem;
   }
 
   .xl\:text-sm {
-    font-size: 0.875rem;
+    font-size: .875rem;
+  }
+
+  .xl\:text-tiny {
+    font-size: .925rem;
   }
 
   .xl\:text-base {
@@ -164269,6 +164345,10 @@ body,
 
   .xl\:text-6xl {
     font-size: 4rem;
+  }
+
+  .xl\:text-7xl {
+    font-size: 5rem;
   }
 
   .xl\:leading-3 {
