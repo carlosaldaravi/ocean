@@ -10,12 +10,32 @@
     </div>
     <div
       @click="goToStatistics()"
-      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg cursor-pointer shadow- hover:scale-105 hover:bg-opacity-75 md:h-56"
+      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
     >
       <div
         class="absolute font-mono text-xl font-black sm:text-2xl md:text-3xl"
       >
         ESTADÍSTICAS
+      </div>
+    </div>
+    <div
+      @click="goToStudents()"
+      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
+    >
+      <div
+        class="absolute font-mono text-xl font-black sm:text-2xl md:text-3xl"
+      >
+        ALUMNOS
+      </div>
+    </div>
+    <div
+      @click="goToInstructors()"
+      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
+    >
+      <div
+        class="absolute font-mono text-xl font-black sm:text-2xl md:text-3xl"
+      >
+        INSTRUCTORS
       </div>
     </div>
   </div>
@@ -30,6 +50,12 @@ export default {
     },
     goToStatistics() {
       this.$router.push(`/estadisticas`);
+    },
+    goToStudents() {
+      this.$router.push(`/alumnos`);
+    },
+    goToInstructors() {
+      this.$router.push(`/instructors`);
     },
   },
   components: {

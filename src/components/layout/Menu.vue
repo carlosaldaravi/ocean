@@ -102,7 +102,10 @@
                   Inicio
                 </a>
               </router-link>
-              <router-link to="/cursos">
+              <router-link
+                v-if="this.$store.getters.getRole !== 'ADMIN'"
+                to="/cursos"
+              >
                 <a
                   @click="isOpen = false"
                   :class="
@@ -203,12 +206,12 @@
               </router-link>
               <router-link
                 v-if="this.$store.getters.getRole === 'ADMIN'"
-                to="/home"
+                to="/estadisticas"
               >
                 <a
                   @click="isOpen = false"
                   :class="
-                    this.$route.name == 'Stats'
+                    this.$route.name == 'Estadísticas'
                       ? 'text-primary-400 bg-primary-100'
                       : 'text-primary-300'
                   "
@@ -217,7 +220,7 @@
                 >
                   <svg
                     :class="
-                      this.$route.name == 'Stats'
+                      this.$route.name == 'Estadísticas'
                         ? 'text-primary-400'
                         : 'text-primary-300'
                     "
@@ -234,6 +237,72 @@
                     />
                   </svg>
                   Estadísticas
+                </a>
+              </router-link>
+              <router-link to="/alumnos">
+                <a
+                  v-if="this.$store.getters.getRole === 'ADMIN'"
+                  @click="isOpen = false"
+                  href="#"
+                  :class="
+                    this.$route.name == 'Alumnos'
+                      ? 'text-primary-400 bg-primary-100'
+                      : 'text-primary-300'
+                  "
+                  class="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-300 transition duration-150 ease-in-out rounded-md group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                >
+                  <svg
+                    :class="
+                      this.$route.name == 'Alumnos'
+                        ? 'text-primary-400'
+                        : 'text-primary-300'
+                    "
+                    class="w-6 h-6 mr-4 transition duration-150 ease-in-out group-hover:text-gray-300 group-focus:text-gray-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 5a5 5 0 0110 0v2A5 5 0 015 7V5zM0 17a20 20 0 0110-3c4 0 7 1 10 3v3H0v-3z"
+                    />
+                  </svg>
+                  Alumnos
+                </a>
+              </router-link>
+              <router-link to="/instructores">
+                <a
+                  v-if="this.$store.getters.getRole === 'ADMIN'"
+                  @click="isOpen = false"
+                  href="#"
+                  :class="
+                    this.$route.name == 'Instructores'
+                      ? 'text-primary-400 bg-primary-100'
+                      : 'text-primary-300'
+                  "
+                  class="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-300 transition duration-150 ease-in-out rounded-md group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                >
+                  <svg
+                    :class="
+                      this.$route.name == 'Instructores'
+                        ? 'text-primary-400'
+                        : 'text-primary-300'
+                    "
+                    class="w-6 h-6 mr-4 transition duration-150 ease-in-out group-hover:text-gray-300 group-focus:text-gray-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 5a5 5 0 0110 0v2A5 5 0 015 7V5zM0 17a20 20 0 0110-3c4 0 7 1 10 3v3H0v-3z"
+                    />
+                  </svg>
+                  Instructores
                 </a>
               </router-link>
               <a
@@ -331,7 +400,10 @@
                   Inicio
                 </a>
               </router-link>
-              <router-link to="/cursos">
+              <router-link
+                v-if="this.$store.getters.getRole !== 'ADMIN'"
+                to="/cursos"
+              >
                 <a
                   :class="
                     this.$route.name == 'Mis Cursos'
