@@ -12,7 +12,7 @@
                   sport.name == sportSelected.name,
               }"
               @click="sportSelected = sport"
-              class="px-3 py-2 text-xl font-medium font-bold leading-5 rounded-lg rounded-b-none cursor-pointer hover:text-primary-300"
+              class="px-3 py-2 text-xl font-bold leading-5 rounded-lg rounded-b-none cursor-pointer hover:text-primary-300"
               >{{ sport.name }}</a
             >
           </nav>
