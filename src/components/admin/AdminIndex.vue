@@ -55,7 +55,7 @@ export default {
       this.$router.push(`/alumnos`);
     },
     goToInstructors() {
-      this.$router.push(`/instructors`);
+      this.$router.push(`/instructores`);
     },
   },
   components: {
