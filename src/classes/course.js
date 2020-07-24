@@ -11,6 +11,7 @@ export const Course = class Course {
       id: data?.level?.id,
       name: data?.level?.name,
       order: data?.level?.order,
+      targets: data?.level?.targets,
     };
     this.type = {
       id: data?.type?.id,
