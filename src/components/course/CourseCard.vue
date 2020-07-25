@@ -179,7 +179,7 @@
             class="flex items-center"
           >
             <img class="w-6 h-6" src="../../assets/images/logros.svg" alt />
-            <div class="pl-1">8/10</div>
+            <div class="pl-1">0/6</div>
           </div>
         </div>
         <div v-if="moreCard" class="mt-4">
