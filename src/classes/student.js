@@ -3,12 +3,22 @@ export const Student = class Student {
     if (!data) return;
     this.id = data?.id;
     this.email = data?.email;
+    this.status = data?.status;
+    this.userSports = data?.userSports;
     this.details = {
+      id: data?.details?.id,
       firstname: data?.details?.firstname,
       lastname: data?.details?.lastname,
       phone: data?.details?.phone,
-      dateBorn: data?.details?.dateBorn,
       city: data?.details?.city,
+      size: data?.details?.size,
+      weight: data?.details?.weight,
+      footprint: data?.details?.footprint,
+      dateBorn: data?.details?.dateBorn,
+      comments: data?.details?.comments,
+      gender: data?.details?.gender,
+      knownWay: data?.details?.knownWay,
+      dni: data?.details?.dni,
     };
   }
 };

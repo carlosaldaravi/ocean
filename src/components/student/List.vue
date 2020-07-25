@@ -1,39 +1,28 @@
 <template>
   <section>
-    <div v-if="alumnos.length == 0">No hay alumnos disponibles</div>
+    <div v-if="students.length == 0" class="mt-4">
+      No hay alumnos disponibles
+    </div>
     <div v-else>
-      <card v-for="alumno in alumnos" :key="alumno.email" :alumno="alumno"></card>
+      <card
+        v-for="student in students"
+        :key="student.id"
+        :student="student"
+      ></card>
     </div>
   </section>
 </template>
 
 <script>
-import { API } from "../../classes/api";
-import { Student } from "../../classes/student";
 import Card from "./Card.vue";
 
 export default {
   name: "List", // used to devtools, nothing more
-  data() {
-    return {
-      api: new API(),
-      alumnos: []
-    };
-  },
-  async mounted() {
-    this.api.setBaseURL("https://randomuser.me/");
-    let result = await this.api.get("api/?results=5");
-
-    if (!result.success) return;
-    result.data.results.forEach(alumno => {
-      this.alumnos.push(new Student(alumno));
-    });
+  props: {
+    students: { type: Array, required: true },
   },
   components: {
-    Card
-  }
+    Card,
+  },
 };
 </script>
-
-<style>
-</style>
