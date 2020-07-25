@@ -349,15 +349,7 @@
       <SpecificData :editing="editing" :user="user" />
     </section>
 
-    <span class="flex justify-center mb-4 rounded-md shadow-sm">
-      <button
-        v-if="!editing"
-        @click="goToIndex()"
-        type="button"
-        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >
-        Volver
-      </button>
+    <span class="flex justify-center mb-4">
       <button
         @click="editing = true"
         v-if="!editing"
