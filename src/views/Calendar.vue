@@ -275,7 +275,7 @@
           >
             Reservar
           </button>
-          <div v-else>
+          <div class="w-full" v-else>
             <button
               v-if="!isReserved"
               @click="reserveCourse()"
