@@ -1,18 +1,18 @@
 <template>
-  <div class="min-h-screen bg-white flex w-full">
+  <div class="flex w-full min-h-screen bg-white">
     <div
-      class="flex-1 flex flex-col justify-center py-4 md:py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
+      class="flex flex-col justify-center flex-1 px-4 py-4 md:py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
     >
-      <div class="mx-auto w-full max-w-sm">
+      <div class="w-full max-w-sm mx-auto">
         <div>
           <div class="text-center">
             <img
-              class="h-40 md:h-64 mx-auto"
-              src="../../assets/images/logo.png"
+              class="h-40 mx-auto md:h-64"
+              src="../../assets/images/logo/logoLogin.png"
               alt="Ocean"
             />
           </div>
-          <h2 class="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
+          <h2 class="mt-6 text-3xl font-extrabold leading-9 text-gray-900">
             Welcome to Ocean Platform
           </h2>
         </div>
@@ -32,7 +32,7 @@
                     id="email"
                     type="email"
                     required
-                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                   />
                 </div>
               </div>
@@ -49,22 +49,22 @@
                     id="password"
                     type="password"
                     required
-                    class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                   />
                 </div>
               </div>
 
-              <div class="mt-6 flex items-center justify-between"></div>
-              <div class="mt-6 flex items-center justify-between">
+              <div class="flex items-center justify-between mt-6"></div>
+              <div class="flex items-center justify-between mt-6">
                 <div class="flex items-center">
                   <input
                     id="remember_me"
                     type="checkbox"
-                    class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                    class="w-4 h-4 text-indigo-600 transition duration-150 ease-in-out form-checkbox"
                   />
                   <label
                     for="remember_me"
-                    class="ml-2 block text-sm leading-5 text-gray-900"
+                    class="block ml-2 text-sm leading-5 text-gray-900"
                     >Recuérdame</label
                   >
                 </div>
@@ -72,7 +72,7 @@
                 <div class="text-sm leading-5">
                   <a
                     href="#"
-                    class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+                    class="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline"
                     >Contraseña olvidada?</a
                   >
                 </div>
@@ -83,7 +83,7 @@
                   <button
                     @click="signin"
                     type="submit"
-                    class="w-full flex justify-center mb-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                    class="flex justify-center w-full px-4 py-2 mb-4 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
                   >
                     Entrar
                   </button>
@@ -92,7 +92,7 @@
                   <button
                     @click="signup"
                     type="submit"
-                    class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                    class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
                   >
                     Registrarme
                   </button>
@@ -104,9 +104,9 @@
         </div>
       </div>
     </div>
-    <div class="hidden sm:block relative w-0 flex-1">
+    <div class="relative flex-1 hidden w-0 sm:block">
       <img
-        class="absolute inset-0 h-full w-full object-cover md:object-right"
+        class="absolute inset-0 object-cover w-full h-full md:object-right"
         src="https://images.unsplash.com/photo-1534255355456-2d8e6930c5e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80"
         alt
       />

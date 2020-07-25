@@ -64,8 +64,8 @@
           <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
             <div class="flex items-center flex-shrink-0 px-4">
               <img
-                class="w-auto h-8"
-                src="https://tailwindui.com/img/logos/workflow-logo-on-dark.svg"
+                class="w-auto h-16"
+                src="../../assets/images/logo/logoMenu.png"
                 alt="Ocean"
               />
             </div>
@@ -363,8 +363,8 @@
           <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
             <div class="flex items-center flex-shrink-0 px-4">
               <img
-                class="w-8 h-8"
-                src="../../assets/images/logo.png"
+                class="w-auto h-16"
+                src="../../assets/images/logo/logoMenu.png"
                 alt="Ocean logo"
               />
             </div>
