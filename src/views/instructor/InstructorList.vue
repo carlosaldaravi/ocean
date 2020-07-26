@@ -162,6 +162,32 @@
           </div>
         </div>
         <list :instructors="instructorsList"></list>
+        <span class="flex justify-center my-4">
+          <button
+            @click="editing = true"
+            v-if="!editing"
+            type="button"
+            class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+          >
+            Nuevo
+          </button>
+          <button
+            @click="editing = false"
+            v-if="editing"
+            type="button"
+            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+          >
+            Cancelar
+          </button>
+          <button
+            @click="saveUser()"
+            v-if="editing"
+            type="button"
+            class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+          >
+            Guardar
+          </button>
+        </span>
       </div>
     </section>
   </section>
