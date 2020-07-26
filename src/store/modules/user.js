@@ -38,6 +38,8 @@ const actions = {
       commit(SET_ROLE, "STUDENT");
     } else if (roles.some((role) => role.name === "INSTRUCTOR")) {
       commit(SET_ROLE, "INSTRUCTOR");
+    } else {
+      commit(SET_ROLE, "");
     }
     // apiCall({ url: "user/me" })
     //   .then((resp) => {

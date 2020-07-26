@@ -48,10 +48,36 @@
                     v-model="password"
                     id="password"
                     type="password"
-                    required
+                    :required="showSecondPassword"
                     class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                   />
                 </div>
+              </div>
+
+              <div v-if="showSecondPassword" class="mt-6">
+                <label
+                  for="password2"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                  >Repite Contraseña</label
+                >
+                <div class="mt-1 rounded-md shadow-sm">
+                  <input
+                    v-model="password2"
+                    id="password2"
+                    type="password"
+                    class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                  />
+                </div>
+              </div>
+              <div
+                v-if="error"
+                :class="{
+                  'text-red-600': errorStatus == 'error',
+                  'text-green-600': errorStatus == 'success',
+                }"
+                class="mt-4 text-lg font-semibold text-red-600"
+              >
+                {{ msg }}
               </div>
 
               <div class="flex items-center justify-between mt-6"></div>
@@ -126,6 +152,10 @@ export default {
       api: new API(),
       email: "",
       password: "",
+      password2: "",
+      error: false,
+      errorStatus: "",
+      showSecondPassword: false,
 
       // others
       loading: null,
@@ -148,32 +178,59 @@ export default {
   methods: {
     async signin() {
       this.loading = true;
+      this.error = false;
       const { email, password } = this;
-
-      this.$store.dispatch(AUTH_REQUEST, { email, password }).then((res) => {
-        if (res.data.data.user.roles === 1) {
-          this.$router.push(`/welcome`);
-        } else {
-          this.$router.push(`/home`);
-        }
-      });
+      this.$store
+        .dispatch(AUTH_REQUEST, { email, password })
+        .then((res) => {
+          if (res.data.data.user.roles.length === 1) {
+            this.$router.push(`/welcome`);
+          } else {
+            this.$router.push(`/home`);
+          }
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.error = true;
+          this.errorStatus = "error";
+          this.msg = "Credenciales incorrectas";
+        });
     },
 
     async signup() {
-      this.loading = true;
-      let res = await this.api.post("auth/signup", {
-        email: this.email,
-        password: this.password,
-      });
-      this.loading = false;
+      if (!this.showSecondPassword) {
+        this.error = true;
+        this.showSecondPassword = true;
+        this.errorStatus = "error";
+        this.msg = "Repite la contraseña";
+      } else {
+        if (this.password == this.password2 && this.password != "") {
+          this.loading = true;
+          let res = await this.api.post("auth/signup", {
+            email: this.email,
+            password: this.password,
+          });
+          this.loading = false;
 
-      if (!res.status != config.network.SUCCESS) {
-        this.msg = "Error";
-        return;
+          if (res.data.response) {
+            this.errorStatus = "error";
+            this.msg = "Email en uso";
+            return;
+          } else {
+            this.msg = "Registrado correctamente";
+            this.showSecondPassword = false;
+            this.errorStatus = "success";
+            this.password = "";
+            this.password2 = "";
+          }
+        } else {
+          this.error = true;
+          this.errorStatus = "error";
+          this.msg = "Las contraseñas no coinciden";
+          this.password = "";
+          this.password2 = "";
+        }
       }
-      localStorage.setItem("user-token", data.data.token);
-      this.$router.push(`/welcome`);
-
       return;
     },
   },
