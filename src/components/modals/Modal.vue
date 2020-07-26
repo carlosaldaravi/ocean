@@ -1,7 +1,7 @@
 <template>
   <div
     :id="id"
-    class="fixed inset-x-0 bottom-0 z-10 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center hidden-modal"
+    class="fixed inset-x-0 bottom-0 z-10 px-4 pb-4 overflow-y-scroll sm:inset-0 sm:flex sm:items-center sm:justify-center hidden-modal"
   >
     <!--
     Background overlay, show/hide based on modal state.
@@ -44,17 +44,16 @@
   </div>
 </template>
 
-
 <script>
 export default {
   props: {
-    id: { type: String, required: true }
+    id: { type: String, required: true },
   },
   methods: {
     closeModal() {
       document.body.style.overflow = "auto";
       document.getElementById(this.id).classList.add("hidden-modal");
-    }
-  }
+    },
+  },
 };
 </script>
