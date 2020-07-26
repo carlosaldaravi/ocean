@@ -24,7 +24,7 @@ export const User = class User {
     };
     this.userSports = data?.userSports;
     this.languages = [];
-    if (data.languages) {
+    if (data && data.languages) {
       data.languages.forEach((language) => {
         this.languages.push({
           checked: true,
