@@ -70,7 +70,7 @@
               />
             </div>
             <nav class="px-2 mt-5">
-              <router-link to="/home">
+              <router-link v-if="this.$store.getters.getRole !== ''" to="/home">
                 <a
                   @click="isOpen = false"
                   :class="
@@ -103,7 +103,10 @@
                 </a>
               </router-link>
               <router-link
-                v-if="this.$store.getters.getRole !== 'ADMIN'"
+                v-if="
+                  this.$store.getters.getRole !== 'ADMIN' &&
+                    this.$store.getters.getRole !== ''
+                "
                 to="/cursos"
               >
                 <a
@@ -172,7 +175,10 @@
                   Objetivos
                 </a>
               </router-link>
-              <router-link to="/calendario">
+              <router-link
+                v-if="this.$store.getters.getRole !== ''"
+                to="/calendario"
+              >
                 <a
                   @click="isOpen = false"
                   :class="
@@ -319,7 +325,10 @@
               </a>
             </nav>
           </div>
-          <div class="flex flex-shrink-0 p-4 bg-gray-700">
+          <div
+            v-if="this.$store.getters.getRole !== ''"
+            class="flex flex-shrink-0 p-4 bg-gray-700"
+          >
             <router-link to="/perfil">
               <a
                 @click="isOpen = false"
@@ -369,7 +378,7 @@
               />
             </div>
             <nav class="flex-1 px-2 mt-5 bg-gray-800">
-              <router-link to="/home">
+              <router-link v-if="this.$store.getters.getRole !== ''" to="/home">
                 <a
                   href="#"
                   :class="
@@ -401,7 +410,10 @@
                 </a>
               </router-link>
               <router-link
-                v-if="this.$store.getters.getRole !== 'ADMIN'"
+                v-if="
+                  this.$store.getters.getRole !== 'ADMIN' &&
+                    this.$store.getters.getRole !== ''
+                "
                 to="/cursos"
               >
                 <a
@@ -468,7 +480,10 @@
                   Objetivos
                 </a>
               </router-link>
-              <router-link to="/calendario">
+              <router-link
+                v-if="this.$store.getters.getRole !== ''"
+                to="/calendario"
+              >
                 <a
                   href="#"
                   :class="
@@ -609,7 +624,10 @@
               </a>
             </nav>
           </div>
-          <div class="flex flex-shrink-0 p-4 bg-gray-700">
+          <div
+            v-if="this.$store.getters.getRole !== ''"
+            class="flex flex-shrink-0 p-4 bg-gray-700"
+          >
             <a href="#" class="flex-shrink-0 block w-full group">
               <div class="flex items-center">
                 <div>
