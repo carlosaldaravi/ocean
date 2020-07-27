@@ -111,31 +111,28 @@
           <div
             class="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 md:py-16 lg:px-8 lg:py-20"
           >
-            <h2
-              class="text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10"
+            <p
+              class="text-lg font-extrabold tracking-tight md:text-4xl sm:text-4xl sm:leading-10"
             >
               <span class="text-primary-200"
                 >Listo para convertirte en parte de la familia Be Waters?</span
               >
-            </h2>
-            <div class="mt-4">
+            </p>
+            <div class="mt-4 text-xs md:mt-12 md:text-lg">
               <p>
                 Para acceder a nuestra escuela como alumno, es necesario que nos
-                facilites cierta información sobre ti.
-              </p>
-              <p class="mt-2">
-                Dicha información será privada y destinada a mejorar tu
-                experiencia en nuestra escuela.
+                facilites cierta información sobre ti. Dicha información será
+                privada y destinada a mejorar tu experiencia en nuestra escuela.
               </p>
             </div>
-            <div class="mt-8">
+            <div class="mt-4 md:mt-12">
               <div class="flex items-start">
                 <div class="absolute flex items-center h-5">
                   <input
                     v-model="rgpd"
                     id="privacityLaw"
                     type="checkbox"
-                    class="w-4 h-4 transition duration-150 ease-in-out text-primary-300 form-checkbox"
+                    class="w-4 h-4 transition duration-150 ease-in-out cursor-pointer text-primary-300 form-checkbox"
                   />
                 </div>
                 <div class="text-sm leading-5 pl-7">
@@ -156,24 +153,28 @@
                 Debes aceptar la ley de protección de datos
               </div>
             </div>
-            <div class="flex justify-center mt-4">
-              <div class="inline-flex ml-3">
-                <a
-                  @click="logout()"
-                  href="#"
-                  class="inline-flex items-center justify-center px-5 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md hover:bg-red-400 focus:outline-none focus:shadow-outline focus:border-indigo-300"
-                  >Salir</a
-                >
-              </div>
-              <div class="inline-flex rounded-md shadow">
-                <a
+
+            <div class="md:flex md:justify-center">
+              <span class="flex justify-center mt-4">
+                <button
                   @click="checkRGPD()"
-                  href="#"
-                  class="inline-flex items-center justify-center px-5 py-3 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-primary-200 hover:bg-primary-300 focus:outline-none focus:shadow-outline"
-                  >Continuar</a
+                  type="button"
+                  class="w-full py-2 font-medium leading-4 text-center text-white transition duration-150 ease-in-out rounded shadow-md md:w-28 bg-primary-200 md:py-4 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
                 >
-              </div>
+                  Continuar
+                </button>
+              </span>
+              <span class="flex justify-center mt-4">
+                <button
+                  @click="logout()"
+                  type="button"
+                  class="w-full py-2 font-medium leading-4 text-center transition duration-150 ease-in-out rounded shadow-md md:w-28 bg-secondary-100 md:py-4 md:text-lg hover:bg-red-500 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+                >
+                  Salir
+                </button>
+              </span>
             </div>
+
             <div class="mt-8">
               <p class="text-xs font-bold">
                 * Si eres miembro del staff ponte en contacto con el
@@ -267,7 +268,7 @@
                     type="date"
                     v-model="newUser.details.dateBorn"
                     id="date_born"
-                    class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm form-input focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                    class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm cursor-pointer form-input focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                   />
                 </div>
               </div>
@@ -559,11 +560,26 @@
           </div>
           <!-- end targets -->
         </div>
-
+        <!-- step 7, last step -->
+        <div
+          v-if="step == 7 && sportShowed"
+          class="h-auto px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
+        >
+          <div class="">
+            <p class="text-gray-900 sm:text-2xl">
+              <span class="font-bold text-primary-300">Enhorabuena</span>, has
+              completado el proceso de registro de alumno.
+            </p>
+            <p class="text-xs text-gray-700 sm:text-sm">
+              Pulsa entrar para acceder al sistema y reservar la clase que
+              quieras :)
+            </p>
+          </div>
+        </div>
         <div class="flex">
           <span class="relative z-0 inline-flex shadow-sm">
             <button
-              v-if="step > 1 && step <= max_step"
+              v-if="step > 1 && step < max_step"
               @click="step--"
               type="button"
               class="relative inline-flex items-center px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-l-md hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
@@ -592,16 +608,28 @@
             </button>
           </span>
         </div>
-        <span class="flex justify-center mt-4">
-          <button
-            v-if="step == max_step"
-            @click="enroll"
-            type="button"
-            class="w-full py-2 font-medium leading-4 text-center text-white transition duration-150 ease-in-out rounded md:w-28 bg-primary-200 md:px-6 md:py-4 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-          >
-            Entrar
-          </button>
-        </span>
+        <div class="md:flex md:justify-center">
+          <span class="flex justify-center mt-4">
+            <button
+              v-if="step == max_step"
+              @click="enroll"
+              type="button"
+              class="w-full py-2 font-medium leading-4 text-center text-white transition duration-150 ease-in-out rounded shadow-md md:w-28 bg-primary-200 md:py-4 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+            >
+              Entrar
+            </button>
+          </span>
+          <span class="flex justify-center mt-4">
+            <button
+              v-if="step == max_step"
+              @click="step--"
+              type="button"
+              class="w-full py-2 font-medium leading-4 text-center transition duration-150 ease-in-out rounded shadow-md md:w-28 bg-secondary-100 md:py-4 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+            >
+              Volver
+            </button>
+          </span>
+        </div>
       </section>
     </form>
   </section>
@@ -615,6 +643,7 @@ import { Language } from "../classes/language";
 import { Level } from "../classes/level";
 import { API } from "../classes/api";
 import { AUTH_LOGOUT } from "../store/actions/auth";
+import { USER_REQUEST } from "../store/actions/user";
 import { UI } from "../mixins/UI";
 import Modal from "../components/modals/Modal.vue";
 import oc_input from "../components/forms/Input.vue";
@@ -629,7 +658,7 @@ export default {
   },
   data() {
     return {
-      step: 5,
+      step: 1,
       max_step: 7,
       rgpd: false,
       rgpdAccepted: true,
@@ -716,7 +745,21 @@ export default {
       this.step++;
     },
     async enroll() {
-      let res = await this.api.post("students", this.user);
+      let languages = [];
+      this.languagesSelected.forEach((language) => {
+        languages.push({ id: language.id, name: language.name });
+      });
+
+      let payload = {
+        details: this.newUser.details,
+        languages,
+        userSports: this.sportsSelected,
+      };
+
+      let res = await this.api.post("students", payload);
+      console.log(res);
+      this.$store.dispatch(USER_REQUEST, res);
+      this.$router.push(`/home`);
     },
     logout() {
       this.$store.dispatch(AUTH_LOGOUT);
