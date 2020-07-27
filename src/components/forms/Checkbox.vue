@@ -4,8 +4,9 @@
       <input
         v-model="isChecked"
         type="checkbox"
-        class="w-4 h-4 transition duration-150 ease-in-out text-primary-300 form-checkbox"
+        class="w-4 h-4 transition duration-150 ease-in-out cursor-pointer text-primary-300 form-checkbox"
         :disabled="disabled"
+        :id="label"
       />
     </div>
     <div class="text-sm leading-5 pl-7">
