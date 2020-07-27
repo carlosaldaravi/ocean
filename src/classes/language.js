@@ -3,5 +3,6 @@ export const Language = class Language {
     if (!data) return;
     this.id = data?.id;
     this.name = data?.name;
+    this.checked = false;
   }
 };
