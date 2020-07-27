@@ -29,7 +29,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit(AUTH_REQUEST);
       axios({
-        url: "http://localhost:3000/api/auth/signin",
+        url: "https://api-ocean.herokuapp.com/api/auth/signin",
         data: user,
         method: "POST",
       })
