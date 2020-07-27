@@ -288,7 +288,7 @@
                   :key="language.id"
                   class="mt-4"
                 >
-                  <!-- for de deportes en la escuela -->
+                  <!-- for de idiomas en la escuela -->
                   <oc-checkbox
                     v-model="language.checked"
                     :label="language.language.name"
