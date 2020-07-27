@@ -59,7 +59,7 @@ const routes = [
   // lista de tipos de cursos
   {
     path: "/welcome",
-    name: "enrollment",
+    name: "Bienvenido",
     beforeEnter: ifAuthenticated,
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Enrollment.vue"),
