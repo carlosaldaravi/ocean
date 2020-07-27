@@ -62,7 +62,7 @@ const routes = [
     name: "Bienvenido",
     beforeEnter: ifAuthenticated,
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Enrollment.vue"),
+      import(/* webpackChunkName: "welcome" */ "../views/Enrollment.vue"),
   },
   {
     path: "/home",
