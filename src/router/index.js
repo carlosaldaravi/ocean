@@ -17,7 +17,7 @@ const ifAuthenticated = (to, from, next) => {
     next();
     return;
   }
-  next("/login");
+  next("/");
 };
 
 const routes = [
@@ -31,32 +31,12 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/login",
+    path: "/",
     name: "login",
     beforeEnter: ifNotAuthenticated,
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
-
-  // - PARA TODOS
-  //  index
-  //  cursos
-  //  perfil
-  //  calendario
-  //  objetivos
-  //  estadísticas
-  // - Alumnos
-  //  disponibilidad
-  // + info
-  // - Profesor
-  // disponibilidad (vacaciones)
-  // - Admin
-  // lista de alumnos
-  // lista de instructores
-  // lista de deportes
-  // lista de objetivos
-  // lista de niveles
-  // lista de tipos de cursos
   {
     path: "/welcome",
     name: "Bienvenido",
@@ -93,7 +73,7 @@ const routes = [
     beforeEnter: ifAuthenticated,
     component: () =>
       import(
-        /* webpackChunkName: "alumno" */ "../views/student/StudentCourses.vue"
+        /* webpackChunkName: "cursos" */ "../views/student/StudentCourses.vue"
       ),
   },
   {
@@ -101,20 +81,20 @@ const routes = [
     name: "Calendario",
     beforeEnter: ifAuthenticated,
     component: () =>
-      import(/* webpackChunkName: "alumno" */ "../views/Calendar.vue"),
+      import(/* webpackChunkName: "calendario" */ "../views/Calendar.vue"),
   },
   {
     path: "/perfil",
     name: "Perfil",
     component: () =>
-      import(/* webpackChunkName: "alumno" */ "../views/Profile.vue"),
+      import(/* webpackChunkName: "perfil" */ "../views/Profile.vue"),
   },
   {
     path: "/objetivos",
     name: "Objetivos",
     beforeEnter: ifAuthenticated,
     component: () =>
-      import(/* webpackChunkName: "alumno" */ "../views/Targets.vue"),
+      import(/* webpackChunkName: "objetivos" */ "../views/Targets.vue"),
   },
   {
     path: "/estadisticas",
@@ -123,7 +103,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "estadisticas" */ "../views/Statistics.vue"),
   },
-  { path: "*", redirect: "/login" },
+  { path: "*", redirect: "/" },
 ];
 
 const router = new VueRouter({
