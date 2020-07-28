@@ -1,7 +1,7 @@
 <template>
   <section class>
-    <section class="container p-4 mx-auto md:p-8">
-      <div class="mt-3">
+    <section v-if="!editing" class="container p-4 mx-auto md:p-8">
+      <div class="">
         <div>
           <nav class="flex justify-center">
             <a
@@ -162,63 +162,144 @@
           </div>
         </div>
         <list :instructors="instructorsList"></list>
-        <span class="flex justify-center my-4">
-          <button
-            @click="editing = true"
-            v-if="!editing"
-            type="button"
-            class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-          >
-            Nuevo
-          </button>
-          <button
-            @click="editing = false"
-            v-if="editing"
-            type="button"
-            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-          >
-            Cancelar
-          </button>
-          <button
-            @click="saveUser()"
-            v-if="editing"
-            type="button"
-            class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-          >
-            Guardar
-          </button>
-        </span>
       </div>
     </section>
+    <section v-if="editing">
+      <form action="#" method="POST">
+        <div class="container mx-auto">
+          <PersonalData
+            :editing="editing"
+            :user="newInstructor"
+            :userError="userError"
+            @checkUser="checkUser"
+            @clearError="
+              userError = '';
+              newUserOk = true;
+            "
+          />
+        </div>
+        <div
+          v-if="this.$store.getters.getRole === 'ADMIN'"
+          class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
+        >
+          <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="md:col-span-1">
+              <h3 class="text-lg font-medium leading-6 text-gray-900">
+                Cursos
+              </h3>
+              <p class="mt-1 text-sm leading-5 text-gray-500">
+                Añade los deportes e idiomas en los que el instructor va a
+                impartir clases
+              </p>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-1">
+              <fieldset>
+                <legend class="text-base font-medium leading-6 text-gray-900">
+                  Idiomas
+                </legend>
+                <div
+                  v-for="language of newInstructor.languages"
+                  :key="language.id"
+                  class="mt-2"
+                >
+                  <!-- for de idiomas en la escuela -->
+                  <oc-checkbox
+                    v-model="language.checked"
+                    :label="language.name"
+                  ></oc-checkbox>
+                </div>
+              </fieldset>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-1">
+              <fieldset>
+                <legend class="text-base font-medium leading-6 text-gray-900">
+                  Deportes
+                </legend>
+                <div
+                  v-for="sport of newInstructor.sports"
+                  :key="sport.id"
+                  class="mt-2"
+                >
+                  <!-- for de deportes en la escuela -->
+                  <oc-checkbox
+                    v-model="sport.checked"
+                    :label="sport.name"
+                  ></oc-checkbox>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </form>
+    </section>
+    <div v-if="!newUserOk" class="flex justify-center mt-3">
+      <p class="text-red-500">Email de usuario incorrecto</p>
+    </div>
+    <span class="flex justify-center mt-2">
+      <button
+        @click="editing = true"
+        v-if="!editing"
+        type="button"
+        class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+      >
+        Nuevo
+      </button>
+      <button
+        @click="editing = false"
+        v-if="editing"
+        type="button"
+        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+      >
+        Cancelar
+      </button>
+      <button
+        @click="createInstructor()"
+        v-if="editing"
+        type="button"
+        class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
+      >
+        Guardar
+      </button>
+    </span>
   </section>
 </template>
 
 <script>
 import List from "../../components/instructor/List.vue";
+import oc_checkbox from "../../components/forms/Checkbox.vue";
+import PersonalData from "../../components/PersonalData.vue";
 import { Instructor } from "../../classes/instructor";
 import { API } from "../../classes/api";
 import { Sport } from "../../classes/sport";
+import { Language } from "../../classes/language";
 
 export default {
   data() {
     return {
       api: new API(),
       active: true,
+      editing: false,
       showAll: false,
       sports: [], // sports
+      languages: [], // sports
       sportSelected: new Sport(),
-
+      newInstructor: new Instructor(),
       instructors: [],
       instructorsFiltered: [],
+      userError: "",
+      newUserOk: true,
     };
   },
   created() {
     this.getSports();
+    this.getLanguages();
     this.getInstructors();
   },
   components: {
     List,
     Instructor,
+    PersonalData,
+    "oc-checkbox": oc_checkbox,
   },
   computed: {
     instructorsList: function() {
@@ -250,15 +331,25 @@ export default {
         });
         if (this.sports.length > 0) {
           this.sportSelected = res.data.data[0];
+          this.newInstructor.sports = this.sports;
         }
+      }
+    },
+    async getLanguages() {
+      let res = await this.api.get("languages");
+      if (res.data.data) {
+        res.data.data.forEach((language) => {
+          this.languages.push(new Language(language));
+          if (this.languages.length > 0) {
+            this.newInstructor.languages = this.languages;
+          }
+        });
       }
     },
     async getInstructors() {
       let res = await this.api.get("instructors");
       if (res.data.data) {
         res.data.data.forEach((instructor) => {
-          console.log(res.data.data);
-
           this.instructors.push(new Instructor(instructor));
           this.getActualStatus();
         });
@@ -288,6 +379,30 @@ export default {
         this.instructorsFiltered = this.instructors.filter(
           (instructor) => instructor.status == "INACTIVE"
         );
+      }
+    },
+    async checkUser(value) {
+      let res = await this.api.get(`users/email/${value}`);
+      if (res.data.data) {
+        let foundUser = res.data.data;
+        if (foundUser.roles.length > 1) {
+          this.userError = "Usuario incompatible";
+        } else {
+          this.userError = "";
+        }
+      } else {
+        this.userError = "Usuario no encontrado";
+      }
+    },
+    async createInstructor() {
+      if (this.userError != "") {
+        this.newUserOk = false;
+      } else {
+        this.newUserOk = true;
+
+        let res = await this.api.post(`instructors/`, this.newInstructor);
+        this.newInstructor = new Instructor();
+        this.$router.go();
       }
     },
   },

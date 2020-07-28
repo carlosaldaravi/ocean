@@ -10,7 +10,7 @@
             Información Personal
           </h3>
           <p class="mt-1 text-sm leading-5 text-gray-500">
-            Rellena tu información personal.
+            Rellena la información personal
           </p>
         </div>
         <div class="mt-5 md:mt-0 md:col-span-2">
@@ -42,12 +42,31 @@
               </div>
 
               <div class="col-span-6 sm:col-span-3">
-                <oc-input
-                  label="email"
-                  title="Email"
-                  type="email"
-                  v-model="user.email"
-                ></oc-input>
+                <label
+                  for="user_email"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                  >Email</label
+                >
+                <div class="relative mt-1 rounded-md shadow-sm">
+                  <input
+                    @blur="checkEmail()"
+                    @keyup="clearError()"
+                    v-model="user.email"
+                    class="block w-full form-input sm:text-sm sm:leading-5"
+                    type="email"
+                    id="user_email"
+                  />
+                </div>
+                <div
+                  v-if="this.$store.getters.getRole === 'ADMIN'"
+                  class="ml-2"
+                >
+                  <span
+                    v-if="userError && user.email != ''"
+                    class="text-xs italic font-semibold text-red-500 md:text-sm"
+                    >{{ userError }}</span
+                  >
+                </div>
               </div>
 
               <div class="col-span-6 sm:col-span-3">
@@ -58,7 +77,8 @@
                 >
                 <select
                   id="gender"
-                  class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                  v-model="user.details.gender"
+                  class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                 >
                   <option>Hombre</option>
                   <option>Mujer</option>
@@ -78,6 +98,14 @@
                   label="phone"
                   title="Teléfono"
                   v-model="user.details.phone"
+                ></oc-input>
+              </div>
+              <div class="col-span-6 sm:col-span-3 lg:col-span-3">
+                <oc-input
+                  type="date"
+                  label="dateBorn"
+                  title="Fecha de nacimiento"
+                  v-model="user.details.dateBorn"
                 ></oc-input>
               </div>
             </div>
@@ -133,6 +161,7 @@ export default {
   props: {
     user: { type: Object, required: true },
     editing: { type: Boolean, required: true },
+    userError: { type: String, required: false },
   },
   methods: {
     formatDate,
@@ -143,6 +172,12 @@ export default {
         userRoles += role.name + ", ";
       });
       return userRoles.substring(0, userRoles.length - 2);
+    },
+    checkEmail() {
+      this.$emit("checkUser", this.user.email);
+    },
+    clearError() {
+      this.$emit("clearError");
     },
   },
 };
