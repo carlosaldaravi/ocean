@@ -1,6 +1,5 @@
 export const Instructor = class Instructor {
   constructor(data = null) {
-    if (!data) return;
     this.id = data?.id;
     this.email = data?.email;
     this.status = data?.status;
@@ -13,5 +12,15 @@ export const Instructor = class Instructor {
       city: data?.details.city,
       gender: data?.details.gender,
     };
+    this.userSports = data?.userSports;
+    this.languages = [];
+    if (data && data.languages) {
+      data.languages.forEach((language) => {
+        this.languages.push({
+          checked: true,
+          language: new Language(language),
+        });
+      });
+    }
   }
 };
