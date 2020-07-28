@@ -3,7 +3,7 @@
   "short_name": "ocean",
   "icons": [
     {
-      "src": "/android-chrome-144x144.png",
+      "src": "/src/assets/icons/logo_icono.png",
       "sizes": "144x144",
       "type": "image/png"
     }
