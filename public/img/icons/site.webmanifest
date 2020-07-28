@@ -1,14 +1,21 @@
 {
-  "name": "ocean-platform",
-  "short_name": "ocean",
+  "name": "Ocean-platform",
+  "short_name": "Ocean",
   "icons": [
     {
-      "src": "/src/assets/icons/logo_icono.png",
-      "sizes": "144x144",
-      "type": "image/png"
+      "src": "/192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "start_url": "/?utm_source=a2hs",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#FFFFFF"
 }
