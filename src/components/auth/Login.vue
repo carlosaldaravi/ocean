@@ -86,11 +86,11 @@
                   <input
                     id="remember_me"
                     type="checkbox"
-                    class="w-4 h-4 text-indigo-600 transition duration-150 ease-in-out form-checkbox"
+                    class="w-4 h-4 transition duration-150 ease-in-out text-primary-300 form-checkbox"
                   />
                   <label
                     for="remember_me"
-                    class="block ml-2 text-sm leading-5 text-gray-900"
+                    class="block ml-2 text-sm leading-5 text-primary-200"
                     >Recuérdame</label
                   >
                 </div>
@@ -98,7 +98,7 @@
                 <div class="text-sm leading-5">
                   <a
                     href="#"
-                    class="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline"
+                    class="font-medium transition duration-150 ease-in-out text-primary-200 hover:text-primary-300 focus:outline-none focus:underline"
                     >Contraseña olvidada?</a
                   >
                 </div>
@@ -109,7 +109,7 @@
                   <button
                     @click="signin"
                     type="submit"
-                    class="flex justify-center w-full px-4 py-2 mb-4 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+                    class="flex justify-center w-full px-4 py-2 mb-4 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-primary-200 hover:bg-primary-300 focus:outline-none focus:shadow-outline-indigo"
                   >
                     Entrar
                   </button>
@@ -118,13 +118,13 @@
                   <button
                     @click="signup"
                     type="submit"
-                    class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+                    class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-primary-200 hover:bg-primary-300 focus:outline-none focus:shadow-outline-indigo"
                   >
                     Registrarme
                   </button>
                 </span>
               </div>
-              <div v-else>Loading...</div>
+              <div v-else>Cargando...</div>
             </form>
           </div>
         </div>
