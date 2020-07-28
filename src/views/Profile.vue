@@ -101,9 +101,16 @@
       </div>
 
       <PersonalData :editing="editing" :user="user" />
-      <SpecificData :editing="editing" :user="user" />
+      <SpecificData
+        v-if="this.$store.getters.getRole === 'STUDENT'"
+        :editing="editing"
+        :user="user"
+      />
 
-      <div class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6">
+      <div
+        v-if="this.$store.getters.getRole === 'STUDENT'"
+        class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
+      >
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">Cursos</h3>
@@ -346,7 +353,11 @@
     <!-- Not editing -->
     <section v-else class="container mx-auto my-8">
       <PersonalData :editing="editing" :user="user" />
-      <SpecificData :editing="editing" :user="user" />
+      <SpecificData
+        v-if="this.$store.getters.getRole === 'STUDENT'"
+        :editing="editing"
+        :user="user"
+      />
     </section>
 
     <span class="flex justify-center mb-4">
