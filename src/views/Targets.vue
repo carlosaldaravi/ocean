@@ -26,9 +26,9 @@
               class="block w-full bg-primary-400 form-select"
             >
               <option
-                v-for="sportLevel of sportSelected.sportLevel"
-                :key="sportLevel.level.id"
-                >{{ sportLevel.level.name }}</option
+                v-for="sportLevel of sportSelected.sportLevels"
+                :key="sportLevel.sportLevel.levelId"
+                >{{ sportLevel.sportLevel.level.name }}</option
               >
             </select>
           </div>
@@ -36,17 +36,17 @@
             <div class="mb-1 border-b border-primary-400">
               <nav class="flex justify-between -mb-px">
                 <a
-                  v-for="sportLevel of sportSelected.sportLevel"
-                  :key="sportLevel.level.id"
-                  @click="levelSelected = sportLevel.level.name"
+                  v-for="sportLevel of sportSelected.sportLevels"
+                  :key="sportLevel.sportLevel.levelId"
+                  @click="levelSelected = sportLevel.sportLevel.level.name"
                   :class="[
-                    levelSelected == sportLevel.level.name
+                    levelSelected == sportLevel.sportLevel.level.name
                       ? 'text-primary-100 border-primary-100'
                       : 'text-secondary-200 border-transparent text-secondary-200 hover:border-primary-200 hover:text-primary-200',
                   ]"
                   class="px-1 py-4 font-medium leading-5 text-center border-b-2 cursor-pointer text-m hover:outline-none"
                   aria-current="page"
-                  >{{ sportLevel.level.name }}</a
+                  >{{ sportLevel.sportLevel.level.name }}</a
                 >
               </nav>
             </div>
