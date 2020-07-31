@@ -715,6 +715,7 @@ export default {
   },
   components: {},
   created() {
+    this.$store.dispatch("SET_LOADING", true);
     this.getStats();
   },
   methods: {
@@ -722,6 +723,7 @@ export default {
       let res = await this.api.get(
         `stats/${this.monthSelected}/${this.yearSelected}`
       );
+      this.$store.dispatch("SET_LOADING", false);
       this.stats = res.data.data;
     },
     openMonth() {
