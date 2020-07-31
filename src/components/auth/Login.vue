@@ -177,12 +177,14 @@ export default {
   },
   methods: {
     async signin() {
+      this.$store.dispatch("SET_LOADING", true);
       this.loading = true;
       this.error = false;
       const { email, password } = this;
       this.$store
         .dispatch(AUTH_REQUEST, { email, password })
         .then((res) => {
+          this.$store.dispatch("SET_LOADING", false);
           if (res.data.data.user.roles.length === 1) {
             this.$router.push(`/welcome`);
           } else {
@@ -190,6 +192,7 @@ export default {
           }
         })
         .catch((error) => {
+          this.$store.dispatch("SET_LOADING", true);
           this.loading = false;
           this.error = true;
           this.errorStatus = "error";
@@ -205,11 +208,13 @@ export default {
         this.msg = "Repite la contraseña";
       } else {
         if (this.password == this.password2 && this.password != "") {
+          this.$store.dispatch("SET_LOADING", true);
           this.loading = true;
           let res = await this.api.post("auth/signup", {
             email: this.email,
             password: this.password,
           });
+          this.$store.dispatch("SET_LOADING", false);
           this.loading = false;
 
           if (res.data.response) {

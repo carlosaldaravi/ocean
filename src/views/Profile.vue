@@ -424,9 +424,11 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch("SET_LOADING", true);
     this.getUserData();
     this.getSports();
     this.getSportsLeft();
+    this.$store.dispatch("SET_LOADING", false);
   },
   computed: {},
   methods: {
@@ -468,7 +470,9 @@ export default {
       this.$router.push(`/home`);
     },
     async saveUser() {
+      this.$store.dispatch("SET_LOADING", true);
       await this.api.patch(`users`, this.user);
+      this.$store.dispatch("SET_LOADING", false);
     },
     getSportsLeft() {
       if (this.user) {
