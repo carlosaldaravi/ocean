@@ -187,6 +187,7 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch("SET_LOADING", true);
     this.getSports();
     this.getStudents();
   },
@@ -230,6 +231,7 @@ export default {
     async getStudents() {
       let res = await this.api.get("students");
       if (res.data.data) {
+        this.$store.dispatch("SET_LOADING", false);
         res.data.data.forEach((student) => {
           this.students.push(new Student(student));
           this.getActualStatus();

@@ -291,6 +291,7 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch("SET_LOADING", true);
     this.getSports();
     this.getLanguages();
     this.getInstructors();
@@ -350,6 +351,7 @@ export default {
       let res = await this.api.get("instructors");
       if (res.data.data) {
         res.data.data.forEach((instructor) => {
+          this.$store.dispatch("SET_LOADING", false);
           this.instructors.push(new Instructor(instructor));
           this.getActualStatus();
         });
