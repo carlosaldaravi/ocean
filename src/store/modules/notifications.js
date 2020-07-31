@@ -1,14 +1,17 @@
 import {
   ADD_NOTIFICATION,
   REMOVE_NOTIFICATION,
+  SET_LOADING,
 } from "../actions/notifications";
 
 const state = {
   notifications: [],
+  loading: false,
 };
 
 const getters = {
   NOTIFICATIONS: (state) => state.notifications,
+  isLoading: (state) => state.loading,
 };
 
 const actions = {
@@ -17,6 +20,9 @@ const actions = {
   },
   REMOVE_NOTIFICATION({ commit }, notification) {
     commit(REMOVE_NOTIFICATION, notification);
+  },
+  SET_LOADING({ commit }, value) {
+    commit(SET_LOADING, value);
   },
 };
 const mutations = {
@@ -34,6 +40,9 @@ const mutations = {
     state.notifications = state.notifications.filter((notif) => {
       return notif.id != notification.id;
     });
+  },
+  SET_LOADING: (state, value) => {
+    state.loading = value;
   },
 };
 export default {
