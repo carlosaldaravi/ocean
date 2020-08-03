@@ -424,11 +424,9 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("SET_LOADING", true);
     this.getUserData();
     this.getSports();
     this.getSportsLeft();
-    this.$store.dispatch("SET_LOADING", false);
   },
   computed: {},
   methods: {
@@ -438,8 +436,10 @@ export default {
       let {
         data: { data },
       } = await this.api.get(`users/${userId}`);
-      this.user = new User(data);
-      this.getLanguages();
+      if (data) {
+        this.user = new User(data);
+        this.getLanguages();
+      }
     },
     async getSports() {
       let {
