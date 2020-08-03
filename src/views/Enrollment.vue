@@ -11,31 +11,28 @@
           </h3>
         </div>
         <div>
-          <h2>
-            INTRODUCCIÓN
-          </h2>
-          BBB, en adelante AAA, recopila, trata y almacena información personal
-          a través de la web de su propiedad MMM. Esta información será relativa
-          a los usuarios de la web. La información se recopilará, tratara y
-          almacenará conforme a la presente Política de Privacidad. Esta
-          Política de Privacidad fue actualizada el NNN. RESPONSABLE LEGAL
-          Denominación comercial: AAA Denominación social: BBB Identificador
-          fiscal: JJJ Domicilio: III E-mail de contacto: HHH LEYES DE APLICACIÓN
-          EN ESTA WEB RGPD (Reglamento (UE) 2016/679 del Parlamento Europeo y
-          del Consejo de 27 de abril de 2016 relativo a la protección de las
-          personas físicas) LOPD (Ley Orgánica 15/1999, de 13 de diciembre, de
-          Protección de Datos de Carácter Personal y Real Decreto 1720/2007, de
-          21 de diciembre, Reglamento de desarrollo de la LOPD) LSSI (Ley
-          34/2002, de 11 de julio, de Servicios de la Sociedad de la Información
-          y Comercio Electrónico) DATOS RECOPILADOS Únicamente se recopilarán
-          los datos estrictamente necesarios para llevar a cabo la normal
-          actividad del servicio. Ajustándose al principio de minimización de
-          datos (Art.5.b GDPR). Los datos recopilados serán en todo caso de
-          mayores de 16 años (Art. 8.1 GDPR). AAA se reserva el derecho a tomar
-          las medidas oportunas para comprobar la veracidad de la edad (Art. 8.2
-          GDPR). En todo caso estos datos serán de carácter personal
-          identificativos y no sensibles, podrán ser: Correo electrónico
-          Teléfono Nombre y apellidos DNI Dirección CCC
+          INTRODUCCIÓN BBB, en adelante AAA, recopila, trata y almacena
+          información personal a través de la web de su propiedad MMM. Esta
+          información será relativa a los usuarios de la web. La información se
+          recopilará, tratara y almacenará conforme a la presente Política de
+          Privacidad. Esta Política de Privacidad fue actualizada el NNN.
+          RESPONSABLE LEGAL Denominación comercial: AAA Denominación social: BBB
+          Identificador fiscal: JJJ Domicilio: III E-mail de contacto: HHH LEYES
+          DE APLICACIÓN EN ESTA WEB RGPD (Reglamento (UE) 2016/679 del
+          Parlamento Europeo y del Consejo de 27 de abril de 2016 relativo a la
+          protección de las personas físicas) LOPD (Ley Orgánica 15/1999, de 13
+          de diciembre, de Protección de Datos de Carácter Personal y Real
+          Decreto 1720/2007, de 21 de diciembre, Reglamento de desarrollo de la
+          LOPD) LSSI (Ley 34/2002, de 11 de julio, de Servicios de la Sociedad
+          de la Información y Comercio Electrónico) DATOS RECOPILADOS Únicamente
+          se recopilarán los datos estrictamente necesarios para llevar a cabo
+          la normal actividad del servicio. Ajustándose al principio de
+          minimización de datos (Art.5.b GDPR). Los datos recopilados serán en
+          todo caso de mayores de 16 años (Art. 8.1 GDPR). AAA se reserva el
+          derecho a tomar las medidas oportunas para comprobar la veracidad de
+          la edad (Art. 8.2 GDPR). En todo caso estos datos serán de carácter
+          personal identificativos y no sensibles, podrán ser: Correo
+          electrónico Teléfono Nombre y apellidos DNI Dirección CCC
           <h2>MÉTODOS DE RECOPILACIÓN</h2>
           Los datos personales se recopilarán a través de la web de AAA, MMM,
           cuando introduzcas información en alguno de los campos destinados a
@@ -200,7 +197,9 @@
                 <div class="col-span-6 sm:col-span-3">
                   <oc-input
                     title="Nombre"
-                    label="Nombre"
+                    id="firstname"
+                    label="firstname"
+                    :error="!isFirstname"
                     v-model="newUser.details.firstname"
                     :modifiers="['upper', 'dd']"
                   ></oc-input>
@@ -209,7 +208,9 @@
                 <div class="col-span-6 sm:col-span-3">
                   <oc-input
                     title="Apellidos"
-                    label="Apellidos"
+                    id="lastname"
+                    label="lastname"
+                    :error="!isLastname"
                     v-model="newUser.details.lastname"
                     :modifiers="['upper', 'dd']"
                   ></oc-input>
@@ -218,16 +219,19 @@
                 <div class="col-span-6 sm:col-span-4">
                   <oc-input
                     title="DNI"
-                    label="DNI"
+                    label="dni"
+                    id="dni"
+                    :error="!isDni"
                     v-model="newUser.details.dni"
                     :modifiers="['upper', 'dd']"
                   ></oc-input>
                 </div>
-
+                <!-- set phone with 9 numbers validation -->
                 <div class="col-span-6 sm:col-span-4">
                   <oc-input
                     title="Número de teléfono"
                     label="Telefono"
+                    :error="!isPhone"
                     v-model="newUser.details.phone"
                     :modifiers="['upper', 'dd']"
                   ></oc-input>
@@ -236,11 +240,13 @@
                 <div class="col-span-6 sm:col-span-3">
                   <label
                     for="gender"
+                    :class="{ 'text-red-600 text-base': !isGender }"
                     class="block text-sm font-medium leading-5 text-gray-700"
                     >Sexo</label
                   >
                   <select
                     v-model="newUser.details.gender"
+                    :class="{ 'border-red-600': !isGender }"
                     id="gender"
                     class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                   >
@@ -252,7 +258,9 @@
                 <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                   <oc-input
                     title="Ciudad"
-                    label="Ciudad"
+                    label="city"
+                    id="city"
+                    :error="!isCity"
                     v-model="newUser.details.city"
                     :modifiers="['upper', 'dd']"
                   ></oc-input>
@@ -261,13 +269,16 @@
                 <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                   <label
                     for="date_born"
+                    :class="{ 'text-red-600 text-base': !isDateBorn }"
                     class="block text-sm font-medium leading-5 text-gray-700"
                     >Fecha de nacimiento</label
                   >
                   <input
                     type="date"
-                    v-model="newUser.details.dateBorn"
+                    label="date_born"
                     id="date_born"
+                    :class="{ 'border-red-600': !isDateBorn }"
+                    v-model="newUser.details.dateBorn"
                     class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm cursor-pointer form-input focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                   />
                 </div>
@@ -293,7 +304,9 @@
                   <oc-input
                     type="number"
                     title="Peso"
-                    label="Peso"
+                    label="weight"
+                    id="weight"
+                    :error="!isWeight"
                     v-model="newUser.details.weight"
                     :modifiers="['upper', 'dd']"
                   ></oc-input>
@@ -304,6 +317,8 @@
                     type="number"
                     title="Número de pie"
                     label="footprint"
+                    id="footprint"
+                    :error="!isFootprint"
                     v-model="newUser.details.footprint"
                     :modifiers="['upper', 'dd']"
                   ></oc-input>
@@ -311,13 +326,15 @@
 
                 <div class="col-span-6 sm:col-span-3">
                   <label
-                    for="Size"
+                    for="size"
+                    :class="{ 'text-red-600 text-base': !isSize }"
                     class="block text-sm font-medium leading-5 text-gray-700"
                     >Talla</label
                   >
                   <select
                     v-model="newUser.details.size"
-                    id="Size"
+                    id="size"
+                    :class="{ 'border-red-600': !isSize }"
                     class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                   >
                     <option value="XS">XS</option>
@@ -348,7 +365,10 @@
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
               <fieldset>
-                <legend class="text-base font-medium leading-6 text-gray-900">
+                <legend
+                  :class="{ 'text-red-600 text-lg': !areLanguages }"
+                  class="text-base font-medium leading-6 text-gray-900"
+                >
                   Idiomas
                 </legend>
                 <div
@@ -358,6 +378,7 @@
                 >
                   <div class="flex items-start">
                     <oc-checkbox
+                      :error="!areLanguages"
                       v-model="language.checked"
                       :label="language.name"
                     ></oc-checkbox>
@@ -384,7 +405,10 @@
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
               <fieldset>
-                <legend class="text-base font-medium leading-6 text-gray-900">
+                <legend
+                  :class="{ 'text-red-600 text-lg': !areSports }"
+                  class="text-base font-medium leading-6 text-gray-900"
+                >
                   Deportes
                 </legend>
                 <div v-for="sport of sports" :key="sport.name" class="mt-4">
@@ -445,7 +469,12 @@
                 >
               </nav>
             </div>
-            <div class="md:col-span-1"></div>
+            <div class="md:col-span-1">
+              <div v-if="!areLevels" class="text-red-600">
+                Debes seleccionar tu nivel en todos los deportes que has
+                seleccionado
+              </div>
+            </div>
             <div class="mt-5 md:mt-0 md:col-span-1">
               <div class="mt-4">
                 <div
@@ -537,22 +566,22 @@
               <div v-if="isBegginer()">
                 <p class="mx-12 mt-4 mb-2 text-center text-green-600">
                   <span class="font-bold"
-                    >Perfecto! No necesitas saber nada en iniciación</span
-                  >, mira lo que aprenderás :)
+                    >Perfecto! No necesitas saber nada para hacer un curso de
+                    iniciación</span
+                  >, puedes echar un vistazo a lo que aprenderás :)
                 </p>
               </div>
               <div v-else class="mx-12 mt-4 mb-2">
                 <div v-if="!showTargetsToLearn">
                   <p class="font-semibold text-xxs xs:text-xs md:text-sm">
-                    Es vital que sepas realizar los ejercicios mostrados de
-                    manera autónoma.
+                    Debes realizar los ejercicios mostrados de manera autónoma.
                   </p>
                   <p class="italic text-xxs md:text-sm">
                     En el caso que durante el curso el instructor observe que no
-                    cumples con alguno de estos ejercicios, tendrá que bajarte a
-                    un nivel inferior o recomendarte dar una clase privada para
-                    cumplir los objetivos necesarios para realizar el nivel
-                    seleccionado.
+                    eres capaz de realizar alguno de estos ejercicios, tendrá
+                    que bajarte a un nivel inferior o recomendarte dar una clase
+                    privada para cumplir los objetivos necesarios para realizar
+                    el nivel seleccionado.
                   </p>
                 </div>
               </div>
@@ -660,6 +689,27 @@ export default {
     return {
       step: 1,
       max_step: 7,
+      step1Done: false,
+      step2Done: false,
+      step3Done: false,
+      step4Done: false,
+      step5Done: false,
+      step6Done: false,
+
+      isFirstname: true,
+      isLastname: true,
+      isDni: true,
+      isPhone: true,
+      isGender: true,
+      isCity: true,
+      isDateBorn: true,
+      isWeight: true,
+      isFootprint: true,
+      isSize: true,
+      areLanguages: true,
+      areSports: true,
+      areLevels: true,
+
       rgpd: false,
       rgpdAccepted: true,
       api: new API(),
@@ -718,31 +768,170 @@ export default {
         this.step++;
       }
     },
+    checkPersonalData() {
+      let nextOne = true;
+      if (
+        !this.newUser.details.firstname ||
+        this.newUser.details.firstname == ""
+      ) {
+        this.isFirstname = false;
+        nextOne = false;
+      } else {
+        this.isFirstname = true;
+      }
+      if (
+        !this.newUser.details.lastname ||
+        this.newUser.details.lastname == ""
+      ) {
+        this.isLastname = false;
+        nextOne = false;
+      } else {
+        this.isLastname = true;
+      }
+      if (!this.newUser.details.dni || this.newUser.details.dni == "") {
+        this.isDni = false;
+        nextOne = false;
+      } else {
+        this.isDni = true;
+      }
+      if (!this.newUser.details.phone || this.newUser.details.phone == "") {
+        this.isPhone = false;
+        nextOne = false;
+      } else {
+        this.isPhone = true;
+      }
+      if (!this.newUser.details.gender || this.newUser.details.gender == "") {
+        this.isGender = false;
+        nextOne = false;
+      } else {
+        this.isGender = true;
+      }
+      if (!this.newUser.details.city || this.newUser.details.city == "") {
+        this.isCity = false;
+        nextOne = false;
+      } else {
+        this.isCity = true;
+      }
+      if (
+        !this.newUser.details.dateBorn ||
+        this.newUser.details.dateBorn == ""
+      ) {
+        this.isDateBorn = false;
+        nextOne = false;
+      } else {
+        this.isDateBorn = true;
+      }
+      return nextOne;
+    },
+    checkSpecificData() {
+      let nextOne = true;
+      if (!this.newUser.details.weight || this.newUser.details.weight == "") {
+        this.isWeight = false;
+        nextOne = false;
+      } else {
+        this.isWeight = true;
+      }
+      if (
+        !this.newUser.details.footprint ||
+        this.newUser.details.footprint == ""
+      ) {
+        this.isFootprint = false;
+        nextOne = false;
+      } else {
+        this.isFootprint = true;
+      }
+      if (!this.newUser.details.size || this.newUser.details.size == "") {
+        this.isSize = false;
+        nextOne = false;
+      } else {
+        this.isSize = true;
+      }
+
+      return nextOne;
+    },
     nextStep() {
-      this.languagesSelected = [];
-      this.languages.forEach((language) => {
-        if (language.checked) {
-          this.languagesSelected.push(language);
-        }
-      });
-      this.sportsSelected = [];
-      this.sports.forEach((sport) => {
-        if (sport.checked) {
-          this.sportsSelected.push(sport);
-        }
-      });
-      this.levelsSelected = [];
-      this.levels.forEach((level) => {
-        if (level.checked) {
-          this.levelsSelected.push(level);
-        }
-      });
+      switch (this.step) {
+        case 1:
+          // ley de privacidad
+          checkRGPD();
+          break;
+        case 2:
+          // datos personales
+
+          if (this.checkPersonalData()) {
+            this.step++;
+          } else {
+            return;
+          }
+          break;
+        case 3:
+          // datos específicos
+          if (this.checkSpecificData()) {
+            this.step++;
+          } else {
+            return;
+          }
+          break;
+        case 4:
+          // idiomas
+          this.languagesSelected = [];
+          this.languages.forEach((language) => {
+            if (language.checked) {
+              this.languagesSelected.push(language);
+            }
+          });
+          if (this.languagesSelected.length > 0) {
+            this.step++;
+            this.areLanguages = true;
+          } else {
+            this.areLanguages = false;
+            return;
+          }
+          break;
+        case 5:
+          // deportes
+          this.sportsSelected = [];
+          this.sports.forEach((sport) => {
+            if (sport.checked) {
+              this.sportsSelected.push(sport);
+            }
+          });
+          if (this.sportsSelected.length > 0) {
+            this.areSports = true;
+            this.step++;
+          } else {
+            this.areSports = false;
+            return;
+          }
+          break;
+        case 6:
+          // niveles
+          this.levelsSelected = [];
+          this.sportsSelected.forEach((sport) => {
+            sport.sportLevels.forEach((level) => {
+              if (level.checked) {
+                this.levelsSelected.push(level);
+              }
+            });
+          });
+          if (this.levelsSelected.length == this.sportsSelected.length) {
+            this.areLevels = true;
+            this.step++;
+          } else {
+            this.areLevels = false;
+          }
+          break;
+
+        default:
+          break;
+      }
+
       if (this.step == 5) {
         if (this.sportsSelected.length > 0) {
           this.sportShowed = this.sportsSelected[0];
         }
       }
-      this.step++;
+      // this.step++;
     },
     async enroll() {
       let languages = [];
@@ -757,9 +946,18 @@ export default {
       };
 
       let res = await this.api.post("students", payload);
-      console.log(res);
-      this.$store.dispatch(USER_REQUEST, res);
-      this.$router.push(`/home`);
+      if (res) {
+        if (res.data.data) {
+          // recibir nuevo token con los nuevos datos
+          // la respuesta que se recibe debe ser exactamente la misma que cuando se realiza login siendo ya alumno
+          console.log(res);
+
+          this.$store.dispatch(USER_REQUEST, res);
+          this.$router.push(`/home`);
+        } else {
+          console.log(res.data);
+        }
+      }
     },
     logout() {
       this.$store.dispatch(AUTH_LOGOUT);
