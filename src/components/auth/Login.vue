@@ -131,7 +131,10 @@
                   class="block w-full rounded-md shadow-sm"
                 >
                   <button
-                    @click="showSecondPassword = false"
+                    @click="
+                      showSecondPassword = false;
+                      error = false;
+                    "
                     type="submit"
                     class="flex justify-center w-full px-4 py-2 mt-4 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-primary-200 hover:bg-primary-300 focus:outline-none focus:shadow-outline-indigo"
                   >
