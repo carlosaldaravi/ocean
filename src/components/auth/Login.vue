@@ -105,7 +105,10 @@
               </div>
 
               <div v-if="!loading" class="mt-6">
-                <span class="block w-full rounded-md shadow-sm">
+                <span
+                  v-if="!showSecondPassword"
+                  class="block w-full rounded-md shadow-sm"
+                >
                   <button
                     @click="signin"
                     type="submit"
@@ -121,6 +124,18 @@
                     class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-primary-200 hover:bg-primary-300 focus:outline-none focus:shadow-outline-indigo"
                   >
                     Registrarme
+                  </button>
+                </span>
+                <span
+                  v-if="showSecondPassword"
+                  class="block w-full rounded-md shadow-sm"
+                >
+                  <button
+                    @click="showSecondPassword = false"
+                    type="submit"
+                    class="flex justify-center w-full px-4 py-2 mt-4 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md bg-primary-200 hover:bg-primary-300 focus:outline-none focus:shadow-outline-indigo"
+                  >
+                    Cancelar registro
                   </button>
                 </span>
               </div>
@@ -185,6 +200,8 @@ export default {
         this.$store
           .dispatch(AUTH_REQUEST, { email, password })
           .then((res) => {
+            console.log("res login: ", res);
+
             this.$store.dispatch("SET_LOADING", false);
             if (res.data.data.user.roles.length === 1) {
               this.$router.push(`/welcome`);
@@ -224,7 +241,7 @@ export default {
             this.msg = "Email en uso";
             return;
           } else {
-            this.msg = "Registrado correctamente";
+            this.msg = "Registrado correctamente, realiza login";
             this.showSecondPassword = false;
             this.errorStatus = "success";
             this.password = "";
