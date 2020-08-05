@@ -671,7 +671,7 @@ import { Sport } from "../classes/sport";
 import { Language } from "../classes/language";
 import { Level } from "../classes/level";
 import { API } from "../classes/api";
-import { AUTH_LOGOUT } from "../store/actions/auth";
+import { AUTH_LOGOUT, AUTH_SUCCESS } from "../store/actions/auth";
 import { USER_REQUEST } from "../store/actions/user";
 import { UI } from "../mixins/UI";
 import Modal from "../components/modals/Modal.vue";
@@ -951,7 +951,7 @@ export default {
           // recibir nuevo token con los nuevos datos
           // la respuesta que se recibe debe ser exactamente la misma que cuando se realiza login siendo ya alumno
           console.log(res);
-
+          this.$store.dispatch(AUTH_SUCCESS, res);
           this.$store.dispatch(USER_REQUEST, res);
           this.$router.push(`/home`);
         } else {
