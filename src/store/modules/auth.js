@@ -38,6 +38,7 @@ const actions = {
           store.set("user-token", resp.data.data.token);
           axios.defaults.headers.common["Authorization"] = resp.data.data.token;
           commit(AUTH_SUCCESS, resp);
+
           dispatch(USER_REQUEST, resp);
           resolve(resp);
         })
@@ -70,6 +71,12 @@ const actions = {
         commit(AUTH_LOGOUT);
       }
     });
+  },
+  [AUTH_SUCCESS]: ({ commit, dispatch }, token) => {
+    let store = new Localit();
+    store.set("user-token", token.data.data.token);
+    axios.defaults.headers.common["Authorization"] = token.data.data.token;
+    commit(AUTH_SUCCESS, { data: { data: { token } } });
   },
   // AUTH_CHECK(context) {
   //   let store = new Localit();
