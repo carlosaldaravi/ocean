@@ -83,28 +83,28 @@
     </div>
     <div
       @click="moreCard = !moreCard"
-      class="relative flex flex-col h-auto overflow-hidden bg-gray-100 bg-opacity-75 rounded shadow sm:flex-row bg-opa sm:h-56"
+      class="relative flex flex-col h-auto overflow-hidden bg-gray-100 bg-opacity-75 rounded shadow xl:flex-row bg-opa"
     >
       <div class="absolute right-0">
         <img class="w-8 h-8 rounded" src="../../assets/images/spain.png" alt />
       </div>
 
-      <div class="w-full h-full sm:w-1/3">
+      <div class="w-full h-full xl:w-1/3">
         <img
           v-if="course.level.name == 'Iniciación'"
-          class="object-cover w-full h-40 sm:h-full"
+          class="object-cover w-full h-48"
           src="../../assets/images/iniciacion.jpg"
           alt
         />
         <img
           v-else
-          class="object-cover w-full h-40 sm:h-full"
+          class="object-cover w-full h-48"
           src="../../assets/images/kitesurf.png"
           alt
         />
       </div>
 
-      <div class="w-full h-full p-4 lg:w-2/3">
+      <div class="w-full h-full p-4 xl:w-2/3">
         <!-- hora fecha -->
         <div class="flex justify-between">
           <div class="flex items-center">
