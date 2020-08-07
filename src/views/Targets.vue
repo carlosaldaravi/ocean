@@ -96,7 +96,11 @@ export default {
   },
   methods: {
     async getSports() {
-      let res = await this.api.get("users/sports");
+      if (this.$store.getters.getRole === "ADMIN") {
+        var res = await this.api.get("sports");
+      } else {
+        var res = await this.api.get("users/sports");
+      }
       if (res.data.data) {
         res.data.data.forEach((sport) => {
           this.sports.push(new Sport(sport));
@@ -107,7 +111,11 @@ export default {
       }
     },
     async getTargets() {
-      let res = await this.api.get("students/targets");
+      if (this.$store.getters.getRole === "ADMIN") {
+        var res = await this.api.get("targets");
+      } else {
+        var res = await this.api.get("students/targets");
+      }
       if (res.data.data) {
         res.data.data.forEach((target) => {
           this.targets.push(new Target(target));

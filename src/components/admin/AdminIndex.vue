@@ -19,6 +19,16 @@
       </div>
     </div>
     <div
+      @click="goToTargets()"
+      class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
+    >
+      <div
+        class="absolute font-mono text-xl font-black sm:text-2xl md:text-3xl"
+      >
+        OBJETIVOS
+      </div>
+    </div>
+    <div
       @click="goToStudents()"
       class="relative flex items-center justify-center h-24 overflow-hidden text-center transition duration-300 ease-in-out transform bg-gray-100 bg-opacity-25 rounded-lg shadow-2xl cursor-pointer hover:scale-105 hover:bg-opacity-75 md:h-56"
     >
@@ -56,6 +66,9 @@ export default {
     },
     goToInstructors() {
       this.$router.push(`/instructores`);
+    },
+    goToTargets() {
+      this.$router.push(`/objetivos`);
     },
   },
   components: {

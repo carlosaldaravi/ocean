@@ -141,41 +141,6 @@
                 </a>
               </router-link>
               <router-link
-                v-if="this.$store.getters.getRole === 'STUDENT'"
-                to="/objetivos"
-              >
-                <a
-                  @click="isOpen = false"
-                  :class="
-                    this.$route.name == 'Objetivos'
-                      ? 'text-primary-400 bg-primary-100'
-                      : 'text-primary-300'
-                  "
-                  href="#"
-                  class="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-300 transition duration-150 ease-in-out rounded-md group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-                >
-                  <svg
-                    :class="
-                      this.$route.name == 'Objetivos'
-                        ? 'text-primary-400'
-                        : 'text-primary-300'
-                    "
-                    class="w-6 h-6 mr-4 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300 group-focus:text-gray-300"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-                    />
-                  </svg>
-                  Objetivos
-                </a>
-              </router-link>
-              <router-link
                 v-if="this.$store.getters.getRole !== ''"
                 to="/calendario"
               >
@@ -208,6 +173,41 @@
                     />
                   </svg>
                   Calendario
+                </a>
+              </router-link>
+              <router-link
+                v-if="this.$store.getters.getRole !== 'INSTRUCTOR'"
+                to="/objetivos"
+              >
+                <a
+                  @click="isOpen = false"
+                  :class="
+                    this.$route.name == 'Objetivos'
+                      ? 'text-primary-400 bg-primary-100'
+                      : 'text-primary-300'
+                  "
+                  href="#"
+                  class="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-300 transition duration-150 ease-in-out rounded-md group hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                >
+                  <svg
+                    :class="
+                      this.$route.name == 'Objetivos'
+                        ? 'text-primary-400'
+                        : 'text-primary-300'
+                    "
+                    class="w-6 h-6 mr-4 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300 group-focus:text-gray-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                    />
+                  </svg>
+                  Objetivos
                 </a>
               </router-link>
               <router-link
@@ -447,40 +447,6 @@
                 </a>
               </router-link>
               <router-link
-                v-if="this.$store.getters.getRole === 'STUDENT'"
-                to="/objetivos"
-              >
-                <a
-                  href="#"
-                  :class="
-                    this.$route.name == 'Objetivos'
-                      ? 'text-primary-400 bg-primary-100'
-                      : 'text-primary-300'
-                  "
-                  class="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out rounded-md group hover:text-primary-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-                >
-                  <svg
-                    :class="
-                      this.$route.name == 'Objetivos'
-                        ? 'text-primary-400'
-                        : 'text-primary-300'
-                    "
-                    class="w-6 h-6 mr-3 transition duration-150 ease-in-out group-hover:text-gray-300 group-focus:text-gray-300"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-                    />
-                  </svg>
-                  Objetivos
-                </a>
-              </router-link>
-              <router-link
                 v-if="this.$store.getters.getRole !== ''"
                 to="/calendario"
               >
@@ -512,6 +478,40 @@
                     />
                   </svg>
                   Calendario
+                </a>
+              </router-link>
+              <router-link
+                v-if="this.$store.getters.getRole !== 'INSTRUCTOR'"
+                to="/objetivos"
+              >
+                <a
+                  href="#"
+                  :class="
+                    this.$route.name == 'Objetivos'
+                      ? 'text-primary-400 bg-primary-100'
+                      : 'text-primary-300'
+                  "
+                  class="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-300 transition duration-150 ease-in-out rounded-md group hover:text-primary-400 hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                >
+                  <svg
+                    :class="
+                      this.$route.name == 'Objetivos'
+                        ? 'text-primary-400'
+                        : 'text-primary-300'
+                    "
+                    class="w-6 h-6 mr-3 transition duration-150 ease-in-out group-hover:text-gray-300 group-focus:text-gray-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                    />
+                  </svg>
+                  Objetivos
                 </a>
               </router-link>
               <router-link to="/estadisticas">
