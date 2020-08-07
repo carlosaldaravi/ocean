@@ -1,5 +1,20 @@
 module.exports = {
   theme: {
+    minHeight: {
+      "0": "0",
+      "100": "100px",
+      "150": "150px",
+      "1/4": "25%",
+      "1/2": "50%",
+      "3/4": "75%",
+      full: "100%",
+    },
+    fill: (theme) => ({
+      red: theme("colors.red.500"),
+      green: theme("colors.green.500"),
+      blue: theme("colors.blue.500"),
+      primary: theme("colors.primary.300"),
+    }),
     screens: {
       xs: "440px",
       // => @media (min-width: 440px) { ... }
