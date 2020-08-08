@@ -129,9 +129,11 @@ export default {
     formatDate,
     formatTime,
     async saveTarget() {
+      this.$store.dispatch("SET_LOADING", true);
       this.moreCard = false;
       this.editing = false;
       let res = await this.api.patch(`targets/${this.target.id}`, this.target);
+      this.$store.dispatch("SET_LOADING", false);
     },
   },
 };

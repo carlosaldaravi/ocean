@@ -187,6 +187,7 @@ export default {
   },
   methods: {
     async getSports() {
+      this.$store.dispatch("SET_LOADING", true);
       if (this.$store.getters.getRole === "ADMIN") {
         var res = await this.api.get("sports");
       } else {
@@ -199,9 +200,11 @@ export default {
         if (this.sports.length == 1) {
           this.sportSelected = res.data.data[0];
         }
+        this.$store.dispatch("SET_LOADING", false);
       }
     },
     async getTargets() {
+      this.$store.dispatch("SET_LOADING", true);
       if (this.$store.getters.getRole === "ADMIN") {
         var res = await this.api.get("targets");
       } else {
@@ -211,6 +214,7 @@ export default {
         res.data.data.forEach((target) => {
           this.targets.push(new Target(target));
         });
+        this.$store.dispatch("SET_LOADING", false);
       }
     },
     cancelNewTarget() {
@@ -219,6 +223,7 @@ export default {
     },
     async createNewTarget() {
       //notificación de exito o fracaso
+      this.$store.dispatch("SET_LOADING", true);
       this.editing = false;
       if (this.$store.getters.getRole === "ADMIN") {
         var res = await this.api.post("targets", {
@@ -231,6 +236,7 @@ export default {
       this.newTarget = new Target();
       if (res.data.data) {
         this.targets.push(res.data.data);
+        this.$store.dispatch("SET_LOADING", false);
       }
     },
   },
