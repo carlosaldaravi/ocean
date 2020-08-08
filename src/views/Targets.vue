@@ -11,7 +11,10 @@
                 'bg-primary-200 text-secondary-100 hover:text-secondary-100':
                   sport.name == sportSelected.name,
               }"
-              @click="sportSelected = sport"
+              @click="
+                sportSelected = sport;
+                levels = sport.sportLevels;
+              "
               class="px-3 py-2 text-xl font-bold leading-5 rounded-lg rounded-b-none cursor-pointer hover:text-primary-300"
               >{{ sport.name }}</a
             >
@@ -20,9 +23,9 @@
         <div v-if="Object.keys(sportSelected).length !== 0">
           <div class="mb-2 sm:hidden">
             <select
-              v-model="levelSelected"
+              v-model="levels"
               aria-label="Selected level"
-              :value="levelSelected"
+              @change="changeLevel($event)"
               class="block w-full bg-primary-400 form-select"
             >
               <option
@@ -166,6 +169,7 @@ export default {
       levelSelected: "",
       editing: false,
       newTarget: new Target(),
+      levels: [],
     };
   },
   components: {
@@ -237,6 +241,14 @@ export default {
       if (res.data.data) {
         this.targets.push(res.data.data);
         this.$store.dispatch("SET_LOADING", false);
+      }
+    },
+    changeLevel(event) {
+      if (event.target.value) {
+        this.levelSelected = this.sportSelected.sportLevels.find(
+          (level) => level.sportLevel.level.name == event.target.value
+        );
+        this.levelSelected = this.levelSelected.sportLevel.level;
       }
     },
   },
