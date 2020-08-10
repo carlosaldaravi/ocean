@@ -1,7 +1,21 @@
 <template>
   <div>
     <div v-if="this.$store.getters.getRole === 'INSTRUCTOR'">
-      <Modal id="modal_validate_targets">
+      <Modal
+        v-for="courseStudent of course.courseStudents"
+        :key="
+          'course_' +
+            courseStudent.courseId +
+            '_student_' +
+            courseStudent.studentId
+        "
+        :id="
+          'modal_validate_targets_course_' +
+            courseStudent.courseId +
+            '_student_' +
+            courseStudent.studentId
+        "
+      >
         <div v-if="studentToValidate">
           <div class="mt-1 text-center">
             <h3
@@ -32,16 +46,20 @@
                 <div>Realizado</div>
               </div>
               <div
-                v-for="target of course.level.targets"
-                :key="target.id"
+                v-for="studentTarget of studentTargets"
+                :key="
+                  'student_' +
+                    studentToValidate.id +
+                    '_target_' +
+                    studentTarget.targetId
+                "
                 class="flex justify-between mb-2 text-left"
               >
-                <div class="w-3/4 text-xs">{{ target.name }}</div>
+                <div class="w-3/4 text-xs">{{ studentTarget.target.name }}</div>
                 <input
-                  :checked="
-                    studentToValidate.studentTargets.includes(target.id)
-                  "
-                  :id="target.id"
+                  @click="studentTarget.checked = !studentTarget.checked"
+                  :checked="studentTarget.checked"
+                  :id="studentTarget.target.id"
                   type="checkbox"
                   class="w-4 h-4 transition duration-150 ease-in-out form-checkbox"
                 />
@@ -49,7 +67,7 @@
               <div class="flex justify-between mt-4">
                 <div>Marcar todos</div>
                 <input
-                  @click="markUnmarkAll()"
+                  @click="markAll($event)"
                   type="checkbox"
                   class="w-4 h-4 transition duration-150 ease-in-out form-checkbox"
                 />
@@ -58,7 +76,7 @@
             <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
               <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                 <button
-                  @click="addCourse()"
+                  @click="validateTargets()"
                   type="button"
                   class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
                 >
@@ -69,7 +87,11 @@
                 class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
               >
                 <button
-                  @click="closeModal('modal_validate_targets')"
+                  @click="
+                    closeModal(
+                      `modal_validate_targets_course_${course.id}_student_${studentToValidate.id}`
+                    )
+                  "
                   type="button"
                   class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
                 >
@@ -192,8 +214,8 @@
               </div>
             </div>
             <div
-              v-for="student of course.courseStudents"
-              :key="student.studentId"
+              v-for="courseStudent of course.courseStudents"
+              :key="courseStudent.studentId"
               class="flex justify-between mt-2 align-baseline"
             >
               <div class="flex items-center">
@@ -206,8 +228,8 @@
                 </div>
                 <div class="ml-3">
                   <p class="text-sm font-medium leading-5">
-                    {{ student.student.details.firstname }}
-                    {{ student.student.details.lastname }}
+                    {{ courseStudent.student.details.firstname }}
+                    {{ courseStudent.student.details.lastname }}
                   </p>
                 </div>
               </div>
@@ -217,7 +239,7 @@
                 class="flex justify-between mt-2 align-baseline"
               >
                 <div class="flex items-center mr-2 text-s">
-                  {{ getTargetsValidated(student.student) }}/{{
+                  {{ getTargetsValidated(courseStudent.student) }}/{{
                     course.level.targets.length
                   }}
                 </div>
@@ -225,7 +247,7 @@
                   <button
                     @click="
                       moreCard = !moreCard;
-                      openModalToValidate(student.student);
+                      openModalToValidate(courseStudent.student);
                     "
                     type="button"
                     class="inline-flex justify-center w-full px-1 transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm text-xxs text-primary-400 bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo sm:text-sm sm:leading-5"
@@ -263,16 +285,21 @@ import { formatDate, formatTime } from "../../helpers/functions";
 import Modal from "../modals/Modal.vue";
 import { UI } from "../../mixins/UI";
 import moment from "moment";
+import { StudentTarget } from "../../classes/student-target";
+import { API } from "../../classes/api";
 
 export default {
   components: {
     Modal,
+    StudentTarget,
   },
   data() {
     return {
+      api: new API(),
       moreCard: false,
       studentToValidate: null,
       targetsSelected: [],
+      studentTargets: [],
     };
   },
   props: {
@@ -309,25 +336,37 @@ export default {
     },
     openModalToValidate(student) {
       this.studentToValidate = student;
-      UI.methods.openModal("modal_validate_targets");
-    },
-    markUnmarkAll() {
-      if (this.targetsSelected.length > 0) {
-        this.targetsSelected = [];
-      } else {
-        this.course.level.targets.forEach((target) =>
-          this.targetsSelected.push(target.id)
+      student.studentTargets.forEach((studentTarget) => {
+        this.studentTargets.push(new StudentTarget(studentTarget));
+      });
+      if (this.studentToValidate) {
+        UI.methods.openModal(
+          "modal_validate_targets_course_" +
+            this.course.id +
+            "_student_" +
+            student.id
         );
       }
     },
-    checkIfValidated(target) {
-      console.log("all targets: ", this.studentToValidate.studentTargets);
-      console.log(`target ${target.id}: `, target);
-      console.log(
-        this.studentToValidate.studentTargets.includes(
-          (t) => t.targetId == target.id
-        )
-      );
+    markAll(event) {
+      this.studentTargets.forEach((st) => (st.checked = event.target.checked));
+    },
+    async validateTargets() {
+      let targets = [];
+      this.studentTargets.forEach((st) => {
+        if (st.checked) {
+          targets.push({
+            studentId: this.studentToValidate.id,
+            targetId: st.targetId,
+            feedback: "",
+          });
+        }
+      });
+      let res = await this.api.post("users/setTargets", targets);
+      console.log(res);
+      if (res.data.data) {
+        // change student to student updated
+      }
     },
   },
 };
