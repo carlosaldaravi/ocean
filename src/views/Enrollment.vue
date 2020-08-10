@@ -441,10 +441,7 @@
               <select
                 aria-label="what to know"
                 class="block w-full form-select"
-                @change="
-                  sportShowed = sport;
-                  resetTargets();
-                "
+                @change="resetTargets($event)"
               >
                 <option v-for="sport of sportsSelected" :key="sport.id">{{
                   sport.name
@@ -1019,7 +1016,13 @@ export default {
       }
       this.showTargetsDescription = true;
     },
-    resetTargets() {
+    resetTargets(event) {
+      if (event) {
+        this.sportShowed = this.sportsSelected.find(
+          (sport) => sport.name === event.target.value
+        );
+      }
+
       this.targets = [];
       this.targetsNeeded = false;
       this.showTargetsNeeded = false;
