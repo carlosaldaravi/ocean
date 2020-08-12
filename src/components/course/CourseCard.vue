@@ -196,13 +196,6 @@
               </p>
             </div>
           </div>
-          <div
-            v-if="this.$store.getters.getRole === 'ALUMNO'"
-            class="flex items-center"
-          >
-            <img class="w-6 h-6" src="../../assets/images/logros.svg" alt />
-            <div class="pl-1">0/6</div>
-          </div>
         </div>
         <div v-if="moreCard" class="mt-4">
           <div class="">
@@ -234,16 +227,21 @@
                 </div>
               </div>
               <!-- targets -->
-              <div
-                v-if="$store.getters.getRole === 'INSTRUCTOR'"
-                class="flex justify-between mt-2 align-baseline"
-              >
-                <div class="flex items-center mr-2 text-s">
-                  {{ getTargetsValidated(courseStudent.student) }}/{{
-                    course.level.targets.length
-                  }}
+              <div class="flex justify-between align-baseline">
+                <div
+                  v-if="$store.getters.getRole === 'ALUMNO'"
+                  class="flex items-center"
+                >
+                  <img
+                    class="w-5 h-5"
+                    src="../../assets/images/logros.svg"
+                    alt
+                  />
+                  <div class="pl-1 mb-1 text-sm">
+                    {{ getTargetsValidated(courseStudent.student) }}
+                  </div>
                 </div>
-                <div>
+                <div v-if="$store.getters.getRole === 'INSTRUCTOR'">
                   <button
                     @click="
                       moreCard = !moreCard;
@@ -323,16 +321,20 @@ export default {
       return moment(date).format("HH:mm");
     },
     getTargetsValidated(student) {
+      let totalTargets = 0;
       let validatedTargets = 0;
       let studentTargets = student.studentTargets;
-      studentTargets.forEach((st) => {
-        if (st.target.levelId == this.course.level.id && st.validatedBy) {
-          // this.targetsSelected.push(st.target);
-          validatedTargets++;
-        }
-      });
+      if (studentTargets) {
+        totalTargets = studentTargets.length;
+        studentTargets.forEach((st) => {
+          if (st.target.levelId == this.course.level.id && st.validatedBy) {
+            // this.targetsSelected.push(st.target);
+            validatedTargets++;
+          }
+        });
+      }
 
-      return validatedTargets;
+      return validatedTargets + "/" + totalTargets;
     },
     openModalToValidate(student) {
       this.studentToValidate = student;
