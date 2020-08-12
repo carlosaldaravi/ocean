@@ -1,6 +1,6 @@
 <template>
   <div
-    @click="moreCard = !moreCard"
+    @click="openCloseCard()"
     :class="[
       target.studentTargets.length > 0
         ? isValidated(target)
@@ -162,6 +162,11 @@ export default {
         (student) => student.studentId === this.$store.getters.getUserId
       );
       return studentIsIn.instructor.details.gender;
+    },
+    openCloseCard() {
+      if (this.target.studentTargets.length > 0) {
+        this.moreCard = !this.moreCard;
+      }
     },
   },
 };
