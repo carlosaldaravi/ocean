@@ -34,8 +34,8 @@ const actions = {
 
     if (roles.some((role) => role.name === "ADMIN")) {
       commit(SET_ROLE, "ADMIN");
-    } else if (roles.some((role) => role.name === "STUDENT")) {
-      commit(SET_ROLE, "STUDENT");
+    } else if (roles.some((role) => role.name === "ALUMNO")) {
+      commit(SET_ROLE, "ALUMNO");
     } else if (roles.some((role) => role.name === "INSTRUCTOR")) {
       commit(SET_ROLE, "INSTRUCTOR");
     } else {

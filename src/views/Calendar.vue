@@ -350,7 +350,7 @@
         </span>
       </div>
     </Modal>
-    <div v-if="this.$store.getters.getRole === 'STUDENT'">
+    <div v-if="this.$store.getters.getRole === 'ALUMNO'">
       <p>
         Selecciona en el calendario las fechas en las que estás disponible para
         nuestras clases.
@@ -464,7 +464,7 @@ export default {
       this.title = "Curso";
       this.getCalendar("admins");
     }
-    if (this.$store.getters.getRole === "STUDENT") {
+    if (this.$store.getters.getRole === "ALUMNO") {
       this.title = "Disponible";
       this.getCalendar("students");
     }

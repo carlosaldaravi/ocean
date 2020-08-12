@@ -102,13 +102,13 @@
 
       <PersonalData :editing="editing" :user="user" />
       <SpecificData
-        v-if="this.$store.getters.getRole === 'STUDENT'"
+        v-if="this.$store.getters.getRole === 'ALUMNO'"
         :editing="editing"
         :user="user"
       />
 
       <div
-        v-if="this.$store.getters.getRole === 'STUDENT'"
+        v-if="this.$store.getters.getRole === 'ALUMNO'"
         class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
       >
         <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -354,7 +354,7 @@
     <section v-else class="container mx-auto my-8">
       <PersonalData :editing="editing" :user="user" />
       <SpecificData
-        v-if="this.$store.getters.getRole === 'STUDENT'"
+        v-if="this.$store.getters.getRole === 'ALUMNO'"
         :editing="editing"
         :user="user"
       />

@@ -1,7 +1,7 @@
 <template>
   <section class="container p-4 mx-auto md:p-8">
     <AdminIndex v-if="this.$store.getters.getRole === 'ADMIN'" />
-    <StudentIndex v-if="this.$store.getters.getRole === 'STUDENT'" />
+    <StudentIndex v-if="this.$store.getters.getRole === 'ALUMNO'" />
     <InstructorIndex v-if="this.$store.getters.getRole === 'INSTRUCTOR'" />
   </section>
 </template>

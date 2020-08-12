@@ -197,7 +197,7 @@
             </div>
           </div>
           <div
-            v-if="this.$store.getters.getRole === 'STUDENT'"
+            v-if="this.$store.getters.getRole === 'ALUMNO'"
             class="flex items-center"
           >
             <img class="w-6 h-6" src="../../assets/images/logros.svg" alt />

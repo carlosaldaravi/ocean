@@ -71,7 +71,7 @@ export default {
   methods: {
     async getCourses() {
       let res;
-      if (this.$store.getters.getRole == "STUDENT") {
+      if (this.$store.getters.getRole == "ALUMNO") {
         res = await this.api.get("students/courses");
       } else {
         res = await this.api.get("instructors/courses");
