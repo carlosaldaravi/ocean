@@ -485,6 +485,7 @@ export default {
 
     // own methods
     async getCalendar(role) {
+      this.$store.dispatch("SET_LOADING", true);
       let res1, res2;
       // first of all, synchronize db with store
       this.$store.dispatch("RESET_EVENTS");
@@ -512,8 +513,10 @@ export default {
           this.$store.dispatch("ADD_EVENT", userCalendar);
         });
       }
+      this.$store.dispatch("SET_LOADING", false);
     },
     addStudentOrInstructorEvent(arg) {
+      this.$store.dispatch("SET_LOADING", true);
       const dateStart = moment(arg.start);
       const dateEnd = moment(arg.end);
       const userCalendar = new Calendar(arg);
@@ -541,9 +544,19 @@ export default {
             .then((resp) => {
               let newCalendar = new Calendar(resp.data.data);
               this.$store.dispatch("ADD_EVENT", newCalendar);
+              this.$store.dispatch("ADD_NOTIFICATION", {
+                type: "success",
+                message: "Añadido al calendario correctamente",
+              });
+              this.$store.dispatch("SET_LOADING", false);
               resolve(resp);
             })
             .catch((err) => {
+              this.$store.dispatch("ADD_NOTIFICATION", {
+                type: "error",
+                message: "Fallo al añadir al calendario",
+              });
+              this.$store.dispatch("SET_LOADING", false);
               reject(err);
             });
         });
@@ -596,6 +609,7 @@ export default {
       this.isLevelSelected = true;
     },
     addCourse() {
+      this.$store.dispatch("SET_LOADING", true);
       if (this.newCourseTimeStart == "00:00") {
         this.isTimeStart = false;
         return;
@@ -629,13 +643,24 @@ export default {
         this.api
           .post("courses", newCourse)
           .then((resp) => {
+            this.$store.dispatch("ADD_NOTIFICATION", {
+              type: "success",
+              message: "El curso se ha creado con éxito",
+            });
             let newCalendar = new Calendar(resp.data.data);
             this.$store.dispatch("ADD_EVENT", newCalendar);
+            this.$store.dispatch("SET_LOADING", false);
             resolve(resp);
             this.closeModal("modal_add_course");
             resetAll();
           })
           .catch((err) => {
+            this.$store.dispatch("ADD_NOTIFICATION", {
+              type: "error",
+              message: "Algo ha fallado",
+            });
+            this.$store.dispatch("SET_LOADING", false);
+            console.log(err);
             reject(err);
           });
       });
@@ -651,6 +676,7 @@ export default {
       this.newCourseLevelSelected = null;
     },
     async reserveCourse() {
+      this.$store.dispatch("SET_LOADING", true);
       let res = await this.api.patch(
         `courses/add/${this.clickedEvent.id}/${this.$store.getters.getUserId}`
       );
@@ -662,16 +688,29 @@ export default {
         type: "success",
         message: "Reserva realizada con éxito",
       });
+      this.$store.dispatch("SET_LOADING", false);
     },
     async deleteCourseStudent() {
+      this.$store.dispatch("SET_LOADING", true);
       let res = await this.api.delete(
         `courses/del/${this.clickedEvent.id}/${this.$store.getters.getUserId}`
       );
       this.isReserved = false;
+      this.$store.dispatch("ADD_NOTIFICATION", {
+        type: "success",
+        message: "Curso eliminado con éxito",
+      });
+      this.$store.dispatch("SET_LOADING", false);
       this.closeModal("modal_show_course");
     },
     deleteEvent() {
+      this.$store.dispatch("SET_LOADING", true);
+      this.$store.dispatch("ADD_NOTIFICATION", {
+        type: "success",
+        message: "Evento eliminado con éxito",
+      });
       this.closeModal("modal_confirm_delete_event");
+      this.$store.dispatch("SET_LOADING", false);
       this.$store.dispatch("DELETE_EVENT", this.clickedEvent);
     },
   },

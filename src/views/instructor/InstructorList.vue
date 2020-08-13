@@ -1,7 +1,7 @@
 <template>
   <section class>
     <section v-if="!editing" class="container p-4 mx-auto md:p-8">
-      <div class="">
+      <div class>
         <div>
           <nav class="flex justify-center">
             <a
@@ -13,15 +13,12 @@
               }"
               @click="sportSelected = sport"
               class="px-3 py-2 text-xl font-bold leading-5 rounded-lg rounded-b-none cursor-pointer hover:text-primary-300"
-              >{{ sport.name }}</a
-            >
+            >{{ sport.name }}</a>
           </nav>
         </div>
         <div class="flex justify-between mt-1">
           <div class="flex">
-            <p class="mr-2 border-b w-19 border-primary-100">
-              Todos
-            </p>
+            <p class="mr-2 border-b w-19 border-primary-100">Todos</p>
             <div @click="changeShowAll()">
               <span
                 role="checkbox"
@@ -69,11 +66,7 @@
                     }"
                     class="absolute inset-0 flex items-center justify-center w-full h-full transition-opacity duration-100 ease-out opacity-0"
                   >
-                    <svg
-                      class="w-3 h-3 text-primary-300"
-                      fill="currentColor"
-                      viewBox="0 0 12 12"
-                    >
+                    <svg class="w-3 h-3 text-primary-300" fill="currentColor" viewBox="0 0 12 12">
                       <path
                         d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"
                       />
@@ -88,16 +81,12 @@
               v-if="active"
               :class="{ 'opacity-25': showAll }"
               class="mr-2 border-b w-19 border-primary-100"
-            >
-              Activos
-            </p>
+            >Activos</p>
             <p
               v-if="!active"
               :class="{ 'opacity-25': showAll }"
               class="mr-2 border-b w-18 border-primary-100"
-            >
-              Inactivos
-            </p>
+            >Inactivos</p>
             <div @click="changeActiveStatus()">
               <span
                 role="checkbox"
@@ -146,11 +135,7 @@
                     }"
                     class="absolute inset-0 flex items-center justify-center w-full h-full transition-opacity duration-100 ease-out opacity-0"
                   >
-                    <svg
-                      class="w-3 h-3 text-primary-300"
-                      fill="currentColor"
-                      viewBox="0 0 12 12"
-                    >
+                    <svg class="w-3 h-3 text-primary-300" fill="currentColor" viewBox="0 0 12 12">
                       <path
                         d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"
                       />
@@ -184,9 +169,7 @@
         >
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
-              <h3 class="text-lg font-medium leading-6 text-gray-900">
-                Cursos
-              </h3>
+              <h3 class="text-lg font-medium leading-6 text-gray-900">Cursos</h3>
               <p class="mt-1 text-sm leading-5 text-gray-500">
                 Añade los deportes e idiomas en los que el instructor va a
                 impartir clases
@@ -194,37 +177,19 @@
             </div>
             <div class="mt-5 md:mt-0 md:col-span-1">
               <fieldset>
-                <legend class="text-base font-medium leading-6 text-gray-900">
-                  Idiomas
-                </legend>
-                <div
-                  v-for="language of newInstructor.languages"
-                  :key="language.id"
-                  class="mt-2"
-                >
+                <legend class="text-base font-medium leading-6 text-gray-900">Idiomas</legend>
+                <div v-for="language of newInstructor.languages" :key="language.id" class="mt-2">
                   <!-- for de idiomas en la escuela -->
-                  <oc-checkbox
-                    v-model="language.checked"
-                    :label="language.name"
-                  ></oc-checkbox>
+                  <oc-checkbox v-model="language.checked" :label="language.name"></oc-checkbox>
                 </div>
               </fieldset>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-1">
               <fieldset>
-                <legend class="text-base font-medium leading-6 text-gray-900">
-                  Deportes
-                </legend>
-                <div
-                  v-for="sport of newInstructor.sports"
-                  :key="sport.id"
-                  class="mt-2"
-                >
+                <legend class="text-base font-medium leading-6 text-gray-900">Deportes</legend>
+                <div v-for="sport of newInstructor.sports" :key="sport.id" class="mt-2">
                   <!-- for de deportes en la escuela -->
-                  <oc-checkbox
-                    v-model="sport.checked"
-                    :label="sport.name"
-                  ></oc-checkbox>
+                  <oc-checkbox v-model="sport.checked" :label="sport.name"></oc-checkbox>
                 </div>
               </fieldset>
             </div>
@@ -241,25 +206,19 @@
         v-if="!editing"
         type="button"
         class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >
-        Nuevo
-      </button>
+      >Nuevo</button>
       <button
         @click="editing = false"
         v-if="editing"
         type="button"
         class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >
-        Cancelar
-      </button>
+      >Cancelar</button>
       <button
         @click="createInstructor()"
         v-if="editing"
         type="button"
         class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >
-        Guardar
-      </button>
+      >Guardar</button>
     </span>
   </section>
 </template>
@@ -303,7 +262,7 @@ export default {
     "oc-checkbox": oc_checkbox,
   },
   computed: {
-    instructorsList: function() {
+    instructorsList: function () {
       this.instructorsFiltered = this.instructors;
       if (!this.showAll) {
         if (this.active) {
@@ -351,11 +310,11 @@ export default {
       let res = await this.api.get("instructors");
       if (res.data.data) {
         res.data.data.forEach((instructor) => {
-          this.$store.dispatch("SET_LOADING", false);
           this.instructors.push(new Instructor(instructor));
           this.getActualStatus();
         });
       }
+      this.$store.dispatch("SET_LOADING", false);
     },
     changeActiveStatus() {
       if (!this.showAll) {
@@ -384,6 +343,7 @@ export default {
       }
     },
     async checkUser(value) {
+      this.$store.dispatch("SET_LOADING", true);
       let res = await this.api.get(`users/email/${value}`);
       if (res.data.data) {
         let foundUser = res.data.data;
@@ -395,8 +355,10 @@ export default {
       } else {
         this.userError = "Usuario no encontrado";
       }
+      this.$store.dispatch("SET_LOADING", false);
     },
     async createInstructor() {
+      this.$store.dispatch("SET_LOADING", true);
       if (this.userError != "") {
         this.newUserOk = false;
       } else {
@@ -404,6 +366,11 @@ export default {
 
         let res = await this.api.post(`instructors/`, this.newInstructor);
         this.newInstructor = new Instructor();
+        this.$store.dispatch("ADD_NOTIFICATION", {
+          type: "success",
+          message: "Instructor creado correctamente",
+        });
+        this.$store.dispatch("SET_LOADING", false);
         this.$router.go();
       }
     },

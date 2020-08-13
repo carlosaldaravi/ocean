@@ -5,9 +5,9 @@
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">Perfil</h3>
-            <p class="mt-1 text-sm leading-5 text-gray-500">
-              Esta información es pública así que cuidado con lo que compartes.
-            </p>
+            <p
+              class="mt-1 text-sm leading-5 text-gray-500"
+            >Esta información es pública así que cuidado con lo que compartes.</p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
@@ -15,8 +15,7 @@
                 <label
                   for="about"
                   class="block text-sm font-medium leading-5 text-gray-700"
-                  >Comentarios</label
-                >
+                >Comentarios</label>
                 <div class="rounded-md shadow-sm">
                   <textarea
                     id="about"
@@ -32,13 +31,9 @@
               </div>
 
               <div class="mt-6">
-                <label class="block text-sm font-medium leading-5 text-gray-700"
-                  >Foto</label
-                >
+                <label class="block text-sm font-medium leading-5 text-gray-700">Foto</label>
                 <div class="flex items-center mt-2">
-                  <span
-                    class="inline-block w-12 h-12 overflow-hidden bg-gray-100 rounded-full"
-                  >
+                  <span class="inline-block w-12 h-12 overflow-hidden bg-gray-100 rounded-full">
                     <svg
                       class="w-full h-full text-gray-300"
                       fill="currentColor"
@@ -53,17 +48,13 @@
                     <button
                       type="button"
                       class="px-3 py-2 text-sm font-medium leading-4 text-gray-700 transition duration-150 ease-in-out border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800"
-                    >
-                      Cambiar
-                    </button>
+                    >Cambiar</button>
                   </span>
                 </div>
               </div>
 
               <div class="mt-6">
-                <label class="block text-sm font-medium leading-5 text-gray-700"
-                  >Visualización</label
-                >
+                <label class="block text-sm font-medium leading-5 text-gray-700">Visualización</label>
                 <div
                   class="flex justify-center px-6 pt-5 pb-6 mt-2 border-2 border-gray-300 border-dashed rounded-md"
                 >
@@ -84,14 +75,10 @@
                     <p class="mt-1 text-sm text-gray-600">
                       <button
                         class="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline"
-                      >
-                        Sube un archivo
-                      </button>
+                      >Sube un archivo</button>
                       o haz arrastralo aquí
                     </p>
-                    <p class="mt-1 text-xs text-gray-500">
-                      PNG, JPG, GIF hasta 10MB
-                    </p>
+                    <p class="mt-1 text-xs text-gray-500">PNG, JPG, GIF hasta 10MB</p>
                   </div>
                 </div>
               </div>
@@ -124,32 +111,20 @@
           <div class="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
               <fieldset>
-                <legend class="text-base font-medium leading-6 text-gray-900">
-                  Deportes
-                </legend>
+                <legend class="text-base font-medium leading-6 text-gray-900">Deportes</legend>
                 <div v-if="user && user.userSports">
-                  <div
-                    v-for="userSport of user.userSports"
-                    :key="userSport.sportId"
-                    class="mt-4"
-                  >
+                  <div v-for="userSport of user.userSports" :key="userSport.sportId" class="mt-4">
                     <div class="flex">
                       <div>
-                        <div class="text-sm text-gray-700">
-                          {{ userSport.sport.name }}
-                        </div>
-                        <div class="text-xs text-gray-700">
-                          Nivel actual: {{ userSport.level.name }}
-                        </div>
+                        <div class="text-sm text-gray-700">{{ userSport.sport.name }}</div>
+                        <div class="text-xs text-gray-700">Nivel actual: {{ userSport.level.name }}</div>
                       </div>
                       <div class="flex items-center ml-4">
                         <button
                           @click="openModal('confirm_' + userSport.sportId)"
                           type="button"
                           class="inline-flex items-center px-2.5 py-1 text-xs font-medium leading-4 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded hover:bg-red-500 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-                        >
-                          Eliminar
-                        </button>
+                        >Eliminar</button>
                         <Modal :id="'confirm_' + userSport.sportId">
                           <slot>
                             <div
@@ -174,9 +149,7 @@
                             <h3
                               class="text-lg font-medium leading-6 text-gray-900"
                               id="modal-headline"
-                            >
-                              Eliminar
-                            </h3>
+                            >Eliminar</h3>
                             <div class="mt-2">
                               <p class="text-sm leading-5 text-gray-700">
                                 ¿Estás seguro que quieres eliminar de tus
@@ -190,9 +163,7 @@
                             </div>
                           </div>
                           <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                            <span
-                              class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto"
-                            >
+                            <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                               <button
                                 @click="
                                   remove(userSport);
@@ -200,22 +171,16 @@
                                 "
                                 type="button"
                                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-                              >
-                                Confirmar
-                              </button>
+                              >Confirmar</button>
                             </span>
-                            <span
-                              class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
-                            >
+                            <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
                               <button
                                 @click="
                                   closeModal('confirm_' + userSport.sportId)
                                 "
                                 type="button"
                                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-                              >
-                                Cancelar
-                              </button>
+                              >Cancelar</button>
                             </span>
                           </div>
                         </Modal>
@@ -230,50 +195,40 @@
                   @click="openModal('modal_add_usersport')"
                   type="button"
                   class="inline-flex items-center px-3 py-2 mt-3 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-                >
-                  Añadir deporte
-                </button>
+                >Añadir deporte</button>
                 <Modal id="modal_add_usersport">
                   <div class="mt-3 text-center sm:mt-5">
                     <h3
                       class="text-lg font-medium leading-6 text-gray-900"
                       id="modal-headline"
-                    >
-                      Selecciona deporte
-                    </h3>
+                    >Selecciona deporte</h3>
                     <div>
                       <select
                         id="location"
                         class="block w-full py-2 pl-3 pr-10 mt-1 text-base leading-6 border-gray-300 form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                       >
-                        <option v-for="sport of sportsLeft" :key="sport.id">{{
+                        <option v-for="sport of sportsLeft" :key="sport.id">
+                          {{
                           sport.name
-                        }}</option>
+                          }}
+                        </option>
                       </select>
                     </div>
                   </div>
                   <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                    <span
-                      class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto"
-                    >
+                    <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                       <button
                         @click="closeModal('modal_add_usersport')"
                         type="button"
                         class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-                      >
-                        Confirmar
-                      </button>
+                      >Confirmar</button>
                     </span>
-                    <span
-                      class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
-                    >
+                    <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
                       <button
                         @click="closeModal('modal_add_usersport')"
                         type="button"
                         class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-                      >
-                        Cancelar
-                      </button>
+                      >Cancelar</button>
                     </span>
                   </div>
                 </Modal>
@@ -285,21 +240,10 @@
                 <!-- </div> -->
               </fieldset>
               <fieldset>
-                <legend
-                  class="pt-4 text-base font-medium leading-6 text-gray-900"
-                >
-                  Idiomas
-                </legend>
-                <div
-                  v-for="language of user.languages"
-                  :key="language.id"
-                  class="mt-4"
-                >
+                <legend class="pt-4 text-base font-medium leading-6 text-gray-900">Idiomas</legend>
+                <div v-for="language of user.languages" :key="language.id" class="mt-4">
                   <!-- for de idiomas en la escuela -->
-                  <oc-checkbox
-                    v-model="language.checked"
-                    :label="language.language.name"
-                  ></oc-checkbox>
+                  <oc-checkbox v-model="language.checked" :label="language.language.name"></oc-checkbox>
                 </div>
               </fieldset>
               <!-- <fieldset class="mt-6">
@@ -366,25 +310,19 @@
         v-if="!editing"
         type="button"
         class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >
-        Editar
-      </button>
+      >Editar</button>
       <button
         @click="editing = false"
         v-if="editing"
         type="button"
         class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >
-        Cancelar
-      </button>
+      >Cancelar</button>
       <button
         @click="saveUser()"
         v-if="editing"
         type="button"
         class="inline-flex items-center px-3 py-2 ml-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-      >
-        Guardar
-      </button>
+      >Guardar</button>
     </span>
   </div>
 </template>
@@ -424,9 +362,11 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch("SET_LOADING", true);
     this.getUserData();
     this.getSports();
     this.getSportsLeft();
+    this.$store.dispatch("SET_LOADING", false);
   },
   computed: {},
   methods: {

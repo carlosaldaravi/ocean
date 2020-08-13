@@ -68,6 +68,7 @@ export default {
   },
   methods: {
     async getCourses() {
+      this.$store.dispatch("SET_LOADING", true);
       let res;
       if (this.$store.getters.getRole == "ALUMNO") {
         res = await this.api.get("students/courses");
@@ -84,6 +85,7 @@ export default {
           this.$store.dispatch(AUTH_LOGOUT);
         }
       }
+      this.$store.dispatch("SET_LOADING", false);
     },
   },
 };
