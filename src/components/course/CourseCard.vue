@@ -48,8 +48,9 @@
                 <div>Marcar todos</div>
                 <input
                   @click="markAll($event)"
+                  :checked="checkAll()"
                   type="checkbox"
-                  class="w-4 h-4 transition duration-150 ease-in-out form-checkbox"
+                  class="w-4 h-4 transition duration-150 ease-in-out border-primary-200 form-checkbox"
                 />
               </div>
             </div>
@@ -192,13 +193,13 @@
 </template>
 
 <script>
-import { formatDate, formatTime } from "../../helpers/functions";
-import Modal from "../modals/Modal.vue";
-import { UI } from "../../mixins/UI";
 import moment from "moment";
+import Modal from "../modals/Modal.vue";
+import CourseStudent from "./CourseStudent.vue";
+import { UI } from "../../mixins/UI";
+import { formatDate, formatTime } from "../../helpers/functions";
 import { StudentTarget } from "../../classes/student-target";
 import { API } from "../../classes/api";
-import CourseStudent from "./CourseStudent.vue";
 
 export default {
   components: {
@@ -206,17 +207,12 @@ export default {
     StudentTarget,
     CourseStudent,
   },
-  computed: {
-    curso: function () {
-      return this.curso;
-    },
-  },
   data() {
     return {
       api: new API(),
-      moreCard: false,
-      courseStudent: null,
       studentTargets: [],
+      courseStudent: null,
+      moreCard: false,
     };
   },
   props: {
@@ -258,7 +254,7 @@ export default {
             studentId: this.courseStudent.studentId,
             targetId: st.targetId,
             feedback: "",
-            validatedBy: $store.getters.getUserId,
+            validatedBy: this.$store.getters.getUserId,
             validatedDate: new Date(),
           });
         } else {
@@ -271,25 +267,34 @@ export default {
           });
         }
       });
+
       let res = await this.api.post("users/setTargets", targets);
-      console.log(res);
       if (res.data.data) {
-        // change student to student updated
         let studentId = this.courseStudent.studentId;
-        let auxCourse = this.course;
-        let studentIndex = -1;
-        this.closeModal(`course_${this.course.id}`);
+
         this.course.courseStudents.forEach(function (item, i) {
           if (item.studentId == studentId) {
-            studentIndex = i;
-            auxCourse.courseStudents[i] = res.data.data;
+            item.student.studentTargets = [];
+
+            res.data.data.studentTargets.forEach((studentTarget) => {
+              item.student.studentTargets.push(
+                new StudentTarget(studentTarget)
+              );
+            });
           }
         });
-        this.course = auxCourse;
-        console.log(this.course.courseStudents[studentIndex]);
 
-        // this.getTargetsValidated(this.course.courseStudents[studentIndex]);
+        this.closeModal(`course_${this.course.id}`);
       }
+    },
+    checkAll() {
+      let allChecked = true;
+      this.studentTargets.forEach((sT) => {
+        if (!sT.checked) {
+          allChecked = false;
+        }
+      });
+      return allChecked;
     },
   },
 };

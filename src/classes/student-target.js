@@ -18,6 +18,7 @@ export const StudentTarget = class StudentTarget {
       },
     };
     this.validatedBy = data?.validatedBy;
+    this.validatedDate = data?.validatedDate;
     this.date = data?.date;
     this.feedback = data?.feedback;
     this.targetId = data?.targetId;

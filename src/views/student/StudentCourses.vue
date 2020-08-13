@@ -12,8 +12,7 @@
               href="#"
               @click="tab = 'past'"
               class="px-3 py-2 text-sm font-medium leading-5 rounded-lg rounded-b-none hover:text-primary-300"
-              >Realizados</a
-            >
+            >Realizados</a>
             <a
               @click="tab = 'next'"
               :class="{
@@ -22,8 +21,7 @@
               }"
               href="#"
               class="px-3 py-2 text-sm font-medium leading-5 rounded-lg rounded-b-none hover:text-primary-300"
-              >Próximos</a
-            >
+            >Próximos</a>
           </nav>
         </div>
         <CourseList :courses="coursesList"></CourseList>
@@ -54,15 +52,15 @@ export default {
     this.getCourses();
   },
   computed: {
-    coursesList: function() {
+    coursesList: function () {
       return this.tab == "next" ? this.nextCourses : this.pastCourses;
     },
-    nextCourses: function() {
+    nextCourses: function () {
       return this.courses.filter(
         (course) => new Date() < new Date(`${course.calendar[0].start}`)
       );
     },
-    pastCourses: function() {
+    pastCourses: function () {
       return this.courses.filter(
         (course) => new Date() > new Date(`${course.calendar[0].start}`)
       );
@@ -76,11 +74,8 @@ export default {
       } else {
         res = await this.api.get("instructors/courses");
       }
-      console.log(res.data.data);
 
       if (res.data.data) {
-        console.log(res.data.data);
-
         res.data.data.forEach((course) => {
           this.courses.push(new Course(course));
         });

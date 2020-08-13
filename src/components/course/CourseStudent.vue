@@ -20,7 +20,7 @@
       <div class="flex justify-between align-baseline">
         <div class="flex items-center">
           <img class="w-5 h-5" src="../../assets/images/logros.svg" alt />
-          <div class="pl-1 mb-1 text-sm">{{ validatedTargets }} / {{ totalTargets }}</div>
+          <div class="pl-1 mb-1 text-sm">{{ getTargetsValidated(courseStudent.student) }}</div>
         </div>
         <div v-if="$store.getters.getRole === 'INSTRUCTOR'" class="mt-1 ml-2">
           <button
@@ -36,21 +36,6 @@
 
 <script>
 export default {
-  components: {},
-  computed: {
-    totalTargets: function () {
-      return this.courseStudent.student.studentTargets.length;
-    },
-    validatedTargets: function () {
-      let numValidated = 0;
-      this.courseStudent.student.studentTargets.forEach((st) => {
-        if (st.validatedBy) {
-          numValidated++;
-        }
-      });
-      return numValidated;
-    },
-  },
   data() {
     return {};
   },
