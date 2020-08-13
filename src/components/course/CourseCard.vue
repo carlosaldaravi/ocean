@@ -247,6 +247,7 @@ export default {
       this.studentTargets.forEach((st) => (st.checked = event.target.checked));
     },
     async validateTargets() {
+      this.$store.dispatch("SET_LOADING", true);
       let targets = [];
       this.studentTargets.forEach((st) => {
         if (st.checked) {
@@ -283,9 +284,9 @@ export default {
             });
           }
         });
-
         this.closeModal(`course_${this.course.id}`);
       }
+      this.$store.dispatch("SET_LOADING", false);
     },
     checkAll() {
       let allChecked = true;
