@@ -4,12 +4,7 @@
       <Modal id="modal_add_course">
         <div v-if="newCourseParamsNeeded">
           <div class="mt-3 text-center sm:mt-5">
-            <h3
-              class="text-lg font-medium leading-6 text-gray-900"
-              id="modal-headline"
-            >
-              Añadir curso
-            </h3>
+            <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">Añadir curso</h3>
           </div>
           <div>
             <oc-input
@@ -31,8 +26,7 @@
                 :class="{ 'text-red-600 text-base': !isInstructorSelected }"
                 for="instructorSelected"
                 class="block text-sm font-medium leading-5 text-gray-700"
-                >Instructor
-              </label>
+              >Instructor</label>
               <select
                 id="instructorSelected"
                 @change="changeInstructorSelected($event)"
@@ -44,8 +38,7 @@
                 <option
                   v-for="instructor of newCourseParamsNeeded.instructors"
                   :key="instructor.id"
-                  >{{ instructor.details.firstname }}</option
-                >
+                >{{ instructor.details.firstname }}</option>
               </select>
             </div>
             <div class="col-span-6 sm:col-span-3">
@@ -53,8 +46,7 @@
                 :class="{ 'text-red-600 text-base': !isSportSelected }"
                 for="sportSelected"
                 class="block text-sm font-medium leading-5 text-gray-700"
-                >Deporte
-              </label>
+              >Deporte</label>
               <select
                 id="sportSelected"
                 @change="changeSportSelected($event)"
@@ -66,8 +58,7 @@
                 <option
                   v-for="sport of newCourseParamsNeeded.sports"
                   :key="sport.id"
-                  >{{ sport.name }}</option
-                >
+                >{{ sport.name }}</option>
               </select>
             </div>
             <div class="col-span-6 sm:col-span-3">
@@ -75,8 +66,7 @@
                 :class="{ 'text-red-600 text-base': !isTypeSelected }"
                 for="courseType"
                 class="block text-sm font-medium leading-5 text-gray-700"
-                >Tipo de curso</label
-              >
+              >Tipo de curso</label>
               <select
                 id="courseType"
                 @change="changeTypeSelected($event)"
@@ -88,8 +78,7 @@
                 <option
                   v-for="type of newCourseParamsNeeded.courseTypes"
                   :key="type.id"
-                  >{{ type.name }}</option
-                >
+                >{{ type.name }}</option>
               </select>
             </div>
             <div v-if="newCourseSportSelected" class="col-span-6 sm:col-span-3">
@@ -97,8 +86,7 @@
                 :class="{ 'text-red-600 text-base': !isLevelSelected }"
                 for="levelCourse"
                 class="block text-sm font-medium leading-5 text-gray-700"
-                >Nivel</label
-              >
+              >Nivel</label>
               <select
                 id="levelCourse"
                 @change="changeLevelSelected($event)"
@@ -110,8 +98,7 @@
                 <option
                   v-for="level of newCourseSportSelected.sportLevel"
                   :key="level.levelId"
-                  >{{ level.level.name }}</option
-                >
+                >{{ level.level.name }}</option>
               </select>
             </div>
           </div>
@@ -121,13 +108,9 @@
                 @click="addCourse()"
                 type="button"
                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-              >
-                Confirmar
-              </button>
+              >Confirmar</button>
             </span>
-            <span
-              class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
-            >
+            <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
               <button
                 @click="
                   closeModal('modal_add_course');
@@ -135,9 +118,7 @@
                 "
                 type="button"
                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-              >
-                Cancelar
-              </button>
+              >Cancelar</button>
             </span>
           </div>
         </div>
@@ -145,109 +126,70 @@
     </div>
     <Modal id="modal_show_course">
       <div class="mt-3 text-center sm:mt-5">
-        <h3
-          class="text-lg font-medium leading-6 text-gray-900"
-          id="modal-headline"
-        >
-          RESERVA DE CURSO
-        </h3>
+        <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">RESERVA DE CURSO</h3>
       </div>
       <div>
         <div class="col-span-6 sm:col-span-3">
-          <label
-            for="gender"
-            class="block text-sm font-medium leading-5 text-gray-700"
-            >Deporte
-          </label>
+          <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">Deporte</label>
           {{ newCourseSportSelected }}
         </div>
         <div class="col-span-6 sm:col-span-3">
           <label
             for="gender"
             class="block text-sm font-medium leading-5 text-gray-700"
-            >Tipo de curso</label
-          >
+          >Tipo de curso</label>
           {{ newCourseTypeSelected }}
         </div>
         <div v-if="newCourseSportSelected" class="col-span-6 sm:col-span-3">
-          <label
-            for="gender"
-            class="block text-sm font-medium leading-5 text-gray-700"
-            >Nivel</label
-          >
+          <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">Nivel</label>
           {{ newCourseLevelSelected }}
         </div>
         <div class="col-span-6 sm:col-span-3">
-          <label
-            for="gender"
-            class="block text-sm font-medium leading-5 text-gray-700"
-            >Instructor</label
-          >
+          <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">Instructor</label>
           {{ newCourseInstructorSelected }}
         </div>
         <div class="col-span-6 sm:col-span-3">
-          <label
-            for="gender"
-            class="block text-sm font-medium leading-5 text-gray-700"
-            >Día</label
-          >
+          <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">Día</label>
           {{ newCourseDate }}
         </div>
         <div class="col-span-6 sm:col-span-3">
-          <label
-            for="gender"
-            class="block text-sm font-medium leading-5 text-gray-700"
-            >Hora inicio</label
-          >
+          <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">Hora inicio</label>
           {{ newCourseTimeStart }}
         </div>
         <div class="col-span-6 sm:col-span-3">
-          <label
-            for="gender"
-            class="block text-sm font-medium leading-5 text-gray-700"
-            >Hora final</label
-          >
+          <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">Hora final</label>
           {{ newCourseTimeEnd }}
         </div>
         <div class="col-span-6 sm:col-span-3">
           <label
             for="gender"
             class="block text-sm font-medium leading-5 text-gray-700"
-            >Plazas disponibles/totales</label
-          >
+          >Plazas disponibles/totales</label>
           <div
             v-if="newCourseMaxStudents - newCourseCurrentNumStudents == 0"
             class="text-red-600"
-          >
-            Curso completo
-          </div>
+          >Curso completo</div>
           <div v-else>
             {{ newCourseMaxStudents - newCourseCurrentNumStudents }}/{{
-              newCourseMaxStudents
+            newCourseMaxStudents
             }}
           </div>
         </div>
         <div class="col-span-6 sm:col-span-3">
-          <label
-            for="gender"
-            class="block text-sm font-medium leading-5 text-gray-700"
-            >Precio</label
-          >
+          <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">Precio</label>
           {{ newCoursePrice }}€
         </div>
         <div v-if="isDone" class="col-span-6 sm:col-span-3">
           <label
             for="gender"
             class="block text-lg font-medium leading-5 text-red-700"
-            >Este curso ya se ha realizado</label
-          >
+          >Este curso ya se ha realizado</label>
         </div>
         <div v-if="isReserved && !isDone" class="col-span-6 sm:col-span-3">
           <label
             for="gender"
             class="block text-lg font-medium leading-5 text-green-700"
-            >¡ Ya estás registrado en este curso !</label
-          >
+          >¡ Ya estás registrado en este curso !</label>
         </div>
         <div
           v-if="
@@ -259,8 +201,7 @@
           <label
             for="gender"
             class="block text-lg font-medium leading-5 text-red-700"
-            >¡ Curso completo !</label
-          >
+          >¡ Curso completo !</label>
         </div>
       </div>
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
@@ -272,26 +213,20 @@
                   !isReserved)
             "
             class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white rounded opacity-50 cursor-not-allowed bg-primary-200"
-          >
-            Reservar
-          </button>
+          >Reservar</button>
           <div class="w-full" v-else>
             <button
               v-if="!isReserved"
               @click="reserveCourse()"
               type="button"
               class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-            >
-              Reservar
-            </button>
+            >Reservar</button>
             <button
               v-else
               @click="deleteCourseStudent()"
               type="button"
               class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-400 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-            >
-              Eliminar reserva
-            </button>
+            >Eliminar reserva</button>
           </div>
         </span>
         <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
@@ -302,28 +237,20 @@
             "
             type="button"
             class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-          >
-            Cancelar
-          </button>
+          >Cancelar</button>
         </span>
       </div>
     </Modal>
     <Modal id="modal_confirm_delete_event">
       <div class="mt-3 text-center sm:mt-5">
-        <h3
-          class="text-lg font-medium leading-6 text-gray-900"
-          id="modal-headline"
-        >
-          ELIMINAR EVENTO
-        </h3>
+        <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-headline">ELIMINAR EVENTO</h3>
       </div>
       <div>
         <div class="col-span-6 sm:col-span-3">
           <label
             for="gender"
             class="block text-sm font-medium leading-5 text-gray-700"
-            >¿Seguro que deseas eliminar este evento del calendario?
-          </label>
+          >¿Seguro que deseas eliminar este evento del calendario?</label>
         </div>
       </div>
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
@@ -332,9 +259,7 @@
             @click="deleteEvent()"
             type="button"
             class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-400 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-          >
-            Eliminar
-          </button>
+          >Eliminar</button>
         </span>
         <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
           <button
@@ -344,9 +269,7 @@
             "
             type="button"
             class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-          >
-            Cancelar
-          </button>
+          >Cancelar</button>
         </span>
       </div>
     </Modal>
@@ -424,7 +347,7 @@ export default {
   computed: {
     ...mapGetters(["EVENTS"]),
   },
-  data: function() {
+  data: function () {
     return {
       api: new API(),
       title: "",
@@ -528,7 +451,7 @@ export default {
             this.isReserved = false;
           }
         }
-        UI.methods.openModal("modal_show_course");
+        this.openModal("modal_show_course");
       }
     },
     updateEvent(arg) {
@@ -553,7 +476,7 @@ export default {
         closeButton.addEventListener("click", (event) => {
           event.stopPropagation();
           this.clickedEvent = arg.event;
-          UI.methods.openModal("modal_confirm_delete_event");
+          this.openModal("modal_confirm_delete_event");
 
           // this.$store.dispatch("DELETE_EVENT", arg.event);
         });
@@ -642,7 +565,7 @@ export default {
       this.newCourseParamsNeeded = res.data.data;
 
       // Show modal to create course event
-      UI.methods.openModal("modal_add_course");
+      this.openModal("modal_add_course");
     },
     changeInstructorSelected(event) {
       this.newCourseInstructorSelected = this.newCourseParamsNeeded.instructors.find(
@@ -709,7 +632,7 @@ export default {
             let newCalendar = new Calendar(resp.data.data);
             this.$store.dispatch("ADD_EVENT", newCalendar);
             resolve(resp);
-            UI.methods.closeModal("modal_add_course");
+            this.closeModal("modal_add_course");
             resetAll();
           })
           .catch((err) => {
@@ -732,7 +655,7 @@ export default {
         `courses/add/${this.clickedEvent.id}/${this.$store.getters.getUserId}`
       );
       this.isReserved = true;
-      UI.methods.closeModal("modal_show_course");
+      this.closeModal("modal_show_course");
       this.showSuccessAlert = true;
       this.successText = "Has realizado la reserva con éxito";
       this.$store.dispatch("ADD_NOTIFICATION", {
@@ -745,10 +668,10 @@ export default {
         `courses/del/${this.clickedEvent.id}/${this.$store.getters.getUserId}`
       );
       this.isReserved = false;
-      UI.methods.closeModal("modal_show_course");
+      this.closeModal("modal_show_course");
     },
     deleteEvent() {
-      UI.methods.closeModal("modal_confirm_delete_event");
+      this.closeModal("modal_confirm_delete_event");
       this.$store.dispatch("DELETE_EVENT", this.clickedEvent);
     },
   },
