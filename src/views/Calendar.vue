@@ -31,7 +31,7 @@
                 id="instructorSelected"
                 @change="changeInstructorSelected($event)"
                 :class="{ 'border-red-600': !isInstructorSelected }"
-                class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                 required
               >
                 <option value="0">Selecciona instructor</option>
@@ -51,7 +51,7 @@
                 id="sportSelected"
                 @change="changeSportSelected($event)"
                 :class="{ 'border-red-600': !isSportSelected }"
-                class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                 required
               >
                 <option value="0">Selecciona deporte</option>
@@ -71,7 +71,7 @@
                 id="courseType"
                 @change="changeTypeSelected($event)"
                 :class="{ 'border-red-600': !isTypeSelected }"
-                class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                 required
               >
                 <option value="0">Selecciona tipo de curso</option>
@@ -91,12 +91,12 @@
                 id="levelCourse"
                 @change="changeLevelSelected($event)"
                 :class="{ 'border-red-600': !isLevelSelected }"
-                class="block w-full px-3 py-0 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
                 required
               >
                 <option value="0">Selecciona nivel</option>
                 <option
-                  v-for="level of newCourseSportSelected.sportLevel"
+                  v-for="level of newCourseSportSelected.sportLevels"
                   :key="level.levelId"
                 >{{ level.level.name }}</option>
               </select>
