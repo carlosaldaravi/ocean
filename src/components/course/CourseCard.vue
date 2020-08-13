@@ -285,6 +285,15 @@ export default {
           }
         });
         this.closeModal(`course_${this.course.id}`);
+        this.$store.dispatch("ADD_NOTIFICATION", {
+          type: "success",
+          message: "Objetivos validados correctamente",
+        });
+      } else {
+        this.$store.dispatch("ADD_NOTIFICATION", {
+          type: "error",
+          message: "No se han podido validar los objetivos",
+        });
       }
       this.$store.dispatch("SET_LOADING", false);
     },
