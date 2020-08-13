@@ -4,11 +4,11 @@
       v-if="this.$store.getters.isLoading"
       class="absolute z-50 w-full h-full bg-gray-400 opacity-50"
     />
+    <notification-list />
     <div v-if="isAuthenticated">
       <shell>
         <section slot="content">
           <router-view />
-          <notification-list />
         </section>
       </shell>
     </div>

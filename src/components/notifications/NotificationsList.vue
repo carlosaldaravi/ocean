@@ -1,9 +1,8 @@
 <template>
-  <div>
-    Total notificaciones:
-    {{ this.notifications.length }}
+  <div class="fixed bottom-0 z-50 w-full">
     <notification-message
-      v-for="notification in notifications"
+      class="mb-4"
+      v-for="notification in notifications.notifications"
       :key="notification.id"
       :notification="notification"
     />
@@ -21,15 +20,11 @@ export default {
     ...mapGetters(["NOTIFICATIONS"]),
     ...mapState(["notifications"]),
   },
+  created() {
+    console.log("NotificationList");
+  },
 };
 </script>
 
 <style>
-.notification-list {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin-right: 15px;
-  width: 320px;
-}
 </style>

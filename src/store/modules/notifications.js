@@ -11,6 +11,7 @@ const state = {
 
 const getters = {
   NOTIFICATIONS: (state) => state.notifications,
+  numNotifications: (state) => state.notifications.length,
   isLoading: (state) => state.loading,
 };
 

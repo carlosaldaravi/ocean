@@ -9,31 +9,63 @@
     </button>
     {{ notification.message }}
   </div>-->
-  <div class="fixed bottom-0 left-0 right-0 z-50 w-full p-4 m-0">
-    <div class="p-4 rounded-md shadow bg-green-50">
+  <div class="z-50 w-full p-1">
+    <div
+      :class="{ 'bg-green-300': this.notification.type == 'success',
+          'bg-red-300': this.notification.type == 'error',
+          'bg-yellow-100 yell': this.notification.type == 'warning',
+           }"
+      class="p-4 rounded-md shadow"
+    >
       <div class="flex">
         <div class="flex-shrink-0">
           <svg
-            class="w-5 h-5 text-green-400"
+            :class="{ 'text-green-600': this.notification.type == 'success',
+          'text-red-600': this.notification.type == 'error',
+          'text-yellow-400': this.notification.type == 'warning',
+           }"
+            class="w-5 h-5"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
             <path
+              v-if="notification.type == 'success'"
               fill-rule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clip-rule="evenodd"
+            />
+            <path
+              v-if="notification.type == 'error'"
+              fill-rule="evenodd"
+              d="M2.93 17.07A10 10 0 1117.07 2.93 10 10 0 012.93 17.07zM11.4 10l2.83-2.83-1.41-1.41L10 8.59 7.17 5.76 5.76 7.17 8.59 10l-2.83 2.83 1.41 1.41L10 11.41l2.83 2.83 1.41-1.41L11.41 10z"
+              clip-rule="evenodd"
+            />
+            <path
+              v-if="notification.type == 'warning'"
+              fill-rule="evenodd"
+              d="M2.93 17.07A10 10 0 1117.07 2.93 10 10 0 012.93 17.07zM9 5v6h2V5H9zm0 8v2h2v-2H9z"
               clip-rule="evenodd"
             />
           </svg>
         </div>
         <div class="ml-3">
-          <p class="text-sm font-medium leading-5 text-green-800">
-            {{ this.notification.message }}Registrado satisfactoriamente
-          </p>
+          <p
+            :class="{ 'text-green-800': this.notification.type == 'success',
+          'text-red-800': this.notification.type == 'error',
+          'text-yellow-800': this.notification.type == 'warning',
+           }"
+            class="text-sm font-medium leading-5"
+          >{{ this.notification.message }}</p>
         </div>
         <div class="pl-3 ml-auto">
           <div class="-mx-1.5 -my-1.5">
             <button
-              class="inline-flex rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:bg-green-100 transition ease-in-out duration-150"
+              @click="closeNotification()"
+              :class="{ 'text-green-800 hover:bg-green-500 focus:bg-green-100': this.notification.type == 'success',
+          'text-red-800 hover:bg-red-500 focus:bg-red-100': this.notification.type == 'error',
+          'text-yellow-800 hover:bg-yellow-500 focus:bg-yellow-100': this.notification.type == 'warning',
+           }"
+              class="inline-flex rounded-md p-1.5 focus:outline-none transition ease-in-out duration-150"
             >
               <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path
@@ -65,8 +97,6 @@ export default {
     },
   },
   created() {
-    console.log("notification: ", this.notification);
-
     this.timeout = setTimeout(() => {
       this.REMOVE_NOTIFICATION(this.notification);
     }, 3000);
@@ -74,7 +104,12 @@ export default {
   beforeDestroy() {
     clearTimeout(this.timeout);
   },
-  methods: mapActions(["REMOVE_NOTIFICATION"]),
+  methods: {
+    ...mapActions(["REMOVE_NOTIFICATION"]),
+    closeNotification() {
+      this.REMOVE_NOTIFICATION(this.notification);
+    },
+  },
 };
 </script>
 
