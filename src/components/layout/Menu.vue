@@ -63,11 +63,7 @@
           </div>
           <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
             <div class="flex items-center flex-shrink-0 px-4">
-              <img
-                class="w-auto h-16"
-                src="../../assets/images/logo/logoMenu.png"
-                alt="Ocean"
-              />
+              <img class="w-auto h-16" src="../../assets/images/logo/logoMenu.png" alt="Ocean" />
             </div>
             <nav class="px-2 mt-5">
               <router-link v-if="this.$store.getters.getRole !== ''" to="/home">
@@ -140,10 +136,7 @@
                   Mis Cursos
                 </a>
               </router-link>
-              <router-link
-                v-if="this.$store.getters.getRole !== ''"
-                to="/calendario"
-              >
+              <router-link v-if="this.$store.getters.getRole !== ''" to="/calendario">
                 <a
                   @click="isOpen = false"
                   :class="
@@ -176,7 +169,7 @@
                 </a>
               </router-link>
               <router-link
-                v-if="this.$store.getters.getRole !== 'INSTRUCTOR'"
+                v-if="this.$store.getters.getRole !== 'INSTRUCTOR' && this.$store.getters.getRole !== ''"
                 to="/objetivos"
               >
                 <a
@@ -210,10 +203,7 @@
                   Objetivos
                 </a>
               </router-link>
-              <router-link
-                v-if="this.$store.getters.getRole === 'ADMIN'"
-                to="/estadisticas"
-              >
+              <router-link v-if="this.$store.getters.getRole === 'ADMIN'" to="/estadisticas">
                 <a
                   @click="isOpen = false"
                   :class="
@@ -325,16 +315,9 @@
               </a>
             </nav>
           </div>
-          <div
-            v-if="this.$store.getters.getRole !== ''"
-            class="flex flex-shrink-0 p-4 bg-gray-700"
-          >
+          <div v-if="this.$store.getters.getRole !== ''" class="flex flex-shrink-0 p-4 bg-gray-700">
             <router-link to="/perfil">
-              <a
-                @click="isOpen = false"
-                href="#"
-                class="flex-shrink-0 block group"
-              >
+              <a @click="isOpen = false" href="#" class="flex-shrink-0 block group">
                 <div class="flex items-center">
                   <div>
                     <img
@@ -344,14 +327,12 @@
                     />
                   </div>
                   <div class="ml-3">
-                    <p class="text-base font-medium leading-6 text-white">
-                      {{ this.$store.getters.getUserName }}
-                    </p>
+                    <p
+                      class="text-base font-medium leading-6 text-white"
+                    >{{ this.$store.getters.getUserName }}</p>
                     <p
                       class="text-sm font-medium leading-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300"
-                    >
-                      Perfil
-                    </p>
+                    >Perfil</p>
                   </div>
                 </div>
               </a>
@@ -371,11 +352,7 @@
         <div class="flex flex-col flex-1 h-0 bg-gray-800">
           <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
             <div class="flex items-center flex-shrink-0 px-4">
-              <img
-                class="w-auto h-16"
-                src="../../assets/images/logo/logoMenu.png"
-                alt="Ocean logo"
-              />
+              <img class="w-auto h-16" src="../../assets/images/logo/logoMenu.png" alt="Ocean logo" />
             </div>
             <nav class="flex-1 px-2 mt-5 bg-gray-800">
               <router-link v-if="this.$store.getters.getRole !== ''" to="/home">
@@ -446,10 +423,7 @@
                   Mis Cursos
                 </a>
               </router-link>
-              <router-link
-                v-if="this.$store.getters.getRole !== ''"
-                to="/calendario"
-              >
+              <router-link v-if="this.$store.getters.getRole !== ''" to="/calendario">
                 <a
                   href="#"
                   :class="
@@ -481,7 +455,7 @@
                 </a>
               </router-link>
               <router-link
-                v-if="this.$store.getters.getRole !== 'INSTRUCTOR'"
+                v-if="this.$store.getters.getRole !== 'INSTRUCTOR' && this.$store.getters.getRole !== ''"
                 to="/objetivos"
               >
                 <a
@@ -624,10 +598,7 @@
               </a>
             </nav>
           </div>
-          <div
-            v-if="this.$store.getters.getRole !== ''"
-            class="flex flex-shrink-0 p-4 bg-gray-700"
-          >
+          <div v-if="this.$store.getters.getRole !== ''" class="flex flex-shrink-0 p-4 bg-gray-700">
             <a href="#" class="flex-shrink-0 block w-full group">
               <div class="flex items-center">
                 <div>
@@ -639,14 +610,12 @@
                 </div>
                 <router-link to="/perfil">
                   <div class="ml-3">
-                    <p class="text-sm font-medium leading-5 text-white">
-                      {{ this.$store.getters.getUserName }}
-                    </p>
+                    <p
+                      class="text-sm font-medium leading-5 text-white"
+                    >{{ this.$store.getters.getUserName }}</p>
                     <p
                       class="text-xs font-medium leading-4 text-gray-300 transition duration-150 ease-in-out group-hover:text-gray-200"
-                    >
-                      Perfil
-                    </p>
+                    >Perfil</p>
                   </div>
                 </router-link>
               </div>
@@ -662,12 +631,7 @@
           class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:bg-gray-200 transition ease-in-out duration-150"
           aria-label="Open sidebar"
         >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -678,25 +642,20 @@
         </button>
       </div>
       <!-- <main class="flex-1 overflow-auto bg-primary-400" tabindex="0">
-        <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8"> -->
+      <div class="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">-->
       <!-- Replace with your content-->
       <!-- <div class="px-4 py-4 sm:px-0">
             <slot name="content">
               <router-view />
             </slot>
-          </div> -->
+      </div>-->
       <!-- /End replace -->
       <!-- </div>
-      </main> -->
-      <main
-        class="relative z-0 flex-1 overflow-y-auto focus:outline-none"
-        tabindex="0"
-      >
+      </main>-->
+      <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none" tabindex="0">
         <div class="pt-2 pb-6 md:py-6">
           <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-semibold text-gray-900">
-              {{ this.$route.name }}
-            </h1>
+            <h1 class="text-2xl font-semibold text-gray-900">{{ this.$route.name }}</h1>
           </div>
           <div class="px-4 mx-auto max-w-7xl sm:px-6 md:px-8">
             <slot name="content">
