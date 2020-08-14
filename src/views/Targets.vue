@@ -11,10 +11,7 @@
                 'bg-primary-200 text-secondary-100 hover:text-secondary-100':
                   sport.name == sportSelected.name,
               }"
-              @click="
-                sportSelected = sport;
-                levels = sport.sportLevels;
-              "
+              @click="changeSport(sport)"
               class="px-3 py-2 text-xl font-bold leading-5 rounded-lg rounded-b-none cursor-pointer hover:text-primary-300"
             >{{ sport.name }}</a>
           </nav>
@@ -22,15 +19,15 @@
         <div v-if="sportSelected.id">
           <div class="mb-2 sm:hidden">
             <select
-              v-model="levels"
+              v-model="nameLevelSelected"
               aria-label="Selected level"
               @change="changeLevel($event)"
               class="block w-full bg-primary-400 form-select"
             >
               <option
                 v-for="sportLevel of sportSelected.sportLevels"
-                :key="sportLevel.levelId"
-              >{{ sportLevel.level.name }}</option>
+                :key="sportLevel.sportLevel.levelId"
+              >{{ sportLevel.sportLevel.level.name }}</option>
             </select>
           </div>
           <div class="hidden sm:block">
@@ -38,16 +35,16 @@
               <nav class="flex justify-between -mb-px">
                 <a
                   v-for="sportLevel of sportSelected.sportLevels"
-                  :key="sportLevel.levelId"
-                  @click="levelSelected = sportLevel.level"
+                  :key="sportLevel.sportLevel.levelId"
+                  @click="levelSelected = sportLevel.sportLevel.level"
                   :class="[
-                    levelSelected == sportLevel.level
+                    levelSelected == sportLevel.sportLevel.level
                       ? 'text-primary-100 border-primary-100'
                       : 'border-transparent text-secondary-200 hover:border-primary-200 hover:text-primary-200',
                   ]"
                   class="px-1 py-4 font-medium leading-5 text-center border-b-2 cursor-pointer text-m hover:outline-none"
                   aria-current="page"
-                >{{ sportLevel.level.name }}</a>
+                >{{ sportLevel.sportLevel.level.name }}</a>
               </nav>
             </div>
           </div>
@@ -150,11 +147,11 @@ export default {
       targets: [], // targets
       studentTargets: [], // studentTargets
       sports: [], // sports
-      sportSelected: new Sport(),
+      sportSelected: null,
       levelSelected: "",
+      nameLevelSelected: "",
       editing: false,
       newTarget: new Target(),
-      levels: [],
     };
   },
   components: {
@@ -186,7 +183,9 @@ export default {
         res.data.data.forEach((sport) => {
           this.sports.push(new Sport(sport));
         });
-        this.sportSelected = res.data.data[0];
+        this.sportSelected = this.sports[0];
+        this.levelSelected = this.sportSelected.sportLevels[0].sportLevel.level;
+        this.nameLevelSelected = this.sportSelected.sportLevels[0].sportLevel.level.name;
       }
       this.$store.dispatch("SET_LOADING", false);
     },
@@ -237,6 +236,11 @@ export default {
         );
         this.levelSelected = this.levelSelected.sportLevel.level;
       }
+    },
+    changeSport(sport) {
+      this.sportSelected = sport;
+      this.levelSelected = this.sportSelected.sportLevels[0].sportLevel.level;
+      this.nameLevelSelected = this.sportSelected.sportLevels[0].sportLevel.level.name;
     },
   },
 };
