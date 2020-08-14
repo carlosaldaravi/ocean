@@ -19,7 +19,7 @@
             >{{ sport.name }}</a>
           </nav>
         </div>
-        <div v-if="Object.keys(sportSelected).length !== 0">
+        <div v-if="sportSelected.id">
           <div class="mb-2 sm:hidden">
             <select
               v-model="levels"
@@ -29,8 +29,8 @@
             >
               <option
                 v-for="sportLevel of sportSelected.sportLevels"
-                :key="sportLevel.sportLevel.levelId"
-              >{{ sportLevel.sportLevel.level.name }}</option>
+                :key="sportLevel.levelId"
+              >{{ sportLevel.level.name }}</option>
             </select>
           </div>
           <div class="hidden sm:block">
@@ -38,16 +38,16 @@
               <nav class="flex justify-between -mb-px">
                 <a
                   v-for="sportLevel of sportSelected.sportLevels"
-                  :key="sportLevel.sportLevel.levelId"
-                  @click="levelSelected = sportLevel.sportLevel.level"
+                  :key="sportLevel.levelId"
+                  @click="levelSelected = sportLevel.level"
                   :class="[
-                    levelSelected == sportLevel.sportLevel.level
+                    levelSelected == sportLevel.level
                       ? 'text-primary-100 border-primary-100'
-                      : 'text-secondary-200 border-transparent text-secondary-200 hover:border-primary-200 hover:text-primary-200',
+                      : 'border-transparent text-secondary-200 hover:border-primary-200 hover:text-primary-200',
                   ]"
                   class="px-1 py-4 font-medium leading-5 text-center border-b-2 cursor-pointer text-m hover:outline-none"
                   aria-current="page"
-                >{{ sportLevel.sportLevel.level.name }}</a>
+                >{{ sportLevel.level.name }}</a>
               </nav>
             </div>
           </div>
@@ -186,9 +186,7 @@ export default {
         res.data.data.forEach((sport) => {
           this.sports.push(new Sport(sport));
         });
-        if (this.sports.length == 1) {
-          this.sportSelected = res.data.data[0];
-        }
+        this.sportSelected = res.data.data[0];
       }
       this.$store.dispatch("SET_LOADING", false);
     },
