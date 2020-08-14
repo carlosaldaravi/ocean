@@ -23,32 +23,12 @@
             ></oc-input>
             <div class="col-span-6 sm:col-span-3">
               <label
-                :class="{ 'text-red-600 text-base': !isInstructorSelected }"
-                for="instructorSelected"
-                class="block text-sm font-medium leading-5 text-gray-700"
-              >Instructor</label>
-              <select
-                id="instructorSelected"
-                @change="changeInstructorSelected($event)"
-                :class="{ 'border-red-600': !isInstructorSelected }"
-                class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-                required
-              >
-                <option value="0">Selecciona instructor</option>
-                <option
-                  v-for="instructor of newCourseParamsNeeded.instructors"
-                  :key="instructor.id"
-                >{{ instructor.details.firstname }}</option>
-              </select>
-            </div>
-            <div class="col-span-6 sm:col-span-3">
-              <label
                 :class="{ 'text-red-600 text-base': !isSportSelected }"
-                for="sportSelected"
+                for="newCoursesportSelected"
                 class="block text-sm font-medium leading-5 text-gray-700"
               >Deporte</label>
               <select
-                id="sportSelected"
+                id="newCoursesportSelected"
                 @change="changeSportSelected($event)"
                 :class="{ 'border-red-600': !isSportSelected }"
                 class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
@@ -64,11 +44,11 @@
             <div class="col-span-6 sm:col-span-3">
               <label
                 :class="{ 'text-red-600 text-base': !isTypeSelected }"
-                for="courseType"
+                for="newCourseTypeSelected"
                 class="block text-sm font-medium leading-5 text-gray-700"
               >Tipo de curso</label>
               <select
-                id="courseType"
+                id="newCourseTypeSelected"
                 @change="changeTypeSelected($event)"
                 :class="{ 'border-red-600': !isTypeSelected }"
                 class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
@@ -83,12 +63,32 @@
             </div>
             <div v-if="newCourseSportSelected" class="col-span-6 sm:col-span-3">
               <label
+                :class="{ 'text-red-600 text-base': !isInstructorSelected }"
+                for="newCourseInstructorSelected"
+                class="block text-sm font-medium leading-5 text-gray-700"
+              >Instructor</label>
+              <select
+                id="newCourseInstructorSelected"
+                @change="changeInstructorSelected($event)"
+                :class="{ 'border-red-600': !isInstructorSelected }"
+                class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+                required
+              >
+                <option value="0">Selecciona instructor</option>
+                <option
+                  v-for="instructor of newCourseInstructorsAvailable"
+                  :key="instructor.id"
+                >{{ instructor.details.firstname }}</option>
+              </select>
+            </div>
+            <div v-if="newCourseSportSelected" class="col-span-6 sm:col-span-3">
+              <label
                 :class="{ 'text-red-600 text-base': !isLevelSelected }"
-                for="levelCourse"
+                for="newCourseLevelSelected"
                 class="block text-sm font-medium leading-5 text-gray-700"
               >Nivel</label>
               <select
-                id="levelCourse"
+                id="newCourseLevelSelected"
                 @change="changeLevelSelected($event)"
                 :class="{ 'border-red-600': !isLevelSelected }"
                 class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
@@ -96,9 +96,9 @@
               >
                 <option value="0">Selecciona nivel</option>
                 <option
-                  v-for="level of newCourseSportSelected.sportLevels"
-                  :key="level.levelId"
-                >{{ level.level.name }}</option>
+                  v-for="sportLevel of newCourseSportSelected.sportLevels"
+                  :key="sportLevel.levelId"
+                >{{ sportLevel.level.name }}</option>
               </select>
             </div>
           </div>
@@ -362,6 +362,7 @@ export default {
       newCourseLevelSelected: null,
       newCourseMaxStudents: null,
       newCourseCurrentNumStudents: null,
+      newCourseInstructorsAvailable: null,
       newCoursePrice: null,
       isInstructorSelected: true,
       isSportSelected: true,
@@ -563,6 +564,7 @@ export default {
       }
     },
     async addCourseEvent(arg) {
+      this.$store.dispatch("SET_LOADING", true);
       const dateStart = moment(arg.start);
       const dateEnd = moment(arg.end);
       this.newCourseTimeStart = dateStart.format("HH:mm");
@@ -575,10 +577,17 @@ export default {
         dateStart.format("D");
 
       let res = await this.api.get(`courses/new`);
-      this.newCourseParamsNeeded = res.data.data;
-
-      // Show modal to create course event
-      this.openModal("modal_add_course");
+      if (res.success) {
+        // Show modal to create course event
+        this.newCourseParamsNeeded = res.data.data;
+        this.openModal("modal_add_course");
+      } else {
+        this.$store.dispatch("ADD_NOTIFICATION", {
+          type: "error",
+          message: "No es posible crear un curso en este momento",
+        });
+      }
+      this.$store.dispatch("SET_LOADING", false);
     },
     changeInstructorSelected(event) {
       this.newCourseInstructorSelected = this.newCourseParamsNeeded.instructors.find(
@@ -591,6 +600,13 @@ export default {
       this.newCourseSportSelected = this.newCourseParamsNeeded.sports.find(
         (sport) => sport.name == event.target.value
       );
+      this.newCourseInstructorsAvailable = this.newCourseParamsNeeded.instructors.filter(
+        (instructor) => {
+          return instructor.userSports.find(
+            (userSport) => userSport.sportId == this.newCourseSportSelected.id
+          );
+        }
+      );
       this.newCourse.sport = this.newCourseSportSelected;
       this.isSportSelected = true;
     },
@@ -602,7 +618,7 @@ export default {
       this.isTypeSelected = true;
     },
     changeLevelSelected(event) {
-      this.newCourseLevelSelected = this.newCourseSportSelected.sportLevel.find(
+      this.newCourseLevelSelected = this.newCourseSportSelected.sportLevels.find(
         (sportLevel) => sportLevel.level.name == event.target.value
       );
       this.newCourse.level = this.newCourseLevelSelected.level;
@@ -652,7 +668,7 @@ export default {
             this.$store.dispatch("SET_LOADING", false);
             resolve(resp);
             this.closeModal("modal_add_course");
-            resetAll();
+            this.resetAll();
           })
           .catch((err) => {
             this.$store.dispatch("ADD_NOTIFICATION", {
@@ -666,6 +682,14 @@ export default {
       });
     },
     resetAll() {
+      if (document.getElementById("newCoursesportSelected"))
+        document.getElementById("newCoursesportSelected").value = 0;
+      if (document.getElementById("newCourseLevelSelected"))
+        document.getElementById("newCourseLevelSelected").value = 0;
+      if (document.getElementById("newCourseInstructorSelected"))
+        document.getElementById("newCourseInstructorSelected").value = 0;
+      if (document.getElementById("newCourseTypeSelected"))
+        document.getElementById("newCourseTypeSelected").value = 0;
       this.isSportSelected = true;
       this.isTypeSelected = true;
       this.isLevelSelected = true;
@@ -674,6 +698,7 @@ export default {
       this.newCourseSportSelected = null;
       this.newCourseTypeSelected = null;
       this.newCourseLevelSelected = null;
+      this.newCourseInstructorSelected = null;
     },
     async reserveCourse() {
       this.$store.dispatch("SET_LOADING", true);
