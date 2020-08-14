@@ -6,9 +6,7 @@
           <h3
             class="text-lg font-medium leading-6 text-gray-900"
             id="modal-headline"
-          >
-            Ley de protección de datos
-          </h3>
+          >Ley de protección de datos</h3>
         </div>
         <div>
           INTRODUCCIÓN BBB, en adelante AAA, recopila, trata y almacena
@@ -33,8 +31,7 @@
           la edad (Art. 8.2 GDPR). En todo caso estos datos serán de carácter
           personal identificativos y no sensibles, podrán ser: Correo
           electrónico Teléfono Nombre y apellidos DNI Dirección CCC
-          <h2>MÉTODOS DE RECOPILACIÓN</h2>
-          Los datos personales se recopilarán a través de la web de AAA, MMM,
+          <h2>MÉTODOS DE RECOPILACIÓN</h2>Los datos personales se recopilarán a través de la web de AAA, MMM,
           cuando introduzcas información en alguno de los campos destinados a
           tal efecto en la web. Estos campos están debidamente señalizados y no
           recopilarán ningún dato hasta que no aceptes expresamente la cesión y
@@ -70,8 +67,7 @@
           dirigida a AAA dirección III indicando los derechos que se quieren
           ejercer y una prueba de identidad. Nos comprometemos a responder a tu
           solicitud en un plazo máximo de 30 días hábiles. LEGITIMACIÓN PARA EL
-          <h2>TRATAMIENTO DE DATOS</h2>
-          La base legal para el tratamiento de tus datos personales es la
+          <h2>TRATAMIENTO DE DATOS</h2>La base legal para el tratamiento de tus datos personales es la
           aceptación explícita del tratamiento, gestión y almacenamiento de los
           mismos según la presente política de privacidad. CONSECUENCIAS DE NO
           ACEPTAR LA POLÍTICA DE PRIVACIDAD En el caso de que no aceptes la
@@ -96,24 +92,18 @@
               @click="closeModal('modal_rgpd')"
               type="button"
               class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-            >
-              Volver
-            </button>
+            >Volver</button>
           </span>
         </div>
       </Modal>
       <section class="container p-4 mx-auto md:p-8">
         <!-- step 1 -->
         <div v-if="step == 1" class="bg-white">
-          <div
-            class="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 md:py-16 lg:px-8 lg:py-20"
-          >
-            <p
-              class="text-lg font-extrabold tracking-tight md:text-4xl sm:text-4xl sm:leading-10"
-            >
-              <span class="text-primary-200"
-                >Listo para convertirte en parte de la familia Be Waters?</span
-              >
+          <div class="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 md:py-16 lg:px-8 lg:py-20">
+            <p class="text-lg font-extrabold tracking-tight md:text-4xl sm:text-4xl sm:leading-10">
+              <span
+                class="text-primary-200"
+              >Listo para convertirte en parte de la familia Be Waters?</span>
             </p>
             <div class="mt-4 text-xs md:mt-12 md:text-lg">
               <p>
@@ -133,22 +123,23 @@
                   />
                 </div>
                 <div class="text-sm leading-5 pl-7">
-                  <label for="privacityLaw" class="font-medium text-gray-700"
-                    >Acepto la ley de protección de datos</label
-                  >
+                  <label
+                    for="privacityLaw"
+                    class="font-medium text-gray-700"
+                  >Acepto la ley de protección de datos</label>
                   <p class="text-xs text-gray-500">
                     Puedes ver la ley pulsando
                     <span
                       @click="openModal('modal_rgpd')"
                       class="font-bold cursor-pointer text-primary-300"
-                      >aquí</span
-                    >
+                    >aquí</span>
                   </p>
                 </div>
               </div>
-              <div v-if="!rgpdAccepted" class="text-red-600">
-                Debes aceptar la ley de protección de datos
-              </div>
+              <div
+                v-if="!rgpdAccepted"
+                class="text-red-600"
+              >Debes aceptar la ley de protección de datos</div>
             </div>
 
             <div class="md:flex md:justify-center">
@@ -157,18 +148,14 @@
                   @click="checkRGPD()"
                   type="button"
                   class="w-full py-2 font-medium leading-4 text-center text-white transition duration-150 ease-in-out rounded shadow-md md:w-28 bg-primary-200 md:py-4 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-                >
-                  Continuar
-                </button>
+                >Continuar</button>
               </span>
               <span class="flex justify-center mt-4">
                 <button
                   @click="logout()"
                   type="button"
                   class="w-full py-2 font-medium leading-4 text-center transition duration-150 ease-in-out rounded shadow-md md:w-28 bg-secondary-100 md:py-4 md:text-lg hover:bg-red-500 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-                >
-                  Salir
-                </button>
+                >Salir</button>
               </span>
             </div>
 
@@ -182,15 +169,10 @@
         </div>
 
         <!-- step 2 -->
-        <div
-          v-if="step == 2"
-          class="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6"
-        >
+        <div v-if="step == 2" class="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
-              <h3 class="text-lg font-medium leading-6 text-gray-900">
-                Información personal
-              </h3>
+              <h3 class="text-lg font-medium leading-6 text-gray-900">Información personal</h3>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
               <div class="grid grid-cols-6 gap-6">
@@ -242,8 +224,7 @@
                     for="gender"
                     :class="{ 'text-red-600 text-base': !isGender }"
                     class="block text-sm font-medium leading-5 text-gray-700"
-                    >Sexo</label
-                  >
+                  >Sexo</label>
                   <select
                     v-model="newUser.details.gender"
                     :class="{ 'border-red-600': !isGender }"
@@ -271,8 +252,7 @@
                     for="date_born"
                     :class="{ 'text-red-600 text-base': !isDateBorn }"
                     class="block text-sm font-medium leading-5 text-gray-700"
-                    >Fecha de nacimiento</label
-                  >
+                  >Fecha de nacimiento</label>
                   <input
                     type="date"
                     label="date_born"
@@ -287,10 +267,7 @@
           </div>
         </div>
         <!-- step 3 -->
-        <div
-          v-if="step == 3"
-          class="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6"
-        >
+        <div v-if="step == 3" class="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
               <h3 class="text-lg font-medium leading-6 text-gray-900">
@@ -329,8 +306,7 @@
                     for="size"
                     :class="{ 'text-red-600 text-base': !isSize }"
                     class="block text-sm font-medium leading-5 text-gray-700"
-                    >Talla</label
-                  >
+                  >Talla</label>
                   <select
                     v-model="newUser.details.size"
                     id="size"
@@ -349,33 +325,22 @@
           </div>
         </div>
 
-        <!-- step 4 -->
-        <div
-          v-if="step == 4"
-          class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
-        >
+        <!-- step 4, select language -->
+        <div v-if="step == 4" class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6">
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
-              <h3 class="text-lg font-medium leading-6 text-gray-900">
-                Idioma
-              </h3>
-              <p class="mt-1 text-sm leading-5 text-gray-500">
-                Elige en qué idioma o idiomas te gustaría recibir los cursos
-              </p>
+              <h3 class="text-lg font-medium leading-6 text-gray-900">Idioma</h3>
+              <p
+                class="mt-1 text-sm leading-5 text-gray-500"
+              >Elige en qué idioma o idiomas te gustaría recibir los cursos</p>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
               <fieldset>
                 <legend
                   :class="{ 'text-red-600 text-lg': !areLanguages }"
                   class="text-base font-medium leading-6 text-gray-900"
-                >
-                  Idiomas
-                </legend>
-                <div
-                  v-for="language of languages"
-                  :key="language.name"
-                  class="mt-4"
-                >
+                >Idiomas</legend>
+                <div v-for="language of languages" :key="language.name" class="mt-4">
                   <div class="flex items-start">
                     <oc-checkbox
                       :error="!areLanguages"
@@ -389,53 +354,41 @@
           </div>
         </div>
 
-        <!-- step 5 -->
-        <div
-          v-if="step == 5"
-          class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
-        >
+        <!-- step 5, select sports -->
+        <div v-if="step == 5" class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6">
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
-              <h3 class="text-lg font-medium leading-6 text-gray-900">
-                Deporte
-              </h3>
-              <p class="mt-1 text-sm leading-5 text-gray-500">
-                Elige los deportes en los que te gustaría recibir cursos
-              </p>
+              <h3 class="text-lg font-medium leading-6 text-gray-900">Deporte</h3>
+              <p
+                class="mt-1 text-sm leading-5 text-gray-500"
+              >Elige los deportes en los que te gustaría recibir cursos</p>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
               <fieldset>
                 <legend
                   :class="{ 'text-red-600 text-lg': !areSports }"
                   class="text-base font-medium leading-6 text-gray-900"
-                >
-                  Deportes
-                </legend>
+                >Deportes</legend>
                 <div v-for="sport of sports" :key="sport.name" class="mt-4">
                   <div class="flex items-start">
-                    <oc-checkbox
-                      v-model="sport.checked"
-                      :label="sport.name"
-                    ></oc-checkbox>
+                    <oc-checkbox v-model="sport.checked" :label="sport.name"></oc-checkbox>
                   </div>
                 </div>
               </fieldset>
             </div>
           </div>
         </div>
-        <!-- step 6 -->
+        <!-- step 6, select level -->
         <div
           v-if="step == 6 && sportShowed"
           class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
         >
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
-              <h3 class="text-lg font-medium leading-6 text-gray-900">
-                Nivel
-              </h3>
-              <p class="mt-1 text-sm leading-5 text-gray-500">
-                Elige el nivel que deseas realizar de cada deporte seleccionado
-              </p>
+              <h3 class="text-lg font-medium leading-6 text-gray-900">Nivel</h3>
+              <p
+                class="mt-1 text-sm leading-5 text-gray-500"
+              >Elige el nivel que deseas realizar de cada deporte seleccionado</p>
             </div>
             <div class="xs:hidden">
               <select
@@ -443,9 +396,11 @@
                 class="block w-full form-select"
                 @change="resetTargets($event)"
               >
-                <option v-for="sport of sportsSelected" :key="sport.id">{{
+                <option v-for="sport of sportsSelected" :key="sport.id">
+                  {{
                   sport.name
-                }}</option>
+                  }}
+                </option>
               </select>
             </div>
             <div class="hidden mt-5 xs:block md:mt-0 md:col-span-2">
@@ -462,8 +417,7 @@
                     resetTargets();
                   "
                   class="px-3 py-2 font-bold leading-5 rounded-lg rounded-b-none cursor-pointer text:tiny sm:text-xl hover:text-primary-300"
-                  >{{ sport.name }}</a
-                >
+                >{{ sport.name }}</a>
               </nav>
             </div>
             <div class="md:col-span-1">
@@ -492,8 +446,7 @@
                   <label :for="sportLevel.sportLevel.level.name" class="ml-3">
                     <span
                       class="block text-sm font-medium leading-5 text-gray-700"
-                      >{{ sportLevel.sportLevel.level.name }}</span
-                    >
+                    >{{ sportLevel.sportLevel.level.name }}</span>
                   </label>
                 </div>
               </div>
@@ -513,8 +466,7 @@
                     v-for="option of optionsTargets"
                     :key="option.value"
                     :value="option.value"
-                    >{{ option.text }}</option
-                  >
+                  >{{ option.text }}</option>
                 </select>
               </div>
               <div class="hidden xs:block">
@@ -526,10 +478,8 @@
                       :class="{
                         'border-primary-300 font-bold': showTargetsNeeded,
                       }"
-                      class="w-1/2 py-4 text-sm font-medium leading-5 text-center border-b-2 border-transparent text-primary-300 sm:text-tiny sm:w-48 hover:text-primary-200 hover:border-primary-200 "
-                    >
-                      {{ optionsTargets[0].text }}
-                    </a>
+                      class="w-1/2 py-4 text-sm font-medium leading-5 text-center border-b-2 border-transparent text-primary-300 sm:text-tiny sm:w-48 hover:text-primary-200 hover:border-primary-200"
+                    >{{ optionsTargets[0].text }}</a>
                     <a
                       @click="changeTargetsToShow(optionsTargets[1].value)"
                       href="#"
@@ -537,9 +487,7 @@
                         'border-primary-300 font-bold': showTargetsToLearn,
                       }"
                       class="w-1/2 py-4 text-sm font-medium leading-5 text-center border-b-2 border-transparent text-primary-300 sm:text-tiny sm:w-48 hover:text-primary-200 hover:border-primary-200"
-                    >
-                      {{ optionsTargets[1].text }}
-                    </a>
+                    >{{ optionsTargets[1].text }}</a>
                   </nav>
                 </div>
               </div>
@@ -562,17 +510,17 @@
             <div v-if="isSomeLevelSelected()">
               <div v-if="isBegginer()">
                 <p class="mx-12 mt-4 mb-2 text-center text-green-600">
-                  <span class="font-bold"
-                    >Perfecto! No necesitas saber nada para hacer un curso de
-                    iniciación</span
-                  >, puedes echar un vistazo a lo que aprenderás :)
+                  <span class="font-bold">
+                    Perfecto! No necesitas saber nada para hacer un curso de
+                    iniciación
+                  </span>, puedes echar un vistazo a lo que aprenderás :)
                 </p>
               </div>
               <div v-else class="mx-12 mt-4 mb-2">
                 <div v-if="!showTargetsToLearn">
-                  <p class="font-semibold text-xxs xs:text-xs md:text-sm">
-                    Debes realizar los ejercicios mostrados de manera autónoma.
-                  </p>
+                  <p
+                    class="font-semibold text-xxs xs:text-xs md:text-sm"
+                  >Debes realizar los ejercicios mostrados de manera autónoma.</p>
                   <p class="italic text-xxs md:text-sm">
                     En el caso que durante el curso el instructor observe que no
                     eres capaz de realizar alguno de estos ejercicios, tendrá
@@ -591,7 +539,7 @@
           v-if="step == 7 && sportShowed"
           class="h-auto px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
         >
-          <div class="">
+          <div class>
             <p class="text-gray-900 sm:text-2xl">
               <span class="font-bold text-primary-300">Enhorabuena</span>, has
               completado el proceso de registro de alumno.
@@ -606,7 +554,7 @@
           <span class="relative z-0 inline-flex shadow-sm">
             <button
               v-if="step > 1 && step < max_step"
-              @click="step--"
+              @click="lastStep()"
               type="button"
               class="relative inline-flex items-center px-2 py-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-l-md hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500"
             >
@@ -641,9 +589,7 @@
               @click="enroll"
               type="button"
               class="w-full py-2 font-medium leading-4 text-center text-white transition duration-150 ease-in-out rounded shadow-md md:w-28 bg-primary-200 md:py-4 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-            >
-              Entrar
-            </button>
+            >Entrar</button>
           </span>
           <span class="flex justify-center mt-4">
             <button
@@ -651,9 +597,7 @@
               @click="step--"
               type="button"
               class="w-full py-2 font-medium leading-4 text-center transition duration-150 ease-in-out rounded shadow-md md:w-28 bg-secondary-100 md:py-4 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
-            >
-              Volver
-            </button>
+            >Volver</button>
           </span>
         </div>
       </section>
@@ -730,7 +674,7 @@ export default {
         { text: "Qué necesitas saber", value: 1 },
         { text: "Qué aprenderás", value: 2 },
       ],
-      optionSelected: "",
+      optionSelected: 1,
     };
   },
   mixins: [UI],
@@ -751,7 +695,6 @@ export default {
       data.sports.forEach((sport) => {
         this.sports.push(new Sport(sport));
       });
-      this.sportShowed = this.sports[0];
 
       data.levels.forEach((level) => {
         this.levels.push(new Level(level));
@@ -846,6 +789,22 @@ export default {
 
       return nextOne;
     },
+    lastStep() {
+      if (this.step == 6) {
+        this.sportsSelected.forEach((sport) => {
+          sport.sportLevels.forEach((sportLevel) => {
+            sportLevel.checked = false;
+          });
+        });
+        this.showTargets = false;
+        this.showTargetsDescription = false;
+        this.levelSelected = false;
+        this.targets = [];
+        this.targetsNeeded = [];
+        this.targetsToLearn = [];
+      }
+      this.step--;
+    },
     nextStep() {
       switch (this.step) {
         case 1:
@@ -895,6 +854,7 @@ export default {
           });
           if (this.sportsSelected.length > 0) {
             this.areSports = true;
+            this.sportShowed = this.sportsSelected[0];
             this.step++;
           } else {
             this.areSports = false;
@@ -945,14 +905,9 @@ export default {
       let res = await this.api.post("students", payload);
       if (res) {
         if (res.data.data) {
-          // recibir nuevo token con los nuevos datos
-          // la respuesta que se recibe debe ser exactamente la misma que cuando se realiza login siendo ya alumno
-          console.log(res);
           this.$store.dispatch(AUTH_SUCCESS, res);
           this.$store.dispatch(USER_REQUEST, res);
           this.$router.push(`/home`);
-        } else {
-          console.log(res.data);
         }
       }
     },
@@ -960,6 +915,7 @@ export default {
       this.$store.dispatch(AUTH_LOGOUT);
     },
     getTargets() {
+      this.optionSelected = 1;
       this.showTargets = true;
       let sportId = this.sportShowed.id;
       let sport = this.sportsSelected.find((sport) => sport.id == sportId);
