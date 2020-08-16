@@ -685,6 +685,7 @@ export default {
   },
   methods: {
     async getDataToStart() {
+      this.$store.dispatch("SET_LOADING", true);
       let res = await this.api.get("students/start");
       let data = res.data.data.data;
 
@@ -699,6 +700,7 @@ export default {
       data.levels.forEach((level) => {
         this.levels.push(new Level(level));
       });
+      this.$store.dispatch("SET_LOADING", false);
     },
     checkRGPD() {
       if (!this.rgpd) {
@@ -891,6 +893,7 @@ export default {
       // this.step++;
     },
     async enroll() {
+      this.$store.dispatch("SET_LOADING", true);
       let languages = [];
       this.languagesSelected.forEach((language) => {
         languages.push({ id: language.id, name: language.name });
@@ -910,6 +913,7 @@ export default {
           this.$router.push(`/home`);
         }
       }
+      this.$store.dispatch("SET_LOADING", false);
     },
     logout() {
       this.$store.dispatch(AUTH_LOGOUT);
