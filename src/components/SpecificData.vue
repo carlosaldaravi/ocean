@@ -9,30 +9,35 @@
           >Cuantos más datos tengamos, mejor serán nuestras clases.</p>
         </div>
         <div class="mt-5 md:mt-0 md:col-span-2">
-          <form action="#" method="POST">
-            <div class="grid grid-cols-6 gap-6">
-              <div class="col-span-6 sm:col-span-3">
-                <oc-input label="weight" title="Peso" type="number" v-model="user.details.weight"></oc-input>
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <oc-input
-                  label="footprint"
-                  title="Número de pie"
-                  type="number"
-                  v-model="user.details.footprint"
-                ></oc-input>
-              </div>
-
-              <div class="col-span-6 sm:col-span-4">
-                <label for="size" class="block text-sm font-medium leading-5 text-gray-700">Talla</label>
-                <input
-                  id="size"
-                  class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out border border-gray-300 rounded-md shadow-sm form-input focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-                />
-              </div>
+          <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-span-3">
+              <oc-input label="weight" title="Peso" type="number" v-model="user.details.weight"></oc-input>
             </div>
-          </form>
+
+            <div class="col-span-6 sm:col-span-3">
+              <oc-input
+                label="footprint"
+                title="Número de pie"
+                type="number"
+                v-model="user.details.footprint"
+              ></oc-input>
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+              <label for="size" class="block text-sm font-medium leading-5 text-gray-700">Talla</label>
+              <select
+                id="size"
+                v-model="user.details.size"
+                class="block w-full px-3 py-2 mt-1 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm form-select focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+              >
+                <option>XS</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -70,12 +75,12 @@ import oc_checkbox from "./forms/Checkbox.vue";
 export default {
   components: {
     "oc-input": oc_input,
-    "oc-checkbox": oc_checkbox
+    "oc-checkbox": oc_checkbox,
   },
   props: {
     user: { type: Object, required: true },
-    editing: { type: Boolean, required: true }
-  }
+    editing: { type: Boolean, required: true },
+  },
 };
 </script>
 

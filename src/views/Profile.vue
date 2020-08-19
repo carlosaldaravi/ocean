@@ -1,16 +1,16 @@
 <template>
   <div v-if="user">
     <section v-if="editing" class="container mx-auto my-8">
-      <div class="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-          <div class="md:col-span-1">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">Perfil</h3>
-            <p
-              class="mt-1 text-sm leading-5 text-gray-500"
-            >Esta información es pública así que cuidado con lo que compartes.</p>
-          </div>
-          <div class="mt-5 md:mt-0 md:col-span-2">
-            <form action="#" method="POST">
+      <form action="#" method="POST">
+        <div class="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
+          <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="md:col-span-1">
+              <h3 class="text-lg font-medium leading-6 text-gray-900">Perfil</h3>
+              <p
+                class="mt-1 text-sm leading-5 text-gray-500"
+              >Esta información es pública así que cuidado con lo que compartes.</p>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
               <div class="mt-6">
                 <label
                   for="about"
@@ -82,50 +82,48 @@
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
 
-      <PersonalData :editing="editing" :user="user" />
-      <SpecificData
-        v-if="this.$store.getters.getRole === 'ALUMNO'"
-        :editing="editing"
-        :user="user"
-      />
+        <PersonalData :editing="editing" :user="user" />
+        <SpecificData
+          v-if="this.$store.getters.getRole === 'ALUMNO'"
+          :editing="editing"
+          :user="user"
+        />
 
-      <div
-        v-if="this.$store.getters.getRole === 'ALUMNO'"
-        class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
-      >
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-          <div class="md:col-span-1">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">Cursos</h3>
-            <p class="mt-1 text-sm leading-5 text-gray-500">
-              Añade deportes en los que estés interesado. Para añadir un nuevo
-              deporte, tendrás que seleccionar el nivel. Ten en cuenta que no
-              puedes eliminar un deporte si estás apuntado a alguna clase del
-              mismo.
-            </p>
-          </div>
-          <div class="mt-5 md:mt-0 md:col-span-2">
-            <form action="#" method="POST">
+        <div
+          v-if="this.$store.getters.getRole === 'ALUMNO'"
+          class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
+        >
+          <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="md:col-span-1">
+              <h3 class="text-lg font-medium leading-6 text-gray-900">Cursos</h3>
+              <p class="mt-1 text-sm leading-5 text-gray-500">
+                Añade deportes en los que estés interesado. Para añadir un nuevo
+                deporte, tendrás que seleccionar el nivel. Ten en cuenta que no
+                puedes eliminar un deporte si estás apuntado a alguna clase del
+                mismo.
+              </p>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
               <fieldset>
                 <legend class="text-base font-medium leading-6 text-gray-900">Deportes</legend>
                 <div v-if="user && user.userSports">
                   <div v-for="userSport of user.userSports" :key="userSport.sportId" class="mt-4">
-                    <div class="flex">
+                    <div class="flex justify-between">
                       <div>
                         <div class="text-sm text-gray-700">{{ userSport.sport.name }}</div>
                         <div class="text-xs text-gray-700">Nivel actual: {{ userSport.level.name }}</div>
                       </div>
                       <div class="flex items-center ml-4">
                         <button
-                          @click="openModal('confirm_' + userSport.sportId)"
+                          @click="openModal('confirm_remove_sport_' + userSport.sportId)"
                           type="button"
                           class="inline-flex items-center px-2.5 py-1 text-xs font-medium leading-4 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded hover:bg-red-500 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
                         >Eliminar</button>
-                        <Modal :id="'confirm_' + userSport.sportId">
+                        <Modal :id="'confirm_remove_sport_' + userSport.sportId">
                           <slot>
                             <div
                               class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
@@ -167,7 +165,7 @@
                               <button
                                 @click="
                                   remove(userSport);
-                                  closeModal('confirm_' + userSport.sportId);
+                                  closeModal('confirm_remove_sport_' + userSport.sportId);
                                 "
                                 type="button"
                                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
@@ -176,7 +174,7 @@
                             <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
                               <button
                                 @click="
-                                  closeModal('confirm_' + userSport.sportId)
+                                  closeModal('confirm_remove_sport_' + userSport.sportId)
                                 "
                                 type="button"
                                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
@@ -289,10 +287,10 @@
                   </div>
                 </div>
               </fieldset>-->
-            </form>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </section>
     <!-- Not editing -->
     <section v-else class="container mx-auto my-8">
@@ -428,15 +426,19 @@ export default {
     async remove(userSport) {
       var index = this.user.userSports.indexOf(userSport);
       if (index > -1) {
-        this.user.userSports.splice(index, 1);
-        // this.showConfirmModal = false;
+        let {
+          data: { data },
+        } = await this.api.delete(`users/sport`, userSport);
+        if (data.error) {
+          this.$store.dispatch("ADD_NOTIFICATION", {
+            type: "error",
+            message:
+              "No se puede eliminar teniendo reservado un curso de este deporte",
+          });
+        } else {
+          this.user.userSports.splice(index, 1);
+        }
       }
-      // let {
-      //   data: { data }
-      // } = await this.api.delete(`users/sport`, userSport);
-      // if (data.error) {
-      //   console.log("no ha podido eliminarse");
-      // }
     },
   },
 };
