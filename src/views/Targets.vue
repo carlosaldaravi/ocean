@@ -16,7 +16,7 @@
             >{{ sport.name }}</a>
           </nav>
         </div>
-        <div v-if="sportSelected.id">
+        <div v-if="sportSelected">
           <div class="mb-2 sm:hidden">
             <select
               v-model="nameLevelSelected"
