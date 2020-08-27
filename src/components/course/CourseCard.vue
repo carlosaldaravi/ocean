@@ -152,7 +152,7 @@
             </div>
             <div class="ml-3">
               <p
-                class="text-sm font-medium leading-5 text-gray-700 group-hover:text-gray-900"
+                class="text-base font-black leading-5 text-gray-700 group-hover:text-gray-900"
               >
                 {{ course.courseInstructors[0].instructor.details.firstname }}
               </p>

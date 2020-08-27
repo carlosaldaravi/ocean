@@ -20,7 +20,13 @@
           />
         </div>
         <div class="ml-3">
-          <p class="text-sm font-medium leading-5">
+          <p
+            :class="{
+              'font-bold text-base':
+                courseStudent.student.id == this.$store.getters.getUserId,
+            }"
+            class="text-sm leading-5"
+          >
             {{ courseStudent.student.details.firstname }}
             {{ courseStudent.student.details.lastname }}
           </p>
@@ -30,7 +36,13 @@
       <div class="flex justify-between align-baseline">
         <div class="flex items-center">
           <img class="w-5 h-5" src="../../assets/images/logros.svg" alt />
-          <div class="pl-1 mb-1 text-sm">
+          <div
+            :class="{
+              'font-bold':
+                courseStudent.student.id == this.$store.getters.getUserId,
+            }"
+            class="pl-1 mb-1 text-sm"
+          >
             {{ getTargetsValidated(courseStudent.student) }}
           </div>
         </div>
