@@ -7,6 +7,7 @@ export const Student = class Student {
     this.userSports = data?.userSports;
     this.details = {
       id: data?.details?.id,
+      photo: data?.details?.photo,
       firstname: data?.details?.firstname,
       lastname: data?.details?.lastname,
       phone: data?.details?.phone,

@@ -5,6 +5,7 @@ export const Instructor = class Instructor {
     this.status = data?.status;
     this.userSports = data?.userSports;
     this.details = {
+      photo: data?.details.photo,
       firstname: data?.details.firstname,
       lastname: data?.details.lastname,
       phone: data?.details.phone,

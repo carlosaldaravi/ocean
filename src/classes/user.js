@@ -9,6 +9,8 @@ export const User = class User {
     this.updated_at = data?.updated_at;
     this.details = {
       id: data?.details?.id,
+      photo: data?.details?.photo,
+      photo64: data?.details?.photo64,
       firstname: data?.details?.firstname,
       lastname: data?.details?.lastname,
       phone: data?.details?.phone,
