@@ -58,15 +58,18 @@
             <div class="flex items-center">
               <div>
                 <img
-                  v-if="getInstructorGender(target) == 'FEMALE'"
+                  v-if="target.studentTargets[0].instructor.details.photo"
                   class="object-cover object-top rounded-full w-9 h-9"
-                  src="../../assets/images/avatar/kaya.jpg"
+                  :src="
+                    'https://api-ocean.herokuapp.com/api/file/avatar/' +
+                      target.studentTargets[0].instructor.details.photo
+                  "
                   alt
                 />
                 <img
-                  v-if="getInstructorGender(target) == 'MALE'"
+                  v-else
                   class="object-cover object-top rounded-full w-9 h-9"
-                  src="../../assets/images/avatar/will.jpg"
+                  src="../../assets/images/avatar/user_default.png"
                   alt
                 />
               </div>
