@@ -2,7 +2,9 @@ import {
   USER_REQUEST,
   USER_ERROR,
   USER_SUCCESS,
+  USER_PHOTO,
   SET_ROLE,
+  SET_PHOTO,
 } from "../actions/user";
 import apiCall from "../../utils/api";
 import Vue from "vue";
@@ -18,6 +20,7 @@ const state = {
 const getters = {
   getProfile: (state) => state.profile,
   isProfileLoaded: (state) => !!state.profile.details.firstname,
+  hasPhoto: (state) => state.profile.details.photo,
   getRole: (state) => state.role,
   getUserId: (state) => state.profile.id,
   getUserName: (state) =>
@@ -25,12 +28,12 @@ const getters = {
 };
 
 const actions = {
-  [USER_REQUEST]: ({ commit, dispatch }, resp) => {
+  [USER_REQUEST]: ({ commit, dispatch }, user) => {
     let store = new Localit();
-    store.set("user", resp.data.data.user);
+    store.set("user", user);
     commit(USER_REQUEST);
-    commit(USER_SUCCESS, resp);
-    const roles = resp.data.data.user.roles;
+    commit(USER_SUCCESS, user);
+    const roles = user.roles;
 
     if (roles.some((role) => role.name === "ADMIN")) {
       commit(SET_ROLE, "ADMIN");
@@ -51,15 +54,18 @@ const actions = {
     //     dispatch(AUTH_LOGOUT);
     //   });
   },
+  [USER_PHOTO]: ({ commit, dispatch }, photo) => {
+    commit(SET_PHOTO, photo);
+  },
 };
 
 const mutations = {
   [USER_REQUEST]: (state) => {
     state.status = "loading";
   },
-  [USER_SUCCESS]: (state, resp) => {
+  [USER_SUCCESS]: (state, user) => {
     state.status = "success";
-    Vue.set(state, "profile", resp.data.data.user);
+    Vue.set(state, "profile", user);
   },
   [USER_ERROR]: (state) => {
     state.status = "error";
@@ -69,6 +75,9 @@ const mutations = {
   },
   [SET_ROLE]: (state, role) => {
     state.role = role;
+  },
+  [SET_PHOTO]: (state, photo) => {
+    state.profile.details.photo = photo;
   },
 };
 

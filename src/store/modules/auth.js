@@ -30,6 +30,7 @@ const actions = {
       commit(AUTH_REQUEST);
       axios({
         url: "https://api-ocean.herokuapp.com/api/auth/signin",
+        // url: "http://localhost:3000/api/auth/signin",
         data: user,
         method: "POST",
       })
@@ -39,7 +40,7 @@ const actions = {
           axios.defaults.headers.common["Authorization"] = resp.data.data.token;
           commit(AUTH_SUCCESS, resp);
 
-          dispatch(USER_REQUEST, resp);
+          dispatch(USER_REQUEST, resp.data.data.user);
           resolve(resp);
         })
         .catch((err) => {

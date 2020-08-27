@@ -909,7 +909,7 @@ export default {
       if (res) {
         if (res.data.data) {
           this.$store.dispatch(AUTH_SUCCESS, res);
-          this.$store.dispatch(USER_REQUEST, res);
+          this.$store.dispatch(USER_REQUEST, res.data.data.user);
           this.$router.push(`/home`);
         }
       }
