@@ -1,30 +1,51 @@
 <template>
   <div>
-    <div v-if="editing" class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6">
+    <div
+      v-if="editing"
+      class="px-4 py-5 mt-6 bg-white shadow sm:rounded-lg sm:p-6"
+    >
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">Información Personal</h3>
-          <p class="mt-1 text-sm leading-5 text-gray-500">Rellena la información personal</p>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">
+            Información Personal
+          </h3>
+          <p class="mt-1 text-sm leading-5 text-gray-500">
+            Rellena la información personal
+          </p>
         </div>
         <div class="mt-5 md:mt-0 md:col-span-2">
           <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
-              <oc-input label="firstname" title="Nombre" v-model="user.details.firstname"></oc-input>
+              <oc-input
+                label="firstname"
+                title="Nombre"
+                v-model="user.details.firstname"
+              ></oc-input>
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <oc-input label="lastname" title="Apellidos" v-model="user.details.lastname"></oc-input>
+              <oc-input
+                label="lastname"
+                title="Apellidos"
+                v-model="user.details.lastname"
+              ></oc-input>
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <oc-input label="dni" title="DNI" type="dni" v-model="user.details.dni"></oc-input>
+              <oc-input
+                label="dni"
+                title="DNI"
+                type="dni"
+                v-model="user.details.dni"
+              ></oc-input>
             </div>
 
             <div class="col-span-6 sm:col-span-3">
               <label
                 for="user_email"
                 class="block text-sm font-medium leading-5 text-gray-700"
-              >Email</label>
+                >Email</label
+              >
               <div class="relative mt-1 rounded-md shadow-sm">
                 <input
                   @blur="checkEmail()"
@@ -39,12 +60,17 @@
                 <span
                   v-if="userError && user.email != ''"
                   class="text-xs italic font-semibold text-red-500 md:text-sm"
-                >{{ userError }}</span>
+                  >{{ userError }}</span
+                >
               </div>
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">Sexo</label>
+              <label
+                for="gender"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Sexo</label
+              >
               <select
                 id="gender"
                 v-model="user.details.gender"
@@ -56,11 +82,19 @@
             </div>
 
             <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-              <oc-input label="city" title="Ciudad" v-model="user.details.city"></oc-input>
+              <oc-input
+                label="city"
+                title="Ciudad"
+                v-model="user.details.city"
+              ></oc-input>
             </div>
 
             <div class="col-span-6 sm:col-span-3 lg:col-span-3">
-              <oc-input label="phone" title="Teléfono" v-model="user.details.phone"></oc-input>
+              <oc-input
+                label="phone"
+                title="Teléfono"
+                v-model="user.details.phone"
+              ></oc-input>
             </div>
             <div class="col-span-6 sm:col-span-3 lg:col-span-3">
               <oc-input
@@ -77,8 +111,18 @@
     <div v-else class="p-6 bg-white rounded-lg md:flex">
       <div>
         <img
+          v-if="user.details.photo"
           class="absolute object-cover object-top w-16 h-16 transform -translate-x-1/2 rounded-full top-12 left-1/2"
-          :src="'http://localhost:8080/dist/img/'+user.details.photo"
+          :src="
+            'https://api-ocean.herokuapp.com/api/file/avatar/' +
+              user.details.photo
+          "
+          alt
+        />
+        <img
+          v-else
+          class="absolute object-cover object-top w-16 h-16 transform -translate-x-1/2 rounded-full top-12 left-1/2"
+          src="../assets/images/avatar/user_default.png"
           alt
         />
       </div>
@@ -87,15 +131,22 @@
           <div class="md:col-span-2">Datos personales</div>
           <div class="mt-2 md:mt-0 md:col-span-3">
             <div class="text-purple-500 lowercase">{{ getRole() }}</div>
-            <h2 class="text-lg">{{ user.details.firstname }} {{ user.details.lastname }}</h2>
+            <h2 class="text-lg">
+              {{ user.details.firstname }} {{ user.details.lastname }}
+            </h2>
             <div class="text-gray-600">{{ user.email }}</div>
-            <div v-if="user.details.phone" class="text-gray-600">{{ user.details.phone }}</div>
-            <div v-if="user.details.city" class="text-gray-600">{{ user.details.city }}</div>
-            <div v-if="user.details.dni" class="text-gray-600">{{ user.details.dni }}</div>
-            <div
-              v-if="user.details.dateBorn"
-              class="text-gray-600"
-            >{{ formatDate(user.details.dateBorn) }}</div>
+            <div v-if="user.details.phone" class="text-gray-600">
+              {{ user.details.phone }}
+            </div>
+            <div v-if="user.details.city" class="text-gray-600">
+              {{ user.details.city }}
+            </div>
+            <div v-if="user.details.dni" class="text-gray-600">
+              {{ user.details.dni }}
+            </div>
+            <div v-if="user.details.dateBorn" class="text-gray-600">
+              {{ formatDate(user.details.dateBorn) }}
+            </div>
           </div>
         </div>
       </div>
