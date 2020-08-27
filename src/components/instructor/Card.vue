@@ -11,15 +11,18 @@
         <div class="flex justify-between">
           <div class="flex">
             <img
-              v-if="getInstructorGender(instructor) == 'MALE'"
+              v-if="instructor.details.photo"
               class="object-cover object-top rounded-full w-9 h-9"
-              src="../../assets/images/avatar/will.jpg"
+              :src="
+                'https://api-ocean.herokuapp.com/api/file/avatar/' +
+                  instructor.details.photo
+              "
               alt
             />
             <img
-              v-if="getInstructorGender(instructor) == 'FEMALE'"
+              v-else
               class="object-cover object-top rounded-full w-9 h-9"
-              src="../../assets/images/avatar/kaya.jpg"
+              src="../../assets/images/avatar/user_default.png"
               alt
             />
             <div class="flex items-center ml-4">

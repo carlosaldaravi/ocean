@@ -7,7 +7,9 @@
             <h3
               class="text-xl font-medium leading-6 text-primary-100"
               id="modal-headline"
-            >Validar objetivos</h3>
+            >
+              Validar objetivos
+            </h3>
           </div>
           <div>
             <div class="col-span-6 sm:col-span-3">
@@ -15,8 +17,11 @@
                 <label
                   for="alumnoSelected"
                   class="block text-lg font-medium leading-5 text-primary-200"
-                >Alumno</label>
-                <div class="block text-lg font-medium leading-5 text-primary-200">
+                  >Alumno</label
+                >
+                <div
+                  class="block text-lg font-medium leading-5 text-primary-200"
+                >
                   {{ courseStudent.student.details.firstname }}
                   {{ courseStudent.student.details.lastname }}
                 </div>
@@ -60,18 +65,20 @@
                   @click="validateTargets()"
                   type="button"
                   class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out border border-transparent rounded-md shadow-sm bg-primary-200 hover:bg-primary-300 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
-                >Confirmar</button>
+                >
+                  Confirmar
+                </button>
               </span>
-              <span class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto">
+              <span
+                class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
+              >
                 <button
-                  @click="
-                    closeModal(
-                      `course_${course.id}`
-                    )
-                  "
+                  @click="closeModal(`course_${course.id}`)"
                   type="button"
                   class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
-                >Cancelar</button>
+                >
+                  Cancelar
+                </button>
               </span>
             </div>
           </div>
@@ -93,7 +100,12 @@
           src="../../assets/images/iniciacion.jpg"
           alt
         />
-        <img v-else class="object-cover w-full h-48" src="../../assets/images/kitesurf.png" alt />
+        <img
+          v-else
+          class="object-cover w-full h-48"
+          src="../../assets/images/kitesurf.png"
+          alt
+        />
       </div>
 
       <div class="w-full h-full p-4 xl:w-2/3">
@@ -123,39 +135,42 @@
           <div class="flex items-center">
             <div>
               <img
-                v-if="
-                  course.courseInstructors[0].instructor.details.gender ==
-                    'FEMALE'
-                "
+                v-if="course.courseInstructors[0].instructor.details.photo"
                 class="object-cover object-top rounded-full w-9 h-9"
-                src="../../assets/images/avatar/kaya.jpg"
+                :src="
+                  'https://api-ocean.herokuapp.com/api/file/avatar/' +
+                    course.courseInstructors[0].instructor.details.photo
+                "
                 alt
               />
               <img
-                v-if="
-                  course.courseInstructors[0].instructor.details.gender ==
-                    'MALE'
-                "
+                v-else
                 class="object-cover object-top rounded-full w-9 h-9"
-                src="../../assets/images/avatar/will.jpg"
+                src="../../assets/images/avatar/user_default.png"
                 alt
               />
             </div>
             <div class="ml-3">
               <p
                 class="text-sm font-medium leading-5 text-gray-700 group-hover:text-gray-900"
-              >{{ course.courseInstructors[0].instructor.details.firstname }}</p>
+              >
+                {{ course.courseInstructors[0].instructor.details.firstname }}
+              </p>
               <p
                 v-if="
                   course.courseInstructors[0].instructor.details.gender ==
                     'FEMALE'
                 "
                 class="text-xs font-medium leading-4 text-gray-500 transition duration-150 ease-in-out group-hover:text-gray-700 group-focus:underline"
-              >Instructora</p>
+              >
+                Instructora
+              </p>
               <p
                 v-else
                 class="text-xs font-medium leading-4 text-gray-500 transition duration-150 ease-in-out group-hover:text-gray-700 group-focus:underline"
-              >Instructor</p>
+              >
+                Instructor
+              </p>
             </div>
           </div>
         </div>
@@ -166,7 +181,10 @@
               <div>Alumnos</div>
               <div>Objetivos</div>
             </div>
-            <div v-for="courseStudent of course.courseStudents" :key="courseStudent.studentId">
+            <div
+              v-for="courseStudent of course.courseStudents"
+              :key="courseStudent.studentId"
+            >
               <CourseStudent
                 :courseStudent="courseStudent"
                 :courseId="course.id"
@@ -184,7 +202,12 @@
               src="../../assets/icons/cheveron-down.svg"
               alt
             />
-            <img v-else class="w-4 h-4 text-red-500" src="../../assets/icons/cheveron-up.svg" alt />
+            <img
+              v-else
+              class="w-4 h-4 text-red-500"
+              src="../../assets/icons/cheveron-up.svg"
+              alt
+            />
           </button>
         </div>
       </div>
@@ -273,7 +296,7 @@ export default {
       if (res.data.data) {
         let studentId = this.courseStudent.studentId;
 
-        this.course.courseStudents.forEach(function (item, i) {
+        this.course.courseStudents.forEach(function(item, i) {
           if (item.studentId == studentId) {
             item.student.studentTargets = [];
 
