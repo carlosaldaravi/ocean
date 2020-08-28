@@ -5,9 +5,12 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 import modal from "vue-js-modal";
+import _ from "lodash";
 
 // CSS
 import "./assets/css/output.css";
+
+Object.defineProperty(Vue.prototype, "$_", { value: _ });
 Vue.config.productionTip = false;
 Vue.use(modal, { dialog: true, dynamic: true });
 const token = localStorage.getItem("user-token");
