@@ -225,6 +225,65 @@
                             </span>
                           </div>
                         </Modal>
+                        <Modal id="confirm_cancel_editing">
+                          <slot>
+                            <div
+                              class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                              <svg
+                                class="w-6 h-6 text-red-600"
+                                stroke="currentColor"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                                />
+                              </svg>
+                            </div>
+                          </slot>
+                          <div>
+                            <h3
+                              class="text-lg font-medium leading-6 text-gray-900"
+                              id="modal-headline"
+                            >
+                              Cambios sin guardar
+                            </h3>
+                            <div class="mt-2">
+                              <p class="text-sm leading-5 text-gray-700">
+                                ¿Estás seguro que quieres salir sin guardar los
+                                cambios?
+                              </p>
+                            </div>
+                          </div>
+                          <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                            <span
+                              class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto"
+                            >
+                              <button
+                                @click="confirmCancelEditing()"
+                                type="button"
+                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5"
+                              >
+                                Confirmar
+                              </button>
+                            </span>
+                            <span
+                              class="flex w-full mt-3 rounded-md shadow-sm sm:mt-0 sm:w-auto"
+                            >
+                              <button
+                                @click="closeModal('confirm_cancel_editing')"
+                                type="button"
+                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"
+                              >
+                                Cancelar
+                              </button>
+                            </span>
+                          </div>
+                        </Modal>
                       </div>
                     </div>
                   </div>
@@ -376,7 +435,7 @@
         Editar
       </button>
       <button
-        @click="editing = false"
+        @click="cancelEditing()"
         v-if="editing"
         type="button"
         class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out border border-transparent rounded bg-primary-200 md:px-6 md:py-3 md:text-lg hover:bg-primary-300 focus:outline-none focus:border-primary-100 focus:shadow-outline-indigo active:bg-primary-200"
@@ -409,6 +468,7 @@ import { Language } from "../classes/language";
 import { API } from "../classes/api";
 import { UI } from "../mixins/UI";
 import { USER_PHOTO, USER_REQUEST } from "../store/actions/user";
+
 export default {
   components: {
     "oc-input": oc_input,
@@ -425,6 +485,7 @@ export default {
       api: new API(),
       imgChanged: false,
       user: null,
+      auxUser: null,
       sports: [],
       sportsLeft: [],
       showModal: false,
@@ -450,6 +511,7 @@ export default {
       } = await this.api.get(`users/${userId}`);
       if (data) {
         this.user = new User(data);
+        this.auxUser = new User(data);
         this.getLanguages();
       }
     },
@@ -475,6 +537,10 @@ export default {
             checked: false,
             language: new Language(language),
           });
+          this.auxUser.languages.push({
+            checked: false,
+            language: new Language(language),
+          });
         }
       });
     },
@@ -485,8 +551,8 @@ export default {
       this.$store.dispatch("SET_LOADING", true);
       let res = await this.api.patch(`users`, this.user);
       if (res.data) {
-        console.log(res);
         this.user = res.data.data;
+        this.auxUser = res.data.data;
         this.$store.dispatch(USER_REQUEST, res.data.data);
       }
       if (this.previewImage) {
@@ -527,7 +593,6 @@ export default {
       this.imgChanged = true;
       const image = e.target.files[0];
       const reader = new FileReader();
-      console.log(image.name);
       let extension = image.name.split(".");
       this.newImageExtension = extension[extension.length - 1];
       reader.readAsDataURL(image);
@@ -535,6 +600,18 @@ export default {
         this.previewImage = e.target.result;
         this.user.details.photo64 = e.target.result;
       };
+    },
+    cancelEditing() {
+      if (!this.$_.isEqual(this.user, this.auxUser)) {
+        this.openModal("confirm_cancel_editing");
+      } else {
+        this.editing = false;
+      }
+    },
+    confirmCancelEditing() {
+      this.editing = false;
+      this.closeModal("confirm_cancel_editing");
+      this.user = this.$_.cloneDeep(this.auxUser);
     },
   },
 };
