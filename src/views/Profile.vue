@@ -550,7 +550,7 @@ export default {
     async saveUser() {
       this.$store.dispatch("SET_LOADING", true);
       let res = await this.api.patch(`users`, this.user);
-      if (res.data) {
+      if (res.success) {
         this.user = res.data.data;
         this.auxUser = res.data.data;
         this.$store.dispatch(USER_REQUEST, res.data.data);
