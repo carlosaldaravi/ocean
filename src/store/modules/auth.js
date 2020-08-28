@@ -67,7 +67,7 @@ const actions = {
       const user = store.get("user");
       if (token) {
         commit(AUTH_SUCCESS, { data: { data: { token } } });
-        dispatch(USER_REQUEST, { data: { data: { user } } });
+        dispatch(USER_REQUEST, user);
       } else {
         commit(AUTH_LOGOUT);
       }
