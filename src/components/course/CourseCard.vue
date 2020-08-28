@@ -95,15 +95,76 @@
 
       <div class="w-full h-full xl:w-1/3">
         <img
-          v-if="course.level.name == 'Iniciación'"
+          v-if="course.sport.name == 'SUP' && course.level.name == 'Iniciación'"
           class="object-cover w-full h-48"
-          src="../../assets/images/iniciacion.jpg"
+          src="'../../assets/images/sup_iniciacion.jpg'"
           alt
         />
         <img
-          v-else
+          v-else-if="
+            course.sport.name == 'SUP' &&
+              course.level.name == 'Perfeccionamiento'
+          "
           class="object-cover w-full h-48"
-          src="../../assets/images/kitesurf.png"
+          src="'../../assets/images/sup_perfeccionamiento.jpg'"
+          alt
+        />
+        <img
+          v-else-if="
+            course.sport.name == 'Windsurf' && course.level.name == 'Iniciación'
+          "
+          class="object-cover w-full h-48"
+          src="'../../assets/images/windsurf_iniciacion.jpg'"
+          alt
+        />
+        <img
+          v-else-if="
+            course.sport.name == 'Windsurf' &&
+              course.level.name == 'Perfeccionamiento'
+          "
+          class="object-cover w-full h-48"
+          src="'../../assets/images/windsurf_perfeccionamiento.jpg'"
+          alt
+        />
+        <img
+          v-else-if="
+            course.sport.name == 'Windsurf' && course.level.name == 'Avanzado'
+          "
+          class="object-cover w-full h-48"
+          src="'../../assets/images/windsurf_avanzado.jpg'"
+          alt
+        />
+        <img
+          v-else-if="
+            course.sport.name == 'Kitesurf' && course.level.name == 'Iniciación'
+          "
+          class="object-cover w-full h-48"
+          src="'../../assets/images/kitesurf_iniciacion.jpg'"
+          alt
+        />
+        <img
+          v-else-if="
+            course.sport.name == 'Kitesurf' &&
+              course.level.name == 'Perfeccionamiento'
+          "
+          class="object-cover w-full h-48"
+          src="../../assets/images/kitesurf_perfeccionamiento.jpg"
+          alt
+        />
+        <img
+          v-else-if="
+            course.sport.name == 'Kitesurf' && course.level.name == 'Avanzado'
+          "
+          class="object-cover w-full h-48"
+          src="../../assets/images/kitesurf_avanzado.jpg"
+          alt
+        />
+        <img
+          v-else-if="
+            course.sport.name == 'Kitesurf' && course.level.name == 'Experto'
+          "
+          class="object-cover w-full h-48"
+          src="../../assets/images/kitesurf_experto.jpg"
           alt
         />
       </div>
