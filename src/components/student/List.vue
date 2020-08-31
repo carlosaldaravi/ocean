@@ -8,6 +8,7 @@
         v-for="student in students"
         :key="student.id"
         :student="student"
+        :sportSelected="sportSelected"
       ></card>
     </div>
   </section>
@@ -20,6 +21,7 @@ export default {
   name: "List", // used to devtools, nothing more
   props: {
     students: { type: Array, required: true },
+    sportSelected: { type: Object, required: true },
   },
   components: {
     Card,

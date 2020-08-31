@@ -13,7 +13,8 @@
               }"
               @click="sportSelected = sport"
               class="px-3 py-2 text-xl font-bold leading-5 rounded-lg rounded-b-none cursor-pointer hover:text-primary-300"
-            >{{ sport.name }}</a>
+              >{{ sport.name }}</a
+            >
           </nav>
         </div>
         <div class="flex justify-between mt-1">
@@ -66,7 +67,11 @@
                     }"
                     class="absolute inset-0 flex items-center justify-center w-full h-full transition-opacity duration-100 ease-out opacity-0"
                   >
-                    <svg class="w-3 h-3 text-primary-300" fill="currentColor" viewBox="0 0 12 12">
+                    <svg
+                      class="w-3 h-3 text-primary-300"
+                      fill="currentColor"
+                      viewBox="0 0 12 12"
+                    >
                       <path
                         d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"
                       />
@@ -81,12 +86,16 @@
               v-if="active"
               :class="{ 'opacity-25': showAll }"
               class="mr-2 border-b w-19 border-primary-100"
-            >Activos</p>
+            >
+              Activos
+            </p>
             <p
               v-if="!active"
               :class="{ 'opacity-25': showAll }"
               class="mr-2 border-b w-18 border-primary-100"
-            >Inactivos</p>
+            >
+              Inactivos
+            </p>
             <div @click="changeActiveStatus()">
               <span
                 role="checkbox"
@@ -135,7 +144,11 @@
                     }"
                     class="absolute inset-0 flex items-center justify-center w-full h-full transition-opacity duration-100 ease-out opacity-0"
                   >
-                    <svg class="w-3 h-3 text-primary-300" fill="currentColor" viewBox="0 0 12 12">
+                    <svg
+                      class="w-3 h-3 text-primary-300"
+                      fill="currentColor"
+                      viewBox="0 0 12 12"
+                    >
                       <path
                         d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z"
                       />
@@ -146,7 +159,7 @@
             </div>
           </div>
         </div>
-        <list :students="studentsList"></list>
+        <list :students="studentsList" :sportSelected="sportSelected"></list>
       </div>
     </section>
   </section>
@@ -181,7 +194,7 @@ export default {
     Student,
   },
   computed: {
-    studentsList: function () {
+    studentsList: function() {
       this.studentsFiltered = this.students;
       if (!this.showAll) {
         if (this.active) {

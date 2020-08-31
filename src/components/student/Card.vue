@@ -8,7 +8,7 @@
     >
       <div class="w-full h-full p-4">
         <!-- target  -->
-        <div class="flex justify-between">
+        <div class="flex">
           <div class="flex">
             <img
               v-if="student.details.photo"
@@ -32,24 +32,29 @@
               </div>
             </div>
           </div>
-          <span
-            v-if="student.status == 'ACTIVE'"
-            class="inline-block w-4 h-4 overflow-hidden text-green-600"
-          >
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-            </svg>
-          </span>
-          <span
-            v-if="student.status == 'INACTIVE'"
-            class="inline-block w-4 h-4 overflow-hidden text-red-600"
-          >
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M0 10a10 10 0 1120 0 10 10 0 01-20 0zm16-5L5 16A8 8 0 0016 5zm-1-1A8 8 0 004 15L15 4z"
-              />
-            </svg>
-          </span>
+          <div class="absolute inset-y-0 right-0 flex m-1">
+            <div class="mr-2 text-xs">
+              {{ getStudentLevel() }}
+            </div>
+            <span
+              v-if="student.status == 'ACTIVE'"
+              class="inline-block w-4 h-4 overflow-hidden text-green-600"
+            >
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+              </svg>
+            </span>
+            <span
+              v-if="student.status == 'INACTIVE'"
+              class="inline-block w-4 h-4 overflow-hidden text-red-600"
+            >
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M0 10a10 10 0 1120 0 10 10 0 01-20 0zm16-5L5 16A8 8 0 0016 5zm-1-1A8 8 0 004 15L15 4z"
+                />
+              </svg>
+            </span>
+          </div>
         </div>
 
         <div v-if="moreCard" class="mt-4">
@@ -116,6 +121,7 @@ import moment from "moment";
 export default {
   props: {
     student: { type: Object, required: true },
+    sportSelected: { type: Object, required: true },
   },
   data() {
     return {
@@ -130,6 +136,12 @@ export default {
     },
     getYearsOld(student) {
       return moment().diff(student.details.dateBorn, "years");
+    },
+    getStudentLevel() {
+      let userSport = this.student.userSports.find(
+        (us) => us.sportId == this.sportSelected.id
+      );
+      return userSport.level.name;
     },
   },
 };
