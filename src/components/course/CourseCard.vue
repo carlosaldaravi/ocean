@@ -97,7 +97,7 @@
         <img
           v-if="course.sport.name == 'SUP' && course.level.name == 'Iniciación'"
           class="object-cover w-full h-48"
-          src="'../../assets/images/sup_iniciacion.jpg'"
+          src="../../assets/images/sup_iniciacion.jpg"
           alt
         />
         <img
@@ -106,7 +106,7 @@
               course.level.name == 'Perfeccionamiento'
           "
           class="object-cover w-full h-48"
-          src="'../../assets/images/sup_perfeccionamiento.jpg'"
+          src="../../assets/images/sup_perfeccionamiento.jpg"
           alt
         />
         <img
@@ -114,7 +114,7 @@
             course.sport.name == 'Windsurf' && course.level.name == 'Iniciación'
           "
           class="object-cover w-full h-48"
-          src="'../../assets/images/windsurf_iniciacion.jpg'"
+          src="../../assets/images/windsurf_iniciacion.jpg"
           alt
         />
         <img
@@ -123,7 +123,7 @@
               course.level.name == 'Perfeccionamiento'
           "
           class="object-cover w-full h-48"
-          src="'../../assets/images/windsurf_perfeccionamiento.jpg'"
+          src="../../assets/images/windsurf_perfeccionamiento.jpg"
           alt
         />
         <img
@@ -131,7 +131,7 @@
             course.sport.name == 'Windsurf' && course.level.name == 'Avanzado'
           "
           class="object-cover w-full h-48"
-          src="'../../assets/images/windsurf_avanzado.jpg'"
+          src="../../assets/images/windsurf_avanzado.jpg"
           alt
         />
         <img
@@ -139,7 +139,7 @@
             course.sport.name == 'Kitesurf' && course.level.name == 'Iniciación'
           "
           class="object-cover w-full h-48"
-          src="'../../assets/images/kitesurf_iniciacion.jpg'"
+          src="../../assets/images/kitesurf_iniciacion.jpg"
           alt
         />
         <img
