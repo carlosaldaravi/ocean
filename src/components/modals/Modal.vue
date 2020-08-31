@@ -1,7 +1,7 @@
 <template>
   <div
     :id="id"
-    class="fixed inset-x-0 bottom-0 z-10 px-4 pb-4 overflow-y-scroll sm:inset-0 sm:flex sm:items-center sm:justify-center hidden-modal"
+    class="fixed inset-x-0 z-10 px-4 pb-4 overflow-y-auto sm:inset-0 sm:flex sm:items-center sm:justify-center hidden-modal"
   >
     <!--
     Background overlay, show/hide based on modal state.
@@ -28,7 +28,7 @@
       To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     -->
     <div
-      class="px-4 pt-5 pb-4 overflow-hidden transition-all transform bg-white rounded-lg shadow-xl sm:max-w-lg sm:w-full sm:p-6"
+      class="px-4 pt-5 pb-4 overflow-auto transition-all transform bg-white rounded-lg shadow-xl max-h-26 xs:max-h-3/4 sm:max-w-xl sm:w-full sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-headline"

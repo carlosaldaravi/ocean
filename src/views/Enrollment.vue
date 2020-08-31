@@ -1,7 +1,7 @@
 <template>
   <section>
     <Modal class="w-full overflow-y-auto text-s" id="modal_rgpd">
-      <div class="mt-3 sm:mt-5">
+      <div class="mt-3 text-center sm:my-5 ">
         <p
           class="text-xl font-bold leading-6 text-gray-900"
           id="modal-headline"
