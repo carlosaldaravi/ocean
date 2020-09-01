@@ -1,7 +1,7 @@
 <template>
   <div
     :id="id"
-    class="fixed inset-x-0 z-10 px-4 pb-4 overflow-y-auto sm:inset-0 sm:flex sm:items-center sm:justify-center hidden-modal"
+    class="fixed inset-0 inset-x-0 z-10 flex items-center justify-center px-4 pb-4 overflow-y-auto hidden-modal"
   >
     <!--
     Background overlay, show/hide based on modal state.
@@ -21,20 +21,20 @@
     Modal panel, show/hide based on modal state.
 
     Entering: "ease-out duration-300"
-      From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-      To: "opacity-100 translate-y-0 sm:scale-100"
+      From: "opacity-0 translate-y-4 xs:translate-y-0 xs:scale-95"
+      To: "opacity-100 translate-y-0 xs:scale-100"
     Leaving: "ease-in duration-200"
-      From: "opacity-100 translate-y-0 sm:scale-100"
-      To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+      From: "opacity-100 translate-y-0 xs:scale-100"
+      To: "opacity-0 translate-y-4 xs:translate-y-0 xs:scale-95"
     -->
     <div
-      class="px-4 pt-5 pb-4 overflow-auto transition-all transform bg-white rounded-lg shadow-xl max-h-26 xs:max-h-3/4 sm:max-w-xl sm:w-full sm:p-6"
+      class="px-4 pt-5 pb-4 overflow-auto transition-all transform bg-white rounded-lg shadow-xl max-h-3/4 xs:max-w-xl xs:w-full xs:p-6"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-headline"
     >
-      <div class="sm:flex sm:items-start">
-        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+      <div class="xs:flex xs:items-start">
+        <div class="mt-3 text-center xs:mt-0 xs:ml-4 xs:text-left">
           <slot name="header"></slot>
           <slot></slot>
           <slot name="footer"></slot>
