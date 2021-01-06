@@ -15,7 +15,7 @@
     "@fullcalendar/vue": "^4.4.0",
     "@tailwindcss/ui": "^0.1.4",
     "autoprefixer": "^9.7.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.4.4",
     "localit": "^2.0.0",
     "lodash": "^4.17.20",
