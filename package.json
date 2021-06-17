@@ -20,7 +20,7 @@
     "localit": "^2.0.0",
     "lodash": "^4.17.20",
     "moment": "^2.25.3",
-    "postcss": "^7.0.26",
+    "postcss": "^7.0.36",
     "register-service-worker": "^1.6.2",
     "tailwindcss": "^1.5.2",
     "vue": "^2.6.10",
